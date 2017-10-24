@@ -8,7 +8,7 @@ theme = "hugo-cactus-theme"
 googleAnalytics = ""
 # Disable comments by leaving disqusShortname empty
 disqusShortname = "spf13"
-publishDir="docs"
+# publishDir="docs"
 
 [params]
 	name = "John Doe"
