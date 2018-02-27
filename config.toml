@@ -13,7 +13,7 @@ disqusShortname = "spf13"
 [params]
 	name = "Jorge Luis Betancourt"
 	description = "Computo Ergo Sum"
-	bio = "Blogger & Software Engineer"
+	bio = "Software Engineer & Blogger"
 	# Enter optionally your twitter account
 	twitter = "jorgelbg"
 	enableRSS = true
