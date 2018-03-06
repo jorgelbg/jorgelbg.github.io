@@ -1,5 +1,5 @@
 ---
-title: "Solr Contextual Synonyms"
+title: "Solr Contextual Synonyms with Payloads"
 date: 2018-03-06T01:00:00+01:00
 draft: true
 ---
