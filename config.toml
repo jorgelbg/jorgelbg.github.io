@@ -2,7 +2,7 @@
 baseurl = "http://jorgelbg.github.io/"
 themesDir = "themes/"
 languageCode = "en-us"
-title = "Hugo Cactus Theme"
+title = "Jorge Luis Betancourt"
 theme = "hugo-cactus-theme"
 # Enter your tracking code to enable Google Analytics
 googleAnalytics = "UA-115201846-1"
