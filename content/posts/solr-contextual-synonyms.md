@@ -1,6 +1,6 @@
 ---
 title: "Solr Contextual Synonyms"
-date: 2018-03-06T08:00:00+01:00
+date: 2018-03-06T01:00:00+01:00
 draft: true
 ---
 
