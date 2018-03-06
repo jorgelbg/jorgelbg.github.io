@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Jorge Luis Betancourt">
+<meta name="description" content="Computo Ergo Sum">
+<meta name="generator" content="Hugo 0.37" />
+<title>Solr Contextual Synonyms</title>
+<link rel="shortcut icon" href="http://jorgelbg.github.io/images/favicon.ico">
+<link rel="stylesheet" href="http://jorgelbg.github.io/css/style.css">
+<link rel="stylesheet" href="http://jorgelbg.github.io/css/highlight.css">
+
+
+
+<link rel="stylesheet" href="http://jorgelbg.github.io/css/monosocialiconsfont.css">
+
+
+
+<link href="http://jorgelbg.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Hugo Cactus Theme" />
+
+
+<meta property="og:title" content="Solr Contextual Synonyms" />
+<meta property="og:description" content="TL;DR Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the SynonymFilterFactory which allow to specify a list of synonyms. Last year we saw some improvements to this feature, focused around multi word synonyms. Even with the new changes introduced in Solr there are still some caveats, as explained by Doug on this post. To be honest this was developed some time ago, back when Solr 5 was the &ldquo;cool&rdquo; new version 😁." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://jorgelbg.github.io/posts/solr-contextual-synonyms/" />
+
+
+
+<meta property="article:published_time" content="2018-03-06T01:00:00&#43;01:00"/>
+
+<meta property="article:modified_time" content="2018-03-06T01:00:00&#43;01:00"/>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Solr Contextual Synonyms">
+<meta itemprop="description" content="TL;DR Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the SynonymFilterFactory which allow to specify a list of synonyms. Last year we saw some improvements to this feature, focused around multi word synonyms. Even with the new changes introduced in Solr there are still some caveats, as explained by Doug on this post. To be honest this was developed some time ago, back when Solr 5 was the &ldquo;cool&rdquo; new version 😁.">
+
+
+<meta itemprop="datePublished" content="2018-03-06T01:00:00&#43;01:00" />
+<meta itemprop="dateModified" content="2018-03-06T01:00:00&#43;01:00" />
+<meta itemprop="wordCount" content="2312">
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Solr Contextual Synonyms"/>
+<meta name="twitter:description" content="TL;DR Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the SynonymFilterFactory which allow to specify a list of synonyms. Last year we saw some improvements to this feature, focused around multi word synonyms. Even with the new changes introduced in Solr there are still some caveats, as explained by Doug on this post. To be honest this was developed some time ago, back when Solr 5 was the &ldquo;cool&rdquo; new version 😁."/>
+<meta name="twitter:site" content="@https://www.twitter.com/jorgelbgm"/>
+
+
+    </head>
+<body>
+    <nav class="main-nav">
+	
+		<a href='http://jorgelbg.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+
+	
+		<a class="cta" href="http://jorgelbg.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+    <section id="wrapper">
+        
+        
+<article class="post">
+    <header>
+        <h1>Solr Contextual Synonyms</h1>
+        <h2 class="subtitle"></h2>
+        <h2 class="headline">
+        March 6, 2018
+        <br>
+        
+        </h2>
+    </header>
+    <section id="post-body">
+        
+
+<h2 id="tl-dr">TL;DR</h2>
+
+<p>Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the <code>SynonymFilterFactory</code> which allow to specify a list of synonyms. Last year we saw some <a href="https://lucidworks.com/2017/04/18/multi-word-synonyms-solr-adds-query-time-support/">improvements to this feature</a>, focused around multi word synonyms.
+Even with the new changes introduced in Solr there are still some caveats, as explained by <a href="https://opensourceconnections.com/blog/2018/02/20/edismax-and-multiterm-synonyms-oddities/">Doug on this post</a>. To be honest this was developed some time ago, back when Solr 5 was the &ldquo;cool&rdquo; new version 😁.</p>
+
+<p>This post describes a component to index token synonyms as a payload. Instead of a big file, you send the synonym as a payload for the desired token. This approach works great for single term synonyms, specifying the synonyms at index time. If you&rsquo;re curious about how this works, then continue reading.</p>
+
+<h2 id="a-bit-of-history">A bit of history</h2>
+
+<p>Some time ago I suggested a similar approach in this <a href="https://stackoverflow.com/questions/34122982/lucene-solr-store-offset-information-for-certain-keywords">question, posted on stackoverflow.com</a>. A user was asking to store positional information about the tokens. The end goal was to define something that we could call &ldquo;contextual synonyms&rdquo;.</p>
+
+<blockquote>
+<p>Contextual synonym: a single term can relate to different concepts in the same text.</p>
+</blockquote>
+
+<p>For instance, if we take a look at the following sentence: <code>Bill talked to the white house about the bill</code>. The first occurrence of <code>Bill</code> could be a reference to  <code>Bill Clinton</code>. While the second appearance of <code>bill</code> relates to some law<sup>1</sup>. One business rule could be that a query with the term <code>Clinton</code> should match this document. I know, I know I&rsquo;m doing a lot of assumptions, but bear with me until the end. If we use the traditional synonym mechanism built in Solr, then we may set up a synonym like:</p>
+
+<pre><code>bill =&gt; clinton
+</code></pre>
+
+<blockquote>
+<p>Figuring out to which tokens apply the synonym is out of the scope of this post.</p>
+</blockquote>
+
+<p>Let&rsquo;s assume that we&rsquo;re using the <code>LowerCaseFilterFactory</code>. Solr doesn&rsquo;t know how to differentiate between the two occurrences of <code>bill</code>. We need some mechanism to tell Solr that <code>clinton</code> is also a synonym of only the <strong>first</strong> occurrence of <code>bill</code>. In short, this query: <code>&quot;clinton talked&quot;</code> should then match our document, but not this one <code>&quot;about clinton&quot;</code>.</p>
+
+<p>Solr doesn&rsquo;t provide an out-of-the-box approach for deciding when to apply or not a synonym. But using some Lucene/Solr sauce we can do it. Lucene stores  some positional information for each token. What we want is to have some mechanism to adding the synonym only for certain tokens. Turns out that Lucene already provides a way to attach some &ldquo;metadata&rdquo; to a token: a payload. This <em>payload</em> could be anything that we want. It&rsquo;s encoded as an array of <code>bytes</code> (<code>bytes[]</code>). Solr exposes this feature as a <code>TokenFilter</code> that uses a delimiter to split the token from the payload. We also have access to several encoders (<code>FloatEncoder</code>, <code>IntegerEncoder</code>, <code>IdentityEncoder</code>) to store <code>floats</code>, <code>integers</code>, and <code>strings</code>.</p>
+
+<p>In Solr indexing payloads is very easy, in this case we&rsquo;re using the (<code>|</code>) pipe character as the delimiter.</p>
+
+<pre><code class="language-xml">&lt;filter class=&quot;solr.DelimitedPayloadTokenFilterFactory&quot; delimiter=&quot;|&quot; encoder=&quot;identity&quot;/&gt;
+</code></pre>
+
+<p>Any token in the form of <code>A|B</code> sent to Solr will be interpreted as token <code>A</code> with payload <code>B</code>. The <code>DelimitedPayloadTokenFilterFactory</code> will remove <code>|B</code> from the token before sending it down the analysis chain. If we send the following into Solr:</p>
+
+<pre><code>Bill|Clinton talked to the white house about the bill
+</code></pre>
+
+<p><code>Clinton</code> will be stored as the payload of the <code>Bill</code> token and the later <code>bill</code> will remain unchanged.</p>
+
+<p>This doesn&rsquo;t solve our problem, but we&rsquo;re on track, so far we&rsquo;ve found a way to send custom tokens (synonyms) into Solr. The <em>payload</em> metadata is usually <a href="https://lucidworks.com/blog/2014/06/13/end-to-end-payload-example-in-solr/">used to influence the score calculation</a>. We&rsquo;re going to write our own <code>TokenFilter</code> that reads the payload and will add it to the token stream.</p>
+
+<p>This should be a more straight forward synonym implementation. We don&rsquo;t need to parse any rule to find which synonym to use, and we already know <em>where</em> and <em>what</em> token to add.</p>
+
+<!-- This token filter will be a lot easier than the existing implementation, mainly because no rule parsing of a file and no guessing which rule apply to each token is needed; of course it will be also less powerful, since we're talking about a synonym to a **token** we don't have the ability to define a multiword synonym. For instance using `SynonymFilterFactory` we could specify the following synonym:
+
+```
+domain name server => dns
+```
+
+In each occurrence of `domain name server`, the synonym will be used. With our implementation this wouldn't be possible because we're attaching each synonym in the corresponding token, so the current token doesn't know about the previous/next tokens. -->
+
+<h2 id="the-code">The code</h2>
+
+<p>Now we know what we need to write, so let&rsquo;s doit.</p>
+
+<p>Writing a <code>TokenFilter</code> is not that hard, but of course depends on the task at hand. We need a class that extends from <code>TokenFilter</code>  and overrides the <code>incrementToken()</code> method. As described on JavaDoc:</p>
+
+<blockquote>
+<p>This method is used to advance the stream to the next token and should return <code>false</code> for the end of the stream of tokens and <code>true</code> otherwise.</p>
+</blockquote>
+
+<p>Our custom filter will access the term&rsquo;s payload using the  <code>PayloadAttribute</code> class. This property will provide read/write access to the payload of the current term. The API around the token stream is an iterator, and each call to <code>incrementToken()</code> will advance to the next token.</p>
+
+<p>Suppose we send the following document into solr: <code>A B|E C</code>, what we&rsquo;re trying to say is that <code>E</code> is a synonym of <code>B</code>. This means that phrase queries should continue to work as expected. Bottom line we need our method to output a token graph (Yes! Token streams in Lucene are graphs‼️) like this:</p>
+
+<pre><code class="language-json">(A0) ----&gt; (B1) ----&gt; (C2)
+  \                  /
+    -----&gt; (E1) ----
+</code></pre>
+
+<p>Actually, the previous graph is not an exact representation of a <code>TokenStream</code>. If we&rsquo;re going to get serious the graph will look more like this:</p>
+
+<pre><code class="language-json">       A          B          C
+(0)  -----&gt; (1) -----&gt; (2) -----&gt; (3)
+               \      /
+                -----  
+                  E
+</code></pre>
+
+<p>The tokens are placed in the edges of the graph and the nodes are the states/positions of the token. But for our task at hand we can rely on the first graph for an easier representation.</p>
+
+<p>So <code>B</code> and <code>E</code> should have the same position in the token graph (1). A phrase query like: <code>&quot;B C&quot;</code> will match our document, but also <code>&quot;E C&quot;</code> or <code>&quot;A E&quot;</code>. To do this we&rsquo;ll need to use the <code>PositionIncrementAttribute</code> class. The code for our <code>incrementToken()</code> method is roughly something like:</p>
+
+<pre><code class="language-java">if (!extraTokens.isEmpty()) {
+  restoreState(state);
+
+  posIncrAtt.setPositionIncrement(0); // keep the same position of the token
+  typeAtt.setType(SynonymFilter.TYPE_SYNONYM);
+  termAtt.setEmpty().append(extraTokens.remove());
+
+  return true;
+}
+
+if (input.incrementToken()) {
+  BytesRef payload = payAtt.getPayload();
+
+  extraTokens.add(payload.utf8ToString());
+  state = captureState();
+
+  return true;
+}
+
+return false;
+}
+</code></pre>
+
+<p>The <code>incrementToken()</code> method returns the metadata for the next token. Because of this, we need to save the state of the attributes to &ldquo;insert&rdquo; the  synonym in the right position. Also the position increment needs to be set to 0 or the term will be in the wrong position.</p>
+
+<p>Our implementation detects the token with a payload and in the next call we add the payload as a new token. In the final implementation we do a couple more of things:</p>
+
+<ul>
+<li>remove the payload (since we don&rsquo;t need it anymore)</li>
+<li>split the payload using a delimiter character to generate several synonyms</li>
+</ul>
+
+<h2 id="testing">Testing</h2>
+
+<p>How do we test that our implementation is working as intended? At this stage you may compile your project, generate a jar and add it to Solr and hope that all works well.</p>
+
+<p>The best approach for testing our implementation is writing a Unit Test. Thanks to the amazing committers and community, Lucene already ships with <code>BaseTokenStreamTestCase</code>. A base class that provides several helper methods for testing.</p>
+
+<p>But what do we want to test?</p>
+
+<p>To &ldquo;glue&rdquo; everything in Solr, we need the <code>solr.DelimitedPayloadTokenFilterFactory</code> to index tokens and payloads. But this class is already tested in the Lucence/Solr codebase. For testing our custom filter we need tokens with payloads attached. Let&rsquo;s write a dummy <code>TokenFilter</code> that will provide us with a proper stream of tokens with payloads.</p>
+
+<pre><code class="language-java">private final class DummyPayloadTokenFilter extends TokenFilter {
+  private final CharTermAttribute termAtt = addAttribute(CharTermAttribute.class);
+  private final PayloadAttribute payAtt = addAttribute(PayloadAttribute.class);
+
+  private final List&lt;String&gt; payloadTokens = Arrays.asList(&quot;A&quot;, &quot;B&quot;, &quot;C&quot;);
+  private final PayloadEncoder encoder = new IdentityEncoder();
+  private final BytesRef payload;
+
+  private DummyPayloadTokenFilter(TokenStream input) {
+    super(input);
+    this.payload = encoder.encode(&quot;D&quot;.toCharArray());
+  }
+
+  private DummyPayloadTokenFilter(TokenStream input, String payloadValue) {
+    super(input);
+    this.payload = encoder.encode(payloadValue.toCharArray());
+  }
+
+  @Override
+  public boolean incrementToken() throws IOException {
+    if (input.incrementToken()) {
+      if (payloadTokens.contains(termAtt.toString())) payAtt.setPayload(payload);
+      return true;
+    } else {
+      return false;
+    }
+  }
+}
+</code></pre>
+
+<p>With this dummy <code>TokenFilter</code> we can wrap a mock of a <code>TokenStream</code> and feed it into our <code>PayloadSynonymTokenFilter</code> and test our custom logic.</p>
+
+<p>Now to the next item, how do we test a <code>TokenFilter</code>? We need to start with a string (<code>A B C</code>), which needs to converted into a <code>TokenStream</code>. For this we can use the handy helper method <code>whitespaceMockTokenizer()</code>. This methods will tokenize the string at any occurrence of a whitespace character. Once we have an actual <code>TokenStream</code> to feed to our filter we can start writting assertions.</p>
+
+<p>We need to call <code>incrementToken()</code> and at each step check if the current term is correct and if any other term attribute (such as our beloved payload) has also the expected value.</p>
+
+<p>This assertions are not hard to write. Peeking around the Lucene test suite I came across this handy method than resembled a lot to what I was writing. I decided to use it instead (no harm no fall).</p>
+
+<pre><code class="language-java">void assertTermEquals(String expected, TokenStream stream, CharTermAttribute termAtt, PayloadAttribute payAtt,
+    byte[] expectPay) throws Exception {
+  assertTrue(stream.incrementToken());
+  assertEquals(expected, termAtt.toString());
+  BytesRef payload = payAtt.getPayload();
+
+  if (payload != null) {
+    assertTrue(payload.length + &quot; does not equal: &quot; + expectPay.length, payload.length == expectPay.length);
+    for (int i = 0; i &lt; expectPay.length; i++) {
+      assertTrue(expectPay[i] + &quot; does not equal: &quot; + payload.bytes[i + payload.offset],
+          expectPay[i] == payload.bytes[i + payload.offset]);
+    }
+  } else {
+    assertTrue(&quot;expectPay is not null and it should be&quot;, expectPay == null);
+  }
+}
+</code></pre>
+
+<p>Using this method our test code is a series of calls to <code>assertTermEquals</code> passing the right arguments.</p>
+
+<p>Let&rsquo;s go back to our initial test string. Assuming that only the <code>A</code> token carries a payload, our expected <code>TokenStream</code> should look like <code>A D B C</code>.  <code>D</code> should be a synonym of <code>A</code>: both <code>A</code> and <code>D</code> should have the same position in the stream. The test would look something like:</p>
+
+<pre><code class="language-java">@Test
+public void testSingleSynonym() throws Exception {
+  String test = &quot;A B C&quot;;
+
+  PayloadSynonymTokenFilter filter = new PayloadSynonymTokenFilter(
+    new DummyPayloadTokenFilter(whitespaceMockTokenizer(test)),
+    false, false, &quot;_&quot;
+  );
+
+  CharTermAttribute termAtt = filter.getAttribute(CharTermAttribute.class);
+  PayloadAttribute payAtt = filter.getAttribute(PayloadAttribute.class);
+
+  filter.reset();
+
+  assertTermEquals(&quot;A&quot;, filter, termAtt, payAtt, 
+    &quot;D&quot;.getBytes(StandardCharsets.UTF_8)
+  );
+  assertTermEquals(&quot;D&quot;, filter, termAtt, payAtt, 
+    &quot;D&quot;.getBytes(StandardCharsets.UTF_8)
+  );
+  assertTermEquals(&quot;B&quot;, filter, termAtt, payAtt, null);
+  assertTermEquals(&quot;C&quot;, filter, termAtt, payAtt, null);
+  assertFalse(filter.incrementToken());
+
+  filter.end();
+  filter.close();
+}
+</code></pre>
+
+<p>For the <code>A</code> and <code>D</code> tokens we&rsquo;re also checking that the payload is still there (since we haven&rsquo;t removed it yet), but for <code>B</code> and <code>C</code> there should be no payload at all, so we pass a <code>null</code> parameter to validate this assumption.</p>
+
+<p>Its important to check that the filter returns <code>false</code> when it reaches the end of the <code>TokenStream</code>.</p>
+
+<p>There is still something missing in our test. Let&rsquo;s go back to the couple of figures at the beginning of the post, where we represent the <code>TokenStream</code> as a graph. In those graphs we can see that the token and the synonym should have the same <strong>positional information</strong>. In other words, both terms should be at the same position within the token stream. Or, said in the &ldquo;Lucene jargon&rdquo; the position increment of the synonym should be <code>0</code>. To check this in our test we need to use the <code>PositionIncrementAttribute</code> class:</p>
+
+<pre><code class="language-java">PositionIncrementAttribute posIncAtt = 
+    filter.getAttribute(PositionIncrementAttribute.class);
+
+assertEquals(0, posIncAtt.getPositionIncrement());
+</code></pre>
+
+<p>The default position increment for the rest of the <code>TokenStream</code> should be 1, which we could also test.</p>
+
+<p>Lucene use &ldquo;attributes&rdquo; to store information about a single token. Instead of storing the actual position of a term, Lucene stores the increment of each token. This <code>increment</code> is then used to figure out the actual position of the token in the stream. We can see this information in the analysis page of the Solr Admin UI. This is the internal mechanism that Lucene uses for phrase search and span queries, etc.</p>
+
+<h2 id="using-in-solr">Using in Solr</h2>
+
+<p>The entire code of this example is available in this <a href="https://github.com/jorgelbg/solr-payload-synonyms">Github repo</a>. You can build it using maven and then enable it in your Solr/Fusion installation as a normal filter:</p>
+
+<pre><code class="language-xml">&lt;fieldtype name=&quot;payloads&quot; stored=&quot;false&quot; indexed=&quot;true&quot; class=&quot;solr.TextField&quot; &gt;
+ &lt;analyzer&gt;
+   &lt;tokenizer class=&quot;solr.WhitespaceTokenizerFactory&quot;/&gt;
+   &lt;filter class=&quot;solr.DelimitedPayloadTokenFilterFactory&quot; delimiter=&quot;|&quot; encoder=&quot;identity&quot;/&gt;
+   &lt;filter class=&quot;solr.custom.PayloadSynonymTokenFilterFactory&quot;/&gt;
+ &lt;/analyzer&gt;
+&lt;/fieldtype&gt;
+</code></pre>
+
+<p>Once our <code>fieldtype</code> is defined we can use the very helpful Analysis page of the Solr Admin UI to check if things are working as expected. If we use the test string: <code>Bill|Clinton talked about the bill</code> in the Field value (index) input and select our payload <code>fieldtype</code> we can see an output similar to what is shown in the figure.</p>
+
+<p><img src="/images/solr-synonyms/analysis-ui.png" alt="Solr Admin UI" title="Solr Admin UI" /></p>
+
+<p>A quick inspection, reveals that the tokens <code>Bill</code> and <code>Clinton</code> have the same positional information. Also the <code>Clinton</code> token has a defined type of <code>SYNONYM</code>.</p>
+
+<h2 id="advantages-to-this-approach">Advantages to this approach?</h2>
+
+<p>One question you may been doing yourself if what advantages provides this approach?</p>
+
+<p>This approach <em>decentralizes</em> the synonyms management. Usually your synonyms live in a big text file on the filesystem of your Solr server. Adding new synonyms  means editing that file and adding a new rule.</p>
+
+<p>In recent Solr versions, the <code>ManagedSynonymFilterFactory</code> class provides an HTTP endpoint to do this. But it is not a good idea to give everyone on your team access to this endpoints. I used this approach in a cloud-like environment for Solr. We provided Solr as a service to different teams with different needs. Along with the service we provided our own utility library for interacting with Solr.  In this library we did the heavy lifting and expose a clean and easy API for the developers.</p>
+
+<p>In this environment this approach gave control over the synonyms to each developer. They could customize their synonyms  without knowing the inner workings of Solr.</p>
+
+<p>And of course this solves part of our initial statement: tailoring  a synonym to a specific term/token.</p>
+
+<p>To wrap things up this has been a fun exercise and an atypical use of Lucene/Solr payloads. If it is useful to you then use it if not I hope you&rsquo;ve enjoyed the reading, I&rsquo;ve enjoyed the journey!</p>
+
+    </section>
+</article>
+
+<footer id="post-meta" class="clearfix">
+    <a href="https://twitter.com/jorgelbg">
+    <img class="avatar" src="http://jorgelbg.github.io/images/avatar.png">
+    <div>
+        <span class="dark">Jorge Luis Betancourt</span>
+        <span>Software engineer with a passion for data, search and performance</span>
+    </div>
+    </a>
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fjorgelbg.github.io%2fposts%2fsolr-contextual-synonyms%2f - Solr%20Contextual%20Synonyms by @jorgelbg"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+    </section>
+</footer>
+
+<div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "spf13" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+</ul>
+
+
+
+        <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    
+    <a class="symbol" href="https://www.github.com/jorgelbg">
+        circlegithub
+    </a>
+    
+    <a class="symbol" href="https://www.twitter.com/jorgelbgm">
+        circletwitterbird
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2018 Jorge Luis Betancourt
+    
+    </p>
+</footer>
+
+    </section>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://jorgelbg.github.io/js/main.js"></script>
+<script src="http://jorgelbg.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+
+</body>
+</html>

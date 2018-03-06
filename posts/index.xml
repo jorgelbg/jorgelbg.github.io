@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hugo Cactus Theme</title>
-    <link>http://jorgelbg.github.io/</link>
-    <description>Recent content on Hugo Cactus Theme</description>
+    <title>Posts on Hugo Cactus Theme</title>
+    <link>http://jorgelbg.github.io/posts/</link>
+    <description>Recent content in Posts on Hugo Cactus Theme</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 06 Mar 2018 01:00:00 +0100</lastBuildDate>
     
-	<atom:link href="http://jorgelbg.github.io/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="http://jorgelbg.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,15 +18,6 @@
       
       <guid>http://jorgelbg.github.io/posts/solr-contextual-synonyms/</guid>
       <description>TL;DR Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the SynonymFilterFactory which allow to specify a list of synonyms. Last year we saw some improvements to this feature, focused around multi word synonyms. Even with the new changes introduced in Solr there are still some caveats, as explained by Doug on this post. To be honest this was developed some time ago, back when Solr 5 was the &amp;ldquo;cool&amp;rdquo; new version 😁.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>http://jorgelbg.github.io/hello-world/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>http://jorgelbg.github.io/hello-world/</guid>
-      <description> Hello World! </description>
     </item>
     
   </channel>
