@@ -6,14 +6,14 @@ draft: true
 
 ## TL;DR
 
-Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the `SynonymFilterFactory` which allow to specify a list of synonyms. Last year we saw some [improvements to this feature](https://lucidworks.com/2017/04/18/multi-word-synonyms-solr-adds-query-time-support/), focused around multi word synonyms. 
+Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the `SynonymFilterFactory` which allow to specify a list of synonyms. Last year we saw some [improvements to this feature](https://lucidworks.com/2017/04/18/multi-word-synonyms-solr-adds-query-time-support/), focused around multi word synonyms.
 Even with the new changes introduced in Solr there are still some caveats, as explained by [Doug on this post](https://opensourceconnections.com/blog/2018/02/20/edismax-and-multiterm-synonyms-oddities/). To be honest this was developed some time ago, back when Solr 5 was the "cool" new version 😁.
 
 This post describes a component to index token synonyms as a payload. Instead of a big file, you send the synonym as a payload for the desired token. This approach works great for single term synonyms, specifying the synonyms at index time. If you're curious about how this works, then continue reading.
 
 ## A bit of history
 
-Some time ago I suggested a similar approach in this [question, posted on stackoverflow.com](https://stackoverflow.com/questions/34122982/lucene-solr-store-offset-information-for-certain-keywords). A user was asking to store positional information about the tokens. The end goal was to define something that we could call "contextual synonyms". 
+Some time ago I suggested a similar approach in this [question, posted on stackoverflow.com](https://stackoverflow.com/questions/34122982/lucene-solr-store-offset-information-for-certain-keywords). A user was asking to store positional information about the tokens. The end goal was to define something that we could call "contextual synonyms".
 
 > Contextual synonym: a single term can relate to different concepts in the same text.
 
@@ -29,13 +29,13 @@ Let's assume that we're using the `LowerCaseFilterFactory`. Solr doesn't know ho
 
 Solr doesn't provide an out-of-the-box approach for deciding when to apply or not a synonym. But using some Lucene/Solr sauce we can do it. Lucene stores  some positional information for each token. What we want is to have some mechanism to adding the synonym only for certain tokens. Turns out that Lucene already provides a way to attach some "metadata" to a token: a payload. This *payload* could be anything that we want. It's encoded as an array of `bytes` (`bytes[]`). Solr exposes this feature as a `TokenFilter` that uses a delimiter to split the token from the payload. We also have access to several encoders (`FloatEncoder`, `IntegerEncoder`, `IdentityEncoder`) to store `floats`, `integers`, and `strings`.
 
-In Solr indexing payloads is very easy, in this case we're using the (`|`) pipe character as the delimiter. 
+In Solr indexing payloads is very easy, in this case we're using the (`|`) pipe character as the delimiter.
 
 ```xml
 <filter class="solr.DelimitedPayloadTokenFilterFactory" delimiter="|" encoder="identity"/>
 ```
 
-Any token in the form of `A|B` sent to Solr will be interpreted as token `A` with payload `B`. The `DelimitedPayloadTokenFilterFactory` will remove `|B` from the token before sending it down the analysis chain. If we send the following into Solr: 
+Any token in the form of `A|B` sent to Solr will be interpreted as token `A` with payload `B`. The `DelimitedPayloadTokenFilterFactory` will remove `|B` from the token before sending it down the analysis chain. If we send the following into Solr:
 
 ```
 Bill|Clinton talked to the white house about the bill
@@ -61,7 +61,7 @@ Now we know what we need to write, so let's doit.
 
 Writing a `TokenFilter` is not that hard, but of course depends on the task at hand. We need a class that extends from `TokenFilter`  and overrides the `incrementToken()` method. As described on JavaDoc:
 
-> This method is used to advance the stream to the next token and should return `false` for the end of the stream of tokens and `true` otherwise. 
+> This method is used to advance the stream to the next token and should return `false` for the end of the stream of tokens and `true` otherwise.
 
 Our custom filter will access the term's payload using the  `PayloadAttribute` class. This property will provide read/write access to the payload of the current term. The API around the token stream is an iterator, and each call to `incrementToken()` will advance to the next token.
 
@@ -110,7 +110,7 @@ return false;
 }
 ```
 
-The `incrementToken()` method returns the metadata for the next token. Because of this, we need to save the state of the attributes to "insert" the  synonym in the right position. Also the position increment needs to be set to 0 or the term will be in the wrong position. 
+The `incrementToken()` method returns the metadata for the next token. Because of this, we need to save the state of the attributes to "insert" the  synonym in the right position. Also the position increment needs to be set to 0 or the term will be in the wrong position.
 
 Our implementation detects the token with a payload and in the next call we add the payload as a new token. In the final implementation we do a couple more of things:
 
@@ -119,9 +119,9 @@ Our implementation detects the token with a payload and in the next call we add 
 
 ## Testing
 
-How do we test that our implementation is working as intended? At this stage you may compile your project, generate a jar and add it to Solr and hope that all works well. 
+How do we test that our implementation is working as intended? At this stage you may compile your project, generate a jar and add it to Solr and hope that all works well.
 
-The best approach for testing our implementation is writing a Unit Test. Thanks to the amazing committers and community, Lucene already ships with `BaseTokenStreamTestCase`. A base class that provides several helper methods for testing. 
+The best approach for testing our implementation is writing a Unit Test. Thanks to the amazing committers and community, Lucene already ships with `BaseTokenStreamTestCase`. A base class that provides several helper methods for testing.
 
 But what do we want to test?
 
@@ -160,7 +160,7 @@ private final class DummyPayloadTokenFilter extends TokenFilter {
 
 With this dummy `TokenFilter` we can wrap a mock of a `TokenStream` and feed it into our `PayloadSynonymTokenFilter` and test our custom logic.
 
-Now to the next item, how do we test a `TokenFilter`? We need to start with a string (`A B C`), which needs to converted into a `TokenStream`. For this we can use the handy helper method `whitespaceMockTokenizer()`. This methods will tokenize the string at any occurrence of a whitespace character. Once we have an actual `TokenStream` to feed to our filter we can start writting assertions. 
+Now to the next item, how do we test a `TokenFilter`? We need to start with a string (`A B C`), which needs to converted into a `TokenStream`. For this we can use the handy helper method `whitespaceMockTokenizer()`. This methods will tokenize the string at any occurrence of a whitespace character. Once we have an actual `TokenStream` to feed to our filter we can start writting assertions.
 
 We need to call `incrementToken()` and at each step check if the current term is correct and if any other term attribute (such as our beloved payload) has also the expected value.
 
@@ -185,7 +185,7 @@ void assertTermEquals(String expected, TokenStream stream, CharTermAttribute ter
 }
 ```
 
-Using this method our test code is a series of calls to `assertTermEquals` passing the right arguments. 
+Using this method our test code is a series of calls to `assertTermEquals` passing the right arguments.
 
 Let's go back to our initial test string. Assuming that only the `A` token carries a payload, our expected `TokenStream` should look like `A D B C`.  `D` should be a synonym of `A`: both `A` and `D` should have the same position in the stream. The test would look something like:
 
@@ -204,10 +204,10 @@ public void testSingleSynonym() throws Exception {
 
   filter.reset();
 
-  assertTermEquals("A", filter, termAtt, payAtt, 
+  assertTermEquals("A", filter, termAtt, payAtt,
     "D".getBytes(StandardCharsets.UTF_8)
   );
-  assertTermEquals("D", filter, termAtt, payAtt, 
+  assertTermEquals("D", filter, termAtt, payAtt,
     "D".getBytes(StandardCharsets.UTF_8)
   );
   assertTermEquals("B", filter, termAtt, payAtt, null);
@@ -226,13 +226,13 @@ Its important to check that the filter returns `false` when it reaches the end o
 There is still something missing in our test. Let's go back to the couple of figures at the beginning of the post, where we represent the `TokenStream` as a graph. In those graphs we can see that the token and the synonym should have the same **positional information**. In other words, both terms should be at the same position within the token stream. Or, said in the "Lucene jargon" the position increment of the synonym should be `0`. To check this in our test we need to use the `PositionIncrementAttribute` class:
 
 ```java
-PositionIncrementAttribute posIncAtt = 
+PositionIncrementAttribute posIncAtt =
     filter.getAttribute(PositionIncrementAttribute.class);
 
 assertEquals(0, posIncAtt.getPositionIncrement());
 ```
 
-The default position increment for the rest of the `TokenStream` should be 1, which we could also test. 
+The default position increment for the rest of the `TokenStream` should be 1, which we could also test.
 
 Lucene use "attributes" to store information about a single token. Instead of storing the actual position of a term, Lucene stores the increment of each token. This `increment` is then used to figure out the actual position of the token in the stream. We can see this information in the analysis page of the Solr Admin UI. This is the internal mechanism that Lucene uses for phrase search and span queries, etc.
 
@@ -250,7 +250,7 @@ The entire code of this example is available in this [Github repo](https://githu
 </fieldtype>
 ```
 
-Once our `fieldtype` is defined we can use the very helpful Analysis page of the Solr Admin UI to check if things are working as expected. If we use the test string: `Bill|Clinton talked about the bill` in the Field value (index) input and select our payload `fieldtype` we can see an output similar to what is shown in the figure. 
+Once our `fieldtype` is defined we can use the very helpful Analysis page of the Solr Admin UI to check if things are working as expected. If we use the test string: `Bill|Clinton talked about the bill` in the Field value (index) input and select our payload `fieldtype` we can see an output similar to what is shown in the figure.
 
 ![Solr Admin UI](/images/solr-synonyms/analysis-ui.png "Solr Admin UI")
 
@@ -258,13 +258,13 @@ A quick inspection, reveals that the tokens `Bill` and `Clinton` have the same p
 
 ## Advantages to this approach?
 
-One question you may been doing yourself if what advantages provides this approach?
+One question you may been doing yourself is what advantages provides this approach?
 
-This approach *decentralizes* the synonyms management. Usually your synonyms live in a big text file on the filesystem of your Solr server. Adding new synonyms  means editing that file and adding a new rule. 
+This approach *decentralizes* the synonyms management. Usually your synonyms live in a big text file on the filesystem of your Solr server. Adding new synonyms  means editing that file and adding a new rule.
 
-In recent Solr versions, the `ManagedSynonymFilterFactory` class provides an HTTP endpoint to do this. But it is not a good idea to give everyone on your team access to this endpoints. I used this approach in a cloud-like environment for Solr. We provided Solr as a service to different teams with different needs. Along with the service we provided our own utility library for interacting with Solr.  In this library we did the heavy lifting and expose a clean and easy API for the developers. 
+In recent Solr versions, the `ManagedSynonymFilterFactory` class provides an HTTP endpoint to do this. But it is not a good idea to give everyone on your team access to this endpoints. I used this approach in a cloud-like environment for Solr. We provided Solr as a service to different teams with different needs. Along with the service we provided our own utility library for interacting with Solr.  In this library we did the heavy lifting and exposed a clean and easy API for the developers.
 
-In this environment this approach gave control over the synonyms to each developer. They could customize their synonyms  without knowing the inner workings of Solr. 
+In this environment this approach gave control over the synonyms to each developer. They could customize their synonyms  without knowing the inner workings of Solr.
 
 And of course this solves part of our initial statement: tailoring  a synonym to a specific term/token.
 
