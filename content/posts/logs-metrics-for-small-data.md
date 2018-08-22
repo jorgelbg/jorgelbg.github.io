@@ -16,11 +16,11 @@ Of course, I love my terminal. I spend a great amount of time in the console: co
 $ cat ../../fixtures/json/payload1.json | tr -d '\n' | gsed 's/]}/]}\n/g' | phony --tick 100ms | ./main
 ```
 
-Is common for the majority of developers out there.
+Is very common for the majority of developers out there.
 
-A few days ago, in my spare time, I was debugging a bug with a Java application. I was debugging a local run of a crawl cycle using [Apache Nutch](http://nutch.apache.org/). My normal workflow involves several panels in my terminal (iTerm) and a lot of `cat`, `grep`, `sed`, etc.
+A few days ago, in my spare time, I was troubleshooting a bug with a Java application. I was debugging a local run of a crawl cycle using [Apache Nutch](http://nutch.apache.org/). My normal workflow involves several panels in my terminal (iTerm) and a lot of `cat`, `grep`, `sed`, etc.
 
-At some point, I realized that the correlation that I was looking for in the logs was spread in several log files and in different positions. Finding what I was looking for was not going to be easy. I needed to not only find one specific line, but the events happening around that specific line.
+At some point, I realized that the events I was looking for in the logs were spread in several log files and in different positions. Finding those events was not going to be easy. I needed to not only find one specific line, but the cases happening around that specific line.
 
 And, it hit me. I have to do this several times a day at my normal job. As part of the Web performance team, we need to watch graphs and find specific events in hundreds of servers. Of course, dealing with that amount of data required some infrastructure. We have an ELK cluster that holds ~30TB of logs, and we use Kibana on a daily basis for this very purpose. It has to be like this, no one would think of maintaining an application at this scale without a centralized logging system, right?
 
