@@ -6,7 +6,7 @@ draft: false
 
 This post is a personal comment. I'm going to talk about how using some tools
 thought for "Big Data"™ makes sense for common development tasks. If you hear
-someone talking about ELK, Grafana or Prometheus. You wouldn't thing about a
+someone talking about ELK, Grafana or Prometheus, you wouldn't think about a
 system to run your laptop during development, right?
 
 
@@ -48,7 +48,7 @@ Well, why couldn’t I use the same setup in my project? Right? Turns out that
 replicating a similar setup on my laptop wasn’t that difficult. Docker and the
 fact that Elastic provides all its products as Docker images was a blessing.
 
-I only needed to send the logs into Elasticsearch. Then search the desired
+I only needed to send the logs to Elasticsearch, then search the desired
 information using Kibana.
 
 I used Logstash to ingest the logs, you need to figure out how you want your
@@ -84,12 +84,12 @@ piece of code. Calculate the length of the payload and store that as a key of
 the map and a counter as the value. At the end of our test, we printed the map
 to the terminal.
 
-It’s no coincidence that I’m it the Web Performance Team 🤔 we are responsible
+It’s no coincidence that I’m in the Web Performance Team 🤔 we are responsible
 for looking at graphs the entire day. I like graphs! I wanted to see some
 graphs!
 
-In a more serious note. Although the map allowed us to see the distribution of
-the payload size still lacked one thing. How was behaving our code *over time*?
+On a more serious note, although the map allowed us to see the distribution of
+the payload size, we still lacked one thing. How was our code behaving *over time*?
 For this, we changed our implementation and printed the first `N` samples to the
 terminal. Of course, at some point, I just copied the numbers into Excel and
 created a couple of graphs (I mentioned that I like graphs right?).
@@ -116,22 +116,22 @@ so I added one more config file for Grafana.
 A few more lines to instrument my code with
 [client_golang](https://github.com/prometheus/client_golang) and that was it.
 
-The best part, beautiful interactive graphs, that are a pleasure to use. Very
-useful for spotting problems.
+The best part, beautiful interactive graphs, that are a pleasure to use. And
+they're very useful for spotting problems.
 
 ![Grafana dashboard with Prometheus
 datasource](/images/logs-and-metrics/grafana-prometheus.png "Grafana dashboard")
 
 ## TL;DR
 
-We often hear how good is Docker for replicating your local environment in
+We often hear how good Docker is for replicating your local environment in
 production. Or how it can revolutionize your CI/CD pipeline. We also heard about
 the new version of "it works on my machine" 😂
 
 {{< tweet 917564505416073216 >}}
 
 And of course, it's true, but sometimes we forget that it also works the other
-way around. Docker allows developers to apply already proven solution to
+way around. Docker allows developers to apply already proven solutions to
 problems in a local environment.
 
 Tools like Elasticsearch, Logstash, and Kibana can deal with huge amounts of
@@ -140,4 +140,4 @@ in your local environment.
 
 At the same time, Prometheus, InfluxDB, and Grafana have made storing and
 visualizing metrics a very easy task. Even for that small application that
-you're developing in your laptop.
+you're developing on your laptop.
