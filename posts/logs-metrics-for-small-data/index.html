@@ -22,7 +22,7 @@
 
 
 <meta property="og:title" content="Logs and metrics for Small Data" />
-<meta property="og:description" content="This post is a personal comment. I&rsquo;m going to talk about how using some tools thought for &ldquo;Big Data&rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus. You wouldn&rsquo;t thing about a system to run your laptop during development, right?
+<meta property="og:description" content="This post is a personal comment. I&rsquo;m going to talk about how using some tools thought for &ldquo;Big Data&rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus, you wouldn&rsquo;t think about a system to run your laptop during development, right?
 Logs Concatenating files, parsing logs, are some of those tasks that are part of our daily routine as developers. We type lots of commands (usually connected via pipes |) to accomplish a given goal." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="http://jorgelbg.github.io/posts/logs-metrics-for-small-data/" /><meta property="article:published_time" content="2018-08-23T05:42:44&#43;02:00"/>
@@ -30,13 +30,13 @@ Logs Concatenating files, parsing logs, are some of those tasks that are part of
 
 
 <meta itemprop="name" content="Logs and metrics for Small Data">
-<meta itemprop="description" content="This post is a personal comment. I&rsquo;m going to talk about how using some tools thought for &ldquo;Big Data&rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus. You wouldn&rsquo;t thing about a system to run your laptop during development, right?
+<meta itemprop="description" content="This post is a personal comment. I&rsquo;m going to talk about how using some tools thought for &ldquo;Big Data&rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus, you wouldn&rsquo;t think about a system to run your laptop during development, right?
 Logs Concatenating files, parsing logs, are some of those tasks that are part of our daily routine as developers. We type lots of commands (usually connected via pipes |) to accomplish a given goal.">
 
 
 <meta itemprop="datePublished" content="2018-08-23T05:42:44&#43;02:00" />
 <meta itemprop="dateModified" content="2018-08-23T05:42:44&#43;02:00" />
-<meta itemprop="wordCount" content="1096">
+<meta itemprop="wordCount" content="1099">
 
 
 
@@ -44,7 +44,7 @@ Logs Concatenating files, parsing logs, are some of those tasks that are part of
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Logs and metrics for Small Data"/>
-<meta name="twitter:description" content="This post is a personal comment. I&rsquo;m going to talk about how using some tools thought for &ldquo;Big Data&rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus. You wouldn&rsquo;t thing about a system to run your laptop during development, right?
+<meta name="twitter:description" content="This post is a personal comment. I&rsquo;m going to talk about how using some tools thought for &ldquo;Big Data&rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus, you wouldn&rsquo;t think about a system to run your laptop during development, right?
 Logs Concatenating files, parsing logs, are some of those tasks that are part of our daily routine as developers. We type lots of commands (usually connected via pipes |) to accomplish a given goal."/>
 <meta name="twitter:site" content="@https://www.twitter.com/jorgelbgm"/>
 
@@ -81,7 +81,7 @@ Logs Concatenating files, parsing logs, are some of those tasks that are part of
 
 <p>This post is a personal comment. I&rsquo;m going to talk about how using some tools
 thought for &ldquo;Big Data&rdquo;™ makes sense for common development tasks. If you hear
-someone talking about ELK, Grafana or Prometheus. You wouldn&rsquo;t thing about a
+someone talking about ELK, Grafana or Prometheus, you wouldn&rsquo;t think about a
 system to run your laptop during development, right?</p>
 
 <h2 id="logs">Logs</h2>
@@ -121,7 +121,7 @@ application at this scale without a centralized logging system.</p>
 replicating a similar setup on my laptop wasn’t that difficult. Docker and the
 fact that Elastic provides all its products as Docker images was a blessing.</p>
 
-<p>I only needed to send the logs into Elasticsearch. Then search the desired
+<p>I only needed to send the logs to Elasticsearch, then search the desired
 information using Kibana.</p>
 
 <p>I used Logstash to ingest the logs, you need to figure out how you want your
@@ -157,12 +157,12 @@ piece of code. Calculate the length of the payload and store that as a key of
 the map and a counter as the value. At the end of our test, we printed the map
 to the terminal.</p>
 
-<p>It’s no coincidence that I’m it the Web Performance Team 🤔 we are responsible
+<p>It’s no coincidence that I’m in the Web Performance Team 🤔 we are responsible
 for looking at graphs the entire day. I like graphs! I wanted to see some
 graphs!</p>
 
-<p>In a more serious note. Although the map allowed us to see the distribution of
-the payload size still lacked one thing. How was behaving our code <em>over time</em>?
+<p>On a more serious note, although the map allowed us to see the distribution of
+the payload size, we still lacked one thing. How was our code behaving <em>over time</em>?
 For this, we changed our implementation and printed the first <code>N</code> samples to the
 terminal. Of course, at some point, I just copied the numbers into Excel and
 created a couple of graphs (I mentioned that I like graphs right?).</p>
@@ -189,15 +189,15 @@ so I added one more config file for Grafana.</p>
 <p>A few more lines to instrument my code with
 <a href="https://github.com/prometheus/client_golang">client_golang</a> and that was it.</p>
 
-<p>The best part, beautiful interactive graphs, that are a pleasure to use. Very
-useful for spotting problems.</p>
+<p>The best part, beautiful interactive graphs, that are a pleasure to use. And
+they&rsquo;re very useful for spotting problems.</p>
 
 <p><img src="/images/logs-and-metrics/grafana-prometheus.png" alt="Grafana dashboard with Prometheus
 datasource" title="Grafana dashboard" /></p>
 
 <h2 id="tl-dr">TL;DR</h2>
 
-<p>We often hear how good is Docker for replicating your local environment in
+<p>We often hear how good Docker is for replicating your local environment in
 production. Or how it can revolutionize your CI/CD pipeline. We also heard about
 the new version of &ldquo;it works on my machine&rdquo; 😂</p>
 
@@ -206,7 +206,7 @@ the new version of &ldquo;it works on my machine&rdquo; 😂</p>
 
 
 <p>And of course, it&rsquo;s true, but sometimes we forget that it also works the other
-way around. Docker allows developers to apply already proven solution to
+way around. Docker allows developers to apply already proven solutions to
 problems in a local environment.</p>
 
 <p>Tools like Elasticsearch, Logstash, and Kibana can deal with huge amounts of
@@ -215,7 +215,7 @@ in your local environment.</p>
 
 <p>At the same time, Prometheus, InfluxDB, and Grafana have made storing and
 visualizing metrics a very easy task. Even for that small application that
-you&rsquo;re developing in your laptop.</p>
+you&rsquo;re developing on your laptop.</p>
 
     </section>
 </article>
