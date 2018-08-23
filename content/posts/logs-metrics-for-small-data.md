@@ -116,8 +116,8 @@ so I added one more config file for Grafana.
 A few more lines to instrument my code with
 [client_golang](https://github.com/prometheus/client_golang) and that was it.
 
-The best part, beautiful interactive graphs, that are a pleasure to use. And
-they're very useful for spotting problems.
+The best part, beautiful interactive graphs, that are a pleasure to use. Very
+useful for spotting problems.
 
 ![Grafana dashboard with Prometheus
 datasource](/images/logs-and-metrics/grafana-prometheus.png "Grafana dashboard")
