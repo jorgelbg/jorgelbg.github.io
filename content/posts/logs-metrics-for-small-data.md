@@ -1,5 +1,6 @@
 ---
 title: "Logs and metrics for Small Data"
+description: "Using Docker, ELK stack, Prometheus and Grafana to solve common problems in your local environment."
 date: 2018-08-23T05:42:44+02:00
 draft: false
 ---
