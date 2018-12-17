@@ -1,5 +1,7 @@
 ---
 title: "Using Elasticsearch aliases to optimize Grafana dashboards"
+description: "Elasticsearch aliases provide a handy way to apply preset filters
+automatically. This feature is very to leverage the lack of filters in Grafana"
 date: 2018-12-11T14:02:29+01:00
 draft: true
 ---
