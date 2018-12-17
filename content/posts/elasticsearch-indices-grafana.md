@@ -1,7 +1,7 @@
 ---
 title: "Using Elasticsearch aliases to optimize Grafana dashboards"
 description: "Elasticsearch aliases provide a handy way to apply preset filters
-automatically. This feature is very to leverage the lack of filters in Grafana"
+automatically. This feature comes handy to speed up Grafana dashboards."
 date: 2018-12-11T14:02:29+01:00
 draft: true
 ---
@@ -49,7 +49,6 @@ this detail is not important). The relevant section is the
 `request.data` attribute, that looks like:
 
 ```json
-...
 {
   "size": 0,
   "query": {
@@ -74,7 +73,7 @@ this detail is not important). The relevant section is the
     }
   },
   "aggs": {
-      ...
+      "...": "...",
   }
 }
 ```
@@ -124,14 +123,14 @@ the <kbd>Profile</kbd> button already provided a lot of insight:
 ![Profile of th  e original Grafana query](/images/elasticsearch-indices-grafana/original-query-profile.png "Profiling of the original query taking a long time")
 
 To reduce the noise introduced. we decided to query one specific index. For 1
-day of data the query that Grafana was sending to ES was taking ~40s. Of
-course, a significant part of this time was spent in the profile itself, but we
-knew that on production for the last 2 days this time was ~7s. So we decided to
-use the 40s as a reference.
+day of data the query that Grafana was sending to ES was taking ~40s **(inside
+the profiler)**. Of course, a significant part of this time was spent in the
+profiling part, but we knew that on production for the last 2 days this time
+was ~7s. So we decided to use the 40s as a reference.
 
 The real query looked very similar to:
 
-```
+```json
 {
   "size": 0,
   "query": {
@@ -155,7 +154,8 @@ The real query looked very similar to:
       ]
     }
   }
-  ...
+  "...": "..."
+}
 ```
 
 The tricky section was that the host filtering was done on over 30 different
