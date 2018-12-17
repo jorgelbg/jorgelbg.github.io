@@ -8,24 +8,25 @@ draft: true
 
 Grafana is a very popular opensource dashboarding solution. Provides support
 (at this moment) for a long list of storage solutions, including Elasticsearch.
-Unfortunately the ES support is not at the same level as the one you get from
-Kibana. Nevertheless Grafana allows to combine in the same dashboard differente
-data sources. It is possible to have a panel fetching data from ES and a
-different panel fetching data from InfluxDB, for instance.
+Unfortunately the ES support is not at the same level as the one you get for
+InfluxDB, for instance. Nevertheless Grafana allows to combine in the same
+dashboard differente data sources. It is possible to have a panel fetching data
+from ES and a different panel fetching data from InfluxDB.
 
 ## Grafana ❤️ Elasticsearch
 
-Grafana provides an estellar support for InfluxDB[https://www.influxdata.com/]
+Grafana provides an estellar support for [InfluxDB](https://www.influxdata.com/)
 & [Prometheus](http://docs.grafana.org/features/datasources/prometheus/),
 among others. This means that you get, query autocompletion for fields, values,
 etc. When you select ES as a datasource for panel, the features are a bit less
-polished. You are greated by a "Lucene query" input and some more options.
-Depending on the metric, Grafana also provides some assistnace for field name
-for instance.
+polished. You are greeted by a "Lucene query" input and some more options.
+Depending on the metric (aggregation), Grafana also provides some assistnace
+for field name selection when using ES as a datasource.
 
-Up to this point everything is ok, Grafana is not a first citicen in the
-Grafana ecosystem, but it's supported nevertheless. The issue that we had a few
-days ago was instead related to the query that Grafana sends to ES.
+Up to this point everything is ok, Elasticsearch is not a first citicen in the
+Grafana ecosystem, but it's supported nevertheless (and maintained). The issue
+that we had a few days ago (and that inspired the content of this post) was
+instead related to the query that Grafana sends to ES.
 
 Let's say that we want to calculate the average of a `memcache` field in a
 specific index stored in ES. Only for a subset of our hosts (those that start
@@ -36,14 +37,15 @@ hosts with the following query:
 header.senderId:www*
 ```
 
-Similar to what we see in the following picture:
+We could endup putting the same query in a Grafana panel, and we endup with
+something like this:
 
 ![Grafana Example Elasticsearch query](/images/elasticsearch-indices-grafana/grafana-example-query.png "Example of a Grafana Elasticsearch query in a panel")
 
 
 If we check the [Query Inspector](http://docs.grafana.org/guides/whats-new-in-v4-5/#query-inspector)
-we can see the query that Grafana is sending to ES (actually to the proxy, but
-this detail is not important right now). The relevant section is the
+we can see the query that Grafana sends to ES (actually to the proxy, but
+this detail is not important). The relevant section is the
 `request.data` attribute, that looks like:
 
 ```json
@@ -83,12 +85,12 @@ One small detail is that whatever we put in our "Lucene query" input field will
 be placed in the `query_string` section, as an additional *filter*. This is
 great for 90% of the queries, the problem is that if you're querying a large
 enough dataset (let's say you want to aggregate over 19M documents), and you're
-applying a lot of filters (like filtering for specific hosts). This can have an
+applying a lot of filters (like searching for specific hosts). This can have an
 impact in the performance of your query.
 
-> Not everything is bad, if you're using a daily index pattern, and your
+> Not everything is bad, if you're using a time-based index pattern, and your
 > Elasticsearch datasource in Grafana is properly configured, Grafana will know
-> to which indexes send the query depending on your time range, pretty cool!.
+> to which indexes send the query depending on the time range, pretty cool!.
 
 ## The problem
 
@@ -98,8 +100,8 @@ fetching data from ES. We saw this issue in our internal monitoring as well:
 
 ![Periodic spikes in Elasticsearch response times](/images/elasticsearch-indices-grafana/periodic-query-time-spike.png "Periodic spikes in Elasticsearch response times shown in the internal monitoring")
 
-This graph shows that approximately every hour we had a spike in the query time
-from ES, spiking to ~7s. After some detective work, one coworker found the
+This graph shows that approximately every hour we had a spike in the ES query
+time, spiking to ~7s. After some detective work, one coworker found the
 culprit dashboard. Considering that the query was executed periodically, it was
 a good bet that the query was coming from some sort of automated source (like a
 dashboard put in a rotation).
