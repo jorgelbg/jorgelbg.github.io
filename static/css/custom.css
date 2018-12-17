@@ -27,12 +27,20 @@ body {
 }
 
 .post h2.subtitle {
-    background-color: #f7f7f7;
-    /* border-right: 4px solid #5badf0;
+  background-color: #f7f7f7;
+  /* border-right: 4px solid #5badf0;
     border-bottom: 4px solid #5badf0; */
-    padding: 10px 30px;
-    text-align: left;
-    margin-top: 30px;
-    color: #8c8c8c;
-    font: normal 1.1rem/2rem "Helvetica Neue",Helvetica,Arial,sans-serif;
+  padding: 10px 30px;
+  text-align: left;
+  margin-top: 30px;
+  color: #8c8c8c;
+  font: normal 1.1rem/2rem "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+kbd {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 0px 9px;
+  background: linear-gradient(178deg, #fff, #fff, #fff, #ddd);
 }
