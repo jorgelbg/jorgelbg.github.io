@@ -8,22 +8,22 @@ draft: true
 
 Grafana is a very popular opensource dashboarding solution. Provides support
 (at this moment) for a long list of storage solutions, including Elasticsearch.
-Unfortunately the ES support is not at the same level as the one you get for
-InfluxDB, for instance. Nevertheless Grafana allows to combine in the same
-dashboard differente data sources. It is possible to have a panel fetching data
+Unfortunately, the ES support is not at the same level as the one you get for
+InfluxDB, for instance. Nevertheless, Grafana allows combining in the same
+dashboard different data sources. It is possible to have a panel fetching data
 from ES and a different panel fetching data from InfluxDB.
 
 ## Grafana ❤️ Elasticsearch
 
-Grafana provides an estellar support for [InfluxDB](https://www.influxdata.com/)
+Grafana provides stellar support for [InfluxDB](https://www.influxdata.com/)
 & [Prometheus](http://docs.grafana.org/features/datasources/prometheus/),
 among others. This means that you get, query autocompletion for fields, values,
-etc. When you select ES as a datasource for panel, the features are a bit less
+etc. When you select ES as a data source for a panel, the features are a bit less
 polished. You are greeted by a "Lucene query" input and some more options.
-Depending on the metric (aggregation), Grafana also provides some assistnace
-for field name selection when using ES as a datasource.
+Depending on the metric (aggregation), Grafana also provides some assistance
+for field name selection when using ES as a data source.
 
-Up to this point everything is ok, Elasticsearch is not a first citicen in the
+Up to this point, everything is ok, Elasticsearch is not a first citizen in the
 Grafana ecosystem, but it's supported nevertheless (and maintained). The issue
 that we had a few days ago (and that inspired the content of this post) was
 instead related to the query that Grafana sends to ES.
@@ -37,7 +37,7 @@ hosts with the following query:
 header.senderId:www*
 ```
 
-We could endup putting the same query in a Grafana panel, and we endup with
+We could put the same query in a Grafana panel, and we end up with
 something like this:
 
 ![Grafana Example Elasticsearch query](/images/elasticsearch-indices-grafana/grafana-example-query.png "Example of a Grafana Elasticsearch query in a panel")
@@ -85,10 +85,10 @@ be placed in the `query_string` section, as an additional *filter*. This is
 great for 90% of the queries, the problem is that if you're querying a large
 enough dataset (let's say you want to aggregate over 19M documents), and you're
 applying a lot of filters (like searching for specific hosts). This can have an
-impact in the performance of your query.
+impact on the performance of your query.
 
-> Not everything is bad, if you're using a time-based index pattern, and your
-> Elasticsearch datasource in Grafana is properly configured, Grafana will know
+> Not everything is bad if you're using a time-based index pattern, and your
+> Elasticsearch data source in Grafana is properly configured, Grafana will know
 > to which indexes send the query depending on the time range, pretty cool!.
 
 ## The problem
@@ -105,22 +105,22 @@ culprit dashboard. Considering that the query was executed periodically, it was
 a good bet that the query was coming from some sort of automated source (like a
 dashboard put in a rotation).
 
-After identifying the problematic query we realised that the query was hitting
-a lot of unnecesary shards (last 30 days). This was fixed by properly
+After identifying the problematic query we realized that the query was hitting
+a lot of unnecessary shards (last 30 days). This was fixed by properly
 configuring the data source to use the daily pattern. This helped with reducing
-the number of shards that the query hit. Still, it didn't impacted
+the number of shards that the query hit. Still, it didn't impact
 *significantly* the response time of the query. This is just a testimony
 of how efficient ES/Lucene is.
 
-## Profiling time
+## Time to profile
 
-At this point there is not a lot of things that we can do, except profiling the
+At this point, there is not a lot of things that we can do, except profiling the
 query. Kibana comes bundled with a 
 [Search Profiler](https://www.elastic.co/guide/en/kibana/current/xpack-profiler.html)
 with the basic version of X-pack. Putting the query in the profiler and hitting
 the <kbd>Profile</kbd> button already provided a lot of insight:
 
-![Profile of th  e original Grafana query](/images/elasticsearch-indices-grafana/original-query-profile.png "Profiling of the original query taking a long time")
+![Profile of the original Grafana query](/images/elasticsearch-indices-grafana/original-query-profile.png "Profiling of the original query taking a long time")
 
 To reduce the noise introduced. we decided to query one specific index. For 1
 day of data the query that Grafana was sending to ES was taking ~40s **(inside
@@ -161,8 +161,8 @@ The real query looked very similar to:
 The tricky section was that the host filtering was done on over 30 different
 servers (hostnames). *The original query also included a couple of additional
 conditions that we can disregard for the sake of this article*. Of course,
-executing this over 19M documents its expensive and time consuming (even for ES).
-The `query_string` is not very optimial for filtering data. If we look at the
+executing this over 19M documents it is expensive and time-consuming (even for ES).
+The `query_string` is not very optimal for filtering data. If we look at the
 "internal query" that ES will execute we see something like:
 
 ```json
@@ -179,8 +179,8 @@ The `query_string` is not very optimial for filtering data. If we look at the
 }
 ```
 
-This means internally ES will treat this as a boolean query, and will execute
-that query against every document that falls in the timerange. Even after
+This means internally ES will treat this as a boolean query and will execute
+that query against every document that falls in the time range. Even after
 Grafana selecting the right indices to query, this is a lot of processing to
 do. Perhaps we can find a better way to write this query?
 
@@ -264,10 +264,11 @@ has not been addressed yet.
 
 Elasticsearch supports the use of
 [*aliases*](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html).
-This allows to have a different name of referencing some index. Think on a pointer
+This allows having a different name of referencing some index. Think on a pointer
 to an actual index (very similar to a symbolic link). What is even more
 powerful is that we can have 
 [*filtered aliases*](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#filtered).
+
 According to the documentation:
 
 > Aliases with filters provide an easy way to create different "views" of the
@@ -275,8 +276,8 @@ According to the documentation:
 
 This means that we could create an alias of our index that automatically
 applies the desired filter (the very long list of hosts). Configure this as a
-datasource in Grafana/Kibana and point our dashboards to use it. With this
-feature we can work around the lack of proper filters for Elasticsearch in
+data source in Grafana/Kibana and point our dashboards to use it. With this
+feature, we can work around the lack of proper filters for Elasticsearch in
 Grafana.
 
 To create the alias we can fire a `POST` request against the `/_aliases` endpoint:
@@ -313,15 +314,15 @@ POST /_aliases
 The overall result, after making the switch in the Grafana panels, was that the
 loading time for the dashboard went down from ~7s to ~2.5s.
 
-Additionally this approach provides some abstraction. Everyone using the
-`accesslogs-nsi` alias will apply the same set of filters, without knowing what
+Additionally, this approach provides some abstraction. Everyone using the
+created alias will apply the same set of filters, without knowing what
 is being applied in the background, essentially having a different "view" of
 the data (as so elegantly put by the ES documentation).
 
 ## Summary
 
 Index aliases are a very useful technique not only useful for ingesting without
-downtime, but also to offer different "views" of the same data. As a bonus they
+downtime, but also to offer different "views" of the same data. As a bonus, they
 could help to speed some Grafana dashboards 😉.
 
 ## Bonus Track: Updating the aliases
