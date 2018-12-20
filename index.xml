@@ -6,10 +6,19 @@
     <description>Recent content on Jorge Luis Betancourt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 23 Aug 2018 05:42:44 +0200</lastBuildDate>
+    <lastBuildDate>Thu, 20 Dec 2018 00:00:00 +0100</lastBuildDate>
     
 	<atom:link href="http://jorgelbg.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Using Elasticsearch aliases to optimize Grafana dashboards</title>
+      <link>http://jorgelbg.github.io/posts/elasticsearch-indices-grafana/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>http://jorgelbg.github.io/posts/elasticsearch-indices-grafana/</guid>
+      <description>Grafana is a very popular opensource dashboarding solution. Provides support (at this moment) for a long list of storage solutions, including Elasticsearch. Unfortunately, the ES support is not at the same level as the one you get for InfluxDB, for instance. Still, Grafana allows combining in the same dashboard different data sources. It is possible to have a panel fetching data from ES and a different panel fetching data from InfluxDB.</description>
+    </item>
     
     <item>
       <title>Logs and metrics for Small Data</title>

@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://jorgelbg.github.io/posts/elasticsearch-indices-grafana/</loc>
+    <lastmod>2018-12-20T00:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://jorgelbg.github.io/posts/logs-metrics-for-small-data/</loc>
     <lastmod>2018-08-23T05:42:44+02:00</lastmod>
   </url>
@@ -23,13 +28,13 @@
   
   <url>
     <loc>http://jorgelbg.github.io/</loc>
-    <lastmod>2018-08-23T05:42:44+02:00</lastmod>
+    <lastmod>2018-12-20T00:00:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://jorgelbg.github.io/posts/</loc>
-    <lastmod>2018-08-23T05:42:44+02:00</lastmod>
+    <lastmod>2018-12-20T00:00:00+01:00</lastmod>
     <priority>0</priority>
   </url>
   
