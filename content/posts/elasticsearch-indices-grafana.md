@@ -1,7 +1,7 @@
 ---
 title: "Using Elasticsearch aliases to optimize Grafana dashboards"
-description: "Elasticsearch aliases provide a handy way to apply preset filters
-automatically. This feature comes handy to speed up Grafana dashboards."
+description: "Elasticsearch aliases can apply filters automatically to your queries. 
+Let's use it to speed up some Grafana dashboards."
 date: 2018-12-11T14:02:29+01:00
 draft: true
 ---
@@ -9,7 +9,7 @@ draft: true
 Grafana is a very popular opensource dashboarding solution. Provides support
 (at this moment) for a long list of storage solutions, including Elasticsearch.
 Unfortunately, the ES support is not at the same level as the one you get for
-InfluxDB, for instance. Nevertheless, Grafana allows combining in the same
+InfluxDB, for instance. Still, Grafana allows combining in the same
 dashboard different data sources. It is possible to have a panel fetching data
 from ES and a different panel fetching data from InfluxDB.
 
@@ -19,12 +19,12 @@ Grafana provides stellar support for [InfluxDB](https://www.influxdata.com/)
 & [Prometheus](http://docs.grafana.org/features/datasources/prometheus/),
 among others. This means that you get, query autocompletion for fields, values,
 etc. When you select ES as a data source for a panel, the features are a bit less
-polished. You are greeted by a "Lucene query" input and some more options.
-Depending on the metric (aggregation), Grafana also provides some assistance
+polished. You are greet by a "Lucene query" input and some more options.
+Depending on the metric (aggregation), Grafana also provides some help
 for field name selection when using ES as a data source.
 
 Up to this point, everything is ok, Elasticsearch is not a first citizen in the
-Grafana ecosystem, but it's supported nevertheless (and maintained). The issue
+Grafana ecosystem, but it's supported and maintained). The issue
 that we had a few days ago (and that inspired the content of this post) was
 instead related to the query that Grafana sends to ES.
 
@@ -81,7 +81,7 @@ this detail is not important). The relevant section is the
 We can see that Grafana is applying a 
 [Filtered Query](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/query-dsl-filtered-query.html).
 One small detail is that whatever we put in our "Lucene query" input field will
-be placed in the `query_string` section, as an additional *filter*. This is
+be placed in the `query_string` section, as an extra *filter*. This is
 great for 90% of the queries, the problem is that if you're querying a large
 enough dataset (let's say you want to aggregate over 19M documents), and you're
 applying a lot of filters (like searching for specific hosts). This can have an
@@ -101,15 +101,15 @@ fetching data from ES. We saw this issue in our internal monitoring as well:
 
 This graph shows that approximately every hour we had a spike in the ES query
 time, spiking to ~7s. After some detective work, one coworker found the
-culprit dashboard. Considering that the query was executed periodically, it was
+culprit dashboard. Considering that the query was executing periodically, it was
 a good bet that the query was coming from some sort of automated source (like a
 dashboard put in a rotation).
 
 After identifying the problematic query we realized that the query was hitting
-a lot of unnecessary shards (last 30 days). This was fixed by properly
+a lot of unnecessary shards (last 30 days). We fix it by
 configuring the data source to use the daily pattern. This helped with reducing
 the number of shards that the query hit. Still, it didn't impact
-*significantly* the response time of the query. This is just a testimony
+*significantly* the response time of the query. This is a testimony
 of how efficient ES/Lucene is.
 
 ## Time to profile
@@ -124,9 +124,9 @@ the <kbd>Profile</kbd> button already provided a lot of insight:
 
 To reduce the noise introduced. we decided to query one specific index. For 1
 day of data the query that Grafana was sending to ES was taking ~40s **(inside
-the profiler)**. Of course, a significant part of this time was spent in the
-profiling part, but we knew that on production for the last 2 days this time
-was ~7s. So we decided to use the 40s as a reference.
+the profiler)**. Of course, a significant part of this time comes from the
+profiling itself. We knew that on production for the last 2 days this time
+was ~7s. So we decided to use the 40s as a base reference.
 
 The real query looked very similar to:
 
@@ -158,11 +158,11 @@ The real query looked very similar to:
 }
 ```
 
-The tricky section was that the host filtering was done on over 30 different
-servers (hostnames). *The original query also included a couple of additional
-conditions that we can disregard for the sake of this article*. Of course,
-executing this over 19M documents it is expensive and time-consuming (even for ES).
-The `query_string` is not very optimal for filtering data. If we look at the
+The tricky section was that the host filter included over 30 servers
+(hostnames). *The original query also included a couple of more conditions that
+we can disregard for the sake of this article*. Of course, executing this over
+19M documents it is expensive and time-consuming (even for ES). The
+`query_string` is not very optimal for filtering data. If we look at the
 "internal query" that ES will execute we see something like:
 
 ```json
@@ -179,10 +179,10 @@ The `query_string` is not very optimal for filtering data. If we look at the
 }
 ```
 
-This means internally ES will treat this as a boolean query and will execute
+This means that internally ES will treat this as a boolean query and will execute
 that query against every document that falls in the time range. Even after
-Grafana selecting the right indices to query, this is a lot of processing to
-do. Perhaps we can find a better way to write this query?
+Grafana selected the right indices to query, this was a lot of processing to
+do. Can we find a better way to write this query?
 
 If we take the very long list of hosts and apply that as a `must` filter:
 
@@ -234,7 +234,7 @@ And check the internal query that ES will execute in the profiler:
   ]
 ```
 
-We can see that the explanation section its very different. First of all, we
+The explanation section is very different. First of all, we
 see that when we use the filter everything is wrapped in `ConstantScore`,
 meaning that no scoring will be performed (we just want to include/exclude data
 based on certain criteria). Since the first query is a `BooleanQuery` for every
@@ -257,10 +257,13 @@ After running the new query through the profiler we can see some improvement:
 
 ## Elasticsearch aliases
 
-The solution is kind of clear, use filters!. And here is where we hit a wall.
+The solution is clear, let's use filters!. And here is where we hit a wall.
 At the moment there is no way of specifying query filters for ES in Grafana,
 there is an [open issue](https://github.com/grafana/grafana/issues/12447) that
 has not been addressed yet.
+
+{{% figure src="/images/elasticsearch-indices-grafana/filter-all-the-things.jpg#center" %}}
+
 
 Elasticsearch supports the use of
 [*aliases*](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html).
@@ -311,13 +314,13 @@ POST /_aliases
 }
 ```
 
-The overall result, after making the switch in the Grafana panels, was that the
-loading time for the dashboard went down from ~7s to ~2.5s.
+The end result: after making the switch in the Grafana panels, the
+loading time for the dashboard went down from ~7s to ~2s.
 
 Additionally, this approach provides some abstraction. Everyone using the
-created alias will apply the same set of filters, without knowing what
-is being applied in the background, essentially having a different "view" of
-the data (as so elegantly put by the ES documentation).
+created alias will apply the same set of filters. This provides uniformity and
+also enforces good practices. Our users have now a different "view" of the data
+(as stated in the ES documentation).
 
 ## Summary
 
@@ -330,6 +333,6 @@ could help to speed some Grafana dashboards 😉.
 Since the aliases are set on the index itself we need to update the alias every
 day (when a new index is created). Using [index
 templates](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-templates.html)
-we can accomplish this. The funny thing is that although we think as an alias
+we can do this. The funny thing is that although we think as an alias
 that points to specific indices, internally is the index the one that knows to
 which alias (or aliases) it responds to 😀.

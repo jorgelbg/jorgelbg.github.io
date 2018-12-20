@@ -21,6 +21,10 @@ body {
   font-size: 2rem;
 }
 
+#post-list.archive li .dates {
+  margin-left: 30px;
+}
+
 .profile h2 {
   color: #7d7d7d;
   font-size: 1.3rem;
@@ -47,4 +51,28 @@ kbd {
 
 .post h2 {
   margin: 30px 0 15px;
+}
+
+img[src$="#center"] {
+  display: block;
+  margin: 0.7rem auto; /* you can replace the vertical '0.7rem' by
+                            whatever floats your boat, but keep the
+                            horizontal 'auto' for this to work */
+  /* whatever else styles you fancy here */
+}
+
+img[src$="#floatleft"] {
+  float: left;
+  margin: 0.7rem; /* this margin is totally up to you */
+  /* whatever else styles you fancy here */
+}
+
+img[src$="#floatright"] {
+  float: right;
+  margin: 0.7rem; /* this margin is totally up to you */
+  /* whatever else styles you fancy here */
+}
+
+h1 {
+  letter-spacing: 0;
 }
