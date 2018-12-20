@@ -21,8 +21,8 @@ body {
   font-size: 2rem;
 }
 
-#post-list.archive li .dates {
-  min-width: 120px;
+#post-list.archive li {
+  display: block;
 }
 
 .profile h2 {
