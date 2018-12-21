@@ -12,12 +12,13 @@
     
     
     <item>
-      <title>Optimize Grafana dashboards using Elasticsearch index aliases</title>
+      <title>Optimize Grafana dashboards with Elasticsearch index aliases</title>
       <link>http://jorgelbg.github.io/posts/elasticsearch-indices-grafana/</link>
       <pubDate>Thu, 20 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>http://jorgelbg.github.io/posts/elasticsearch-indices-grafana/</guid>
-      <description>Grafana is a very popular opensource dashboarding solution. Provides support (at this moment) for a long list of storage solutions, including Elasticsearch. Unfortunately, the ES support is not at the same level as the one you get for InfluxDB, for instance. Still, Grafana allows combining in the same dashboard different data sources. It is possible to have a panel fetching data from ES and a different panel fetching data from InfluxDB.</description>
+      <description>Grafana is a very popular opensource dashboarding solution. Provides support for a long list of storage solutions, including Elasticsearch. Unfortunately, the ES support is not at the same level as the one you get for InfluxDB, for instance. Still, Grafana allows combining in the same dashboard different data sources. It is possible to have a panel fetching data from ES and a different panel fetching data from InfluxDB.
+Grafana ❤️ Elasticsearch Grafana provides stellar support for InfluxDB &amp;amp; Prometheus, among others.</description>
     </item>
     
     <item>
