@@ -1,12 +1,12 @@
 ---
-title: "Using Elasticsearch aliases to optimize Grafana dashboards"
+title: "Optimize Grafana dashboards with Elasticsearch index aliases"
 description: "Elasticsearch aliases can apply filters automatically to your queries. 
 Let's use it to speed up some Grafana dashboards."
 date: 2018-12-20T00:00:00+01:00
 ---
 
 Grafana is a very popular opensource dashboarding solution. Provides support
-(at this moment) for a long list of storage solutions, including Elasticsearch.
+for a long list of storage solutions, including Elasticsearch.
 Unfortunately, the ES support is not at the same level as the one you get for
 InfluxDB, for instance. Still, Grafana allows combining in the same
 dashboard different data sources. It is possible to have a panel fetching data
