@@ -48,9 +48,3 @@ jobs:
             git config --global user.name $USERNAME
             git config --global user.email $USEREMAIL
             ghp-import --no-jekyll -m "New deployment from CircleCI" -b "${TARGET_BRANCH}" --push ${HUGO_BUILD_DIR}
-
-workflows:
-  version: 2
-  build_and_test:
-    jobs:
-      - build
