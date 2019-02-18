@@ -104,5 +104,5 @@ a new version has been deployed.
 The change in the color provides nice visual feedback when a new version is
 deployed. And yet, it is not intrusive to whatever you're showing in your
 graph. It is self-contained, you can change the appearance of your graph
-without affecting this particular series. And finally, this approach doesn't
+without affecting this particular series. Finally, this approach doesn't
 require that you make your queries "aware" of the build information.
