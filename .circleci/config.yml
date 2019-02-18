@@ -21,7 +21,7 @@ jobs:
             - "da:c7:f1:7a:92:ab:33:17:28:1d:cb:40:97:fe:e2:8f"
 
       # install git
-      - run: apk update && apk add git python py-pip
+      - run: apk update && apk add git python py-pip git-fast-import
 
       # checkout the repository
       - checkout
