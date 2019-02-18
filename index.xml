@@ -6,10 +6,21 @@
     <description>Recent content on Jorge Luis Betancourt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 20 Dec 2018 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sun, 17 Feb 2019 14:00:28 +0100</lastBuildDate>
     
 	<atom:link href="http://jorgelbg.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Show the application&#39;s version in your Grafana dashboards.</title>
+      <link>http://jorgelbg.github.io/posts/app-version-in-grafana/</link>
+      <pubDate>Sun, 17 Feb 2019 14:00:28 +0100</pubDate>
+      
+      <guid>http://jorgelbg.github.io/posts/app-version-in-grafana/</guid>
+      <description>At work, we needed a way to monitor the lag of some Kafka consumers reading business-critical topics.
+We ended up using this exporter that provided exactly the metrics that we needed. After adding metadata caching to reduce the load on our Kafka cluster we deployed the exporter to our Nomad cluster and started to build dashboards.
+While I was making changes to the application. I needed not only to check the logs but also to graph the data that the exporter was getting from Kafka, to make sure that my changes were not breaking the normal behavior.</description>
+    </item>
     
     <item>
       <title>Optimize Grafana dashboards with Elasticsearch index aliases</title>
