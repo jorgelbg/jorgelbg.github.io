@@ -10,8 +10,6 @@ jobs:
     
     environment:
       - HUGO_BUILD_DIR: output
-      - USERNAME: "jorgelbg"
-      - USEREMAIL: "betancourt.jorge@gmail.com"
       - SOURCE_BRANCH: hugo
       - TARGET_BRANCH: master
     
@@ -31,39 +29,13 @@ jobs:
             git submodule init
             git submodule update --remote
 
-      # - run:
-      #     name: Install and configure dependencies
-      #     command: |
-      #       npm install -g --silent gh-pages@2.0.1
-      #       git config user.email "ci-build@klukas.net"
-      #       git config user.name "ci-build"
-
       # build with Hugo
       - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
 
-      # - run:
-      #     name: test our generated HTML files
-      #     command: |
-      #       htmlproofer $HUGO_BUILD_DIR --allow-hash-href --check-html \
-      #       --empty-alt-ignore --disable-external
-
-      # - run:
-      #     name: Deploy docs to gh-pages branch
-      #     command: gh-pages --dotfiles --message "[skip ci] Updates" --dist docs/_build/html
       - run:
           name: install dependencies
           command: |
             pip install ghp-import && which ghp-import
-
-      # - run:
-      #     name: commit generated HTMl files
-      #     command: |
-      #       cd ./public && git add -A
-
-      # - run:
-      #     name: push generated HTMl files to master
-      #     command: |
-      #       cd ./public && git push
 
       - run:
           name: list files to push
@@ -76,3 +48,7 @@ jobs:
             git config --global user.name $USERNAME
             git config --global user.email $USEREMAIL
             ghp-import --no-jekyll -m "New deployment from CircleCI" -b "${TARGET_BRANCH}" --push ${HUGO_BUILD_DIR}
+
+test:
+  override:
+    - echo "done"
