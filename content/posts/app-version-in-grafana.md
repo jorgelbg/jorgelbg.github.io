@@ -92,6 +92,9 @@ The end result looks like this:
 
 ![The end result](/images/app-version-in-grafana/final-result.png "How it looked in the end")
 
+As a bonus, you can see how the last deployed version fixed some issues with
+missing metrics
+
 ## Summary
 
 A thick line at the `0` value of the graph always shows the version that I'm
