@@ -61,6 +61,11 @@ jobs:
       #       cd ./public && git push
 
       - run:
+          name: list files to push
+          command: | 
+            ls -lA output
+
+      - run:
           name: Deploy to github pages
           command: |
             git config --global user.name $USERNAME
