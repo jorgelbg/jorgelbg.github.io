@@ -101,5 +101,8 @@ A thick line at the `0` value of the graph always shows the version that I'm
 using. It is visible in the legend and a change in the color indicates that
 a new version has been deployed.
 
-The change in the color provides a nice visual feedback when a new version is
-deployed.
+The change in the color provides nice visual feedback when a new version is
+deployed. And yet, it is not intrusive to whatever you're showing in your
+graph. It is self-contained, you can change the appearance of your graph
+without affecting this particular series. And finally, this approach doesn't
+require that you make your queries "aware" of the build information.
