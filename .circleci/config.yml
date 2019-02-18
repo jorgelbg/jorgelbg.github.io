@@ -1,10 +1,14 @@
 version: 2
 jobs:
-  build:
-    branches:
-      only:
-        - hugo
+  test:
+    steps: []
+    override:
+      - echo "done"
 
+  build:
+    # branches:
+    #   only:
+    #     - hugo
     docker:
       - image: cibuilds/hugo:latest
     working_directory: ~/hugo
