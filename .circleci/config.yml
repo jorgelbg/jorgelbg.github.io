@@ -9,7 +9,7 @@ jobs:
     working_directory: ~/hugo
     
     environment:
-      - HUGO_BUILD_DIR: ~/hugo/public
+      - HUGO_BUILD_DIR: output
       - USERNAME: "jorgelbg"
       - USEREMAIL: "betancourt.jorge@gmail.com"
       - SOURCE_BRANCH: hugo
@@ -34,7 +34,7 @@ jobs:
       #       git config user.name "ci-build"
 
       # build with Hugo
-      - run: HUGO_ENV=production hugo -v
+      - run: HUGO_ENV=production hugo -v -d $HUGO_BUILD_DIR
 
       # - run:
       #     name: test our generated HTML files
@@ -65,4 +65,4 @@ jobs:
           command: |
             git config --global user.name $USERNAME
             git config --global user.email $USEREMAIL
-            ghp-import --no-jekyll -m "New deployment from CircleCI" -b "${TARGET_BRANCH}" --push public
+            ghp-import --no-jekyll -m "New deployment from CircleCI" -b "${TARGET_BRANCH}" --push ${HUGO_BUILD_DIR}
