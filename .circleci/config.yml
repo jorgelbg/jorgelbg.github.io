@@ -10,16 +10,21 @@ jobs:
     
     environment:
       - HUGO_BUILD_DIR: ~/hugo/public
-      - SOURCE_BRANCH: master
-      - TARGET_BRANCH: gh-pages
+      - USERNAME: "jorgelbg"
+      - USEREMAIL: "betancourt.jorge@gmail.com"
+      - SOURCE_BRANCH: hugo
+      - TARGET_BRANCH: master
     
     steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "da:c7:f1:7a:92:ab:33:17:28:1d:cb:40:97:fe:e2:8f"
+
       # install git
-      - run: apk update && apk add git
+      - run: apk update && apk add git python py-pip
 
       # checkout the repository
       - checkout
-      - run: git submodule sync
 
       # - run:
       #     name: Install and configure dependencies
@@ -41,16 +46,23 @@ jobs:
       #     name: Deploy docs to gh-pages branch
       #     command: gh-pages --dotfiles --message "[skip ci] Updates" --dist docs/_build/html
       - run:
-          name: list files
+          name: install dependencies
           command: |
-            cd ./public && ls -lA
+            pip install ghp-import && which ghp-import
+
+      # - run:
+      #     name: commit generated HTMl files
+      #     command: |
+      #       cd ./public && git add -A
+
+      # - run:
+      #     name: push generated HTMl files to master
+      #     command: |
+      #       cd ./public && git push
 
       - run:
-          name: commit generated HTMl files
+          name: Deploy to github pages
           command: |
-            cd ./public && git add -A && git commit -m "CircleCI article from ${CI_PULL_REQUEST}"
-
-      - run:
-          name: push generated HTMl files to master
-          command: |
-            cd ./public && git push
+            git config --global user.name $USERNAME
+            git config --global user.email $USEREMAIL
+            ghp-import --no-jekyll -m "New deployment from CircleCI" -b "${TARGET_BRANCH}" --push public
