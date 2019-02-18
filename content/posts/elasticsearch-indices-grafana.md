@@ -1,7 +1,8 @@
 ---
 title: "Optimize Grafana dashboards with Elasticsearch index aliases"
-description: "Elasticsearch aliases can apply filters automatically to your queries. 
-Let's use it to speed up some Grafana dashboards."
+description: > 
+  Elasticsearch aliases can apply filters automatically to your queries. 
+  Let's use it to speed up some Grafana dashboards."
 date: 2018-12-20T00:00:00+01:00
 ---
 
