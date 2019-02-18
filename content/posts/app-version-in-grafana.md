@@ -54,7 +54,7 @@ metric and make it *visible* in some way.
 I ended up using the following query:
 
 ```
-sum(kafka_exporter_build_info-1) by (revision)
+kafka_exporter_build_info-1
 ```
 
 Because the `kafka_exporter_build_info` has a constant value of `1` and only
