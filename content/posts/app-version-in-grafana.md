@@ -1,5 +1,5 @@
 ---
-title: "Display the application's version in your Grafana dashboards."
+title: "Display the application's version in your Grafana dashboards"
 date: 2019-02-17T14:00:28+01:00
 description: >
     Nice "trick" to visualize the version of your application in your Grafana
