@@ -53,3 +53,6 @@ disqusShortname = "jorgelbg"
     # facebook = "https://www.facebook.com/"
     github   = "https://www.github.com/jorgelbg"
     # dribble  = "https://www.dribbble.com/"
+
+[permalinks]
+  posts = "/:year/:month/:title/"
