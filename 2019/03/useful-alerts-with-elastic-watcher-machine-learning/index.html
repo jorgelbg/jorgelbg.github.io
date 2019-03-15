@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en-us">
+	<head>
+    <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="author" content="Jorge Luis Betancourt">
+<meta name="description" content="Computo Ergo Sum">
+<meta name="generator" content="Hugo 0.54.0" />
+<title>Useful alerts with Elastic Watcher &amp; Machine Learning</title>
+<link rel="shortcut icon" href="http://jorgelbg.github.io/images/favicon.ico">
+<link rel="stylesheet" href="http://jorgelbg.github.io/css/style.css">
+<link rel="stylesheet" href="http://jorgelbg.github.io/css/highlight.css">
+
+<link rel="stylesheet" href="http://jorgelbg.github.io/css/custom.css">
+
+
+
+<link rel="stylesheet" href="http://jorgelbg.github.io/css/monosocialiconsfont.css">
+
+
+
+<link href="http://jorgelbg.github.io/index.xml" rel="alternate" type="application/rss+xml" title="Jorge Luis Betancourt" />
+
+
+<meta property="og:title" content="Useful alerts with Elastic Watcher &amp; Machine Learning" />
+<meta property="og:description" content="Create more useful alerts using Elastic&#39;s Watcher and Machine Learning.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://jorgelbg.github.io/2019/03/useful-alerts-with-elastic-watcher-machine-learning/" />
+<meta property="article:published_time" content="2019-03-15T13:00:00&#43;01:00"/>
+<meta property="article:modified_time" content="2019-03-15T13:00:00&#43;01:00"/>
+
+
+
+<meta itemprop="name" content="Useful alerts with Elastic Watcher &amp; Machine Learning">
+<meta itemprop="description" content="Create more useful alerts using Elastic&#39;s Watcher and Machine Learning.
+">
+
+
+<meta itemprop="datePublished" content="2019-03-15T13:00:00&#43;01:00" />
+<meta itemprop="dateModified" content="2019-03-15T13:00:00&#43;01:00" />
+<meta itemprop="wordCount" content="1052">
+
+
+
+<meta itemprop="keywords" content="" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Useful alerts with Elastic Watcher &amp; Machine Learning"/>
+<meta name="twitter:description" content="Create more useful alerts using Elastic&#39;s Watcher and Machine Learning.
+"/>
+<meta name="twitter:site" content="@https://www.twitter.com/jorgelbgm"/>
+
+
+    </head>
+<body>
+    <nav class="main-nav">
+	
+		<a href='http://jorgelbg.github.io/'> <span class="arrow">←</span>Home</a>
+	
+
+	
+
+	
+		<a class="cta" href="http://jorgelbg.github.io/index.xml">Subscribe</a>
+	
+</nav>
+
+    <section id="wrapper">
+        
+        
+<article class="post">
+    <header>
+        <h1>Useful alerts with Elastic Watcher &amp; Machine Learning</h1>
+        <h2 class="subtitle">Create more useful alerts using Elastic&rsquo;s Watcher and Machine Learning.</h2>
+        <h2 class="headline">
+        March 15, 2019
+        <br>
+        
+        </h2>
+    </header>
+    <section id="post-body">
+        
+
+<p>Alerts should be meaningful, simply getting a notification about something
+happening is not enough. A <a href="https://blog.danslimmon.com/2017/10/02/what-makes-a-good-alert/">good alert</a>
+should be <strong>actionable</strong> and <strong>investigable</strong>. For me, this means getting a
+answer to the following questions:</p>
+
+<h3 id="what-happened">What happened?</h3>
+
+<p>Was the traffic to the Web site unusually low? Did the number of errors
+increase? This is the type of information that the alert should contain in a
+clear and visible way.</p>
+
+<h3 id="why-an-alert-triggered">Why an alert triggered?</h3>
+
+<p>What does it mean if the traffic is <em>unusually low</em>, would a 5% qualify for
+this category? What about 10%? How much are too many errors? What <em>type</em> of
+errors has increased?</p>
+
+<h3 id="what-s-next">What&rsquo;s next?</h3>
+
+<p>Now that I&rsquo;ve received this alert, what to do next? What should I check first?
+How do I get a first glance at the situation?</p>
+
+<p>These questions are even more important if you add Machine Learning&trade; into
+the mix. ML is not the holy grail of alerting. Yet, it can help detect
+situations that you didn&rsquo;t foresee before. This means that sometimes you would
+get a notification about an <em>anomaly</em> that will be the first time that happens.
+If an alert answers the three previous questions it will steer you in the right
+direction.</p>
+
+<h2 id="let-s-build-something">Let&rsquo;s build something</h2>
+
+<p>Elastic stack now supports (with the addition of X-pack)
+<a href="https://www.elastic.co/products/stack/alerting">alerting</a>. Even more
+powerful (if you can afford it) combined with the use of <a href="https://www.elastic.co/products/stack/machine-learning">Machine
+Learning</a>. And yes,
+sounds pretty cool, and it is well integrated into
+<a href="https://www.elastic.co/de/products/kibana">Kibana</a>.</p>
+
+<p>Eventually, you will have more than one ML job configured, and it is likely that
+this number will increase. Having 1 alerting job for each individual ML job
+will not scale. Watcher UI it is simple enough if you want a simple threshold-based alert. But if you really want to use what Watcher offers you will end up
+writing a ton of JSON to have a flexible enough alert.</p>
+
+<p>If you google enough you will find a few <a href="https://www.elastic.co/blog/alerting-on-machine-learning-jobs-in-elasticsearch-v55">blog posts</a>
+and even some <a href="https://github.com/elastic/examples/blob/master/Alerting/Sample%20Watches/ml_examples/bucket_watch.json">example jobs</a>
+that will help you. But the example alerts that you usually find for Watcher
+are very simple. No one can write a perfect example tailored to your particular needs.</p>
+
+<p>In a more practical way an alert should include, to answer the previous three questions:</p>
+
+<ul>
+<li>The name of the job that triggered the anomaly.</li>
+</ul>
+
+<p>This name should be clear and related to the data/situations that it is checking.</p>
+
+<ul>
+<li>Which specific feature(s) influenced this result.</li>
+</ul>
+
+<p>If you have a multi-metric job you will want to know which specific metric(s) triggered the anomaly.</p>
+
+<ul>
+<li>A link to the Anomaly Explorer clearing showing the issue.</li>
+</ul>
+
+<p>Probably you have a lot of dashboards in your ES cluster. Perhaps you&rsquo;re even
+using <a href="https://grafana.com/">Grafana</a> with ES. Providing a link to all
+dashboards in your organization that are related to the main issue is out of
+the question. A link to the Anomaly explorer clearly highlighting the issue
+should be a good start.</p>
+
+<p>A reasonable useful alert message may look like:</p>
+
+<pre><code>Job &lt;job name&gt;.
+Anomaly of score=&lt;score&gt; at &lt;timestamp&gt; influenced by:
+&lt;metric&gt; score=&lt;metric score&gt;, actual=&lt;value&gt;, (typical=&lt;value&gt;)
+&lt;metric1&gt; score=&lt;metric1 score&gt;, actual=&lt;value&gt;, (typical=&lt;value&gt;)
+
+&lt;deep dive link&gt;
+</code></pre>
+
+<p><a href="https://github.com/elastic/examples/blob/master/Alerting/Sample%20Watches/ml_examples/bucket_watch.json">This alert example</a>
+it&rsquo;s a good starting point.</p>
+
+<p>First of all, we don&rsquo;t want to keep 1 alert per ML job because we would need to
+add one new alert every time that we add a new job, and also it would lead to a
+lot of duplication.</p>
+
+<p>Let&rsquo;s remove the <code>term</code> query that it&rsquo;s matching in the <code>job_id</code>:</p>
+
+<pre><code class="language-json">&quot;term&quot;: {
+ &quot;job_id&quot;: &quot;farequote_response&quot;
+}
+</code></pre>
+
+<p>Now our alert will &ldquo;watch&rdquo; all jobs in the cluster. You can also tweak the rest
+of the options: <code>interval</code>, the <code>range</code> filter, etc.</p>
+
+<p>The core issue of the alert is what its included in the <code>text</code> key inside the
+specific <code>actions</code> elements:</p>
+
+<pre><code>&quot;actions&quot;: {
+  &quot;log&quot;: {
+    &quot;logging&quot;: {
+      &quot;text&quot;: &quot;Anomalies:\n{{#ctx.payload.hits.hits}}
+        score={{_source.anomaly_score}}
+        at time={{_source.timestamp}}\n{{/ctx.payload.hits.hits}}&quot;
+    }
+  }
+}
+</code></pre>
+
+<p>In a real-life scenario this would be probably the message posted to a
+specific Slack (or similar) channel. We need to collect some information
+before sending the alert.</p>
+
+<p>Thankfully ES Watcher supports <a href="https://www.elastic.co/guide/en/x-pack/current/transform-script.html">transform scripts</a>
+written in <a href="https://www.elastic.co/guide/en/elasticsearch/reference/master/modules-scripting-painless.html">painless</a>.
+Which will allow us to do a lot of transformations to the data before the
+alert is sent.</p>
+
+<h4 id="get-the-name-of-the-job-that-triggered-the-anomaly">Get the name of the job that triggered the anomaly.</h4>
+
+<p>We can take the job name or <code>job_id</code> from the first element that matches our query scheduled query:</p>
+
+<pre><code class="language-js">return [
+ 'job_id': ctx.payload.first.hits.hits.0._source.job_id
+]
+</code></pre>
+
+<h4 id="round-the-scores-not-a-lot-of-useful-information-after-2-decimal-places">Round the scores (not a lot of useful information after 2 decimal places)</h4>
+
+<p>For rounding the scores we can use the <a href="https://www.elastic.co/guide/en/elasticsearch/painless/6.1/painless-api-reference.html">DecimalFormat</a>
+class:</p>
+
+<pre><code class="language-js">def df = new DecimalFormat('##.##');
+
+return [
+ 'anomaly_score': df.format(ctx.payload.anomaly_score)
+]
+</code></pre>
+
+<h4 id="get-the-start-time-end-time-of-the-anomaly">Get the start time &amp; end time of the anomaly</h4>
+
+<p>This is a bit tricky, we know when the anomaly was triggered, but we still need
+to provide a timeframe to Kibana in order to show the anomaly when it happened.
+For this we can take the moment when the anomaly was triggered and
+substract/add some minutes to get a timeframe when the anomaly should be
+clearly visible:</p>
+
+<pre><code class="language-python">def current = Instant
+  .ofEpochMilli(ctx.payload.first.hits.hits.0._source.timestamp)
+  .atZone(ZoneId.systemDefault());
+
+return [
+ 'start_time' : current.minus(Duration.ofMinutes(20))
+    .format(DateTimeFormatter.ISO_INSTANT),
+ 'end_time' : current.plus(Duration.ofMinutes(20))
+    .format(DateTimeFormatter.ISO_INSTANT)
+]
+</code></pre>
+
+<p>For this example, we&rsquo;re assuming a [-20 minutes, +20 minutes] window around the
+anomaly timestamp.</p>
+
+<h4 id="get-the-list-of-metrics-that-triggered-the-anomaly">Get the list of metrics that triggered the anomaly.</h4>
+
+<p>Finally, we need a list of all metrics (influencers) that triggered the anomaly.
+A bit more of scripting:</p>
+
+<pre><code class="language-js">return [
+ 'anomaly_details': ctx.payload.second.hits.hits.stream().map( p -&gt; [
+    'metric': p._source.partition_field_value,
+    'score': df.format(p._source.record_score),
+    'actual': df.format(p._source.actual.0),
+    'typical':df.format(p._source.typical.0)
+  ]).collect(Collectors.toList())
+]
+</code></pre>
+
+<h3 id="gluing-everything">Gluing everything</h3>
+
+<p>Now that our transform script provides a more friendly view of the data we can
+configure the actual message that is going to be posted to your
+email/chat/ system.</p>
+
+<p>When visualizing an anomaly in the Anomaly explorer in Kibana you may notice
+that it has a URL similar to this one.</p>
+
+<pre><code>http://kibana/app/ml#/explorer?_g=(ml:(jobIds:!(&lt;JOB_NAME&gt;)),refreshInterval:(pause:!f,value:30000),time:(from:'&lt;START_TIME&gt;',mode:quick,to:'&lt;END_TIME&gt;'))&amp;_a=(filters:!(),mlCheckboxShowCharts:(showCharts:!t),mlExplorerSwimlane:(viewBy:domain.keyword),mlSelectInterval:(interval:(display:Auto,val:auto)),mlSelectLimit:(limit:(display:'10',val:10)),mlSelectSeverity:(threshold:(display:major,val:50)))
+</code></pre>
+
+<p>Now we can interpolate the data extracted from the anomaly into this link and
+go from Slack to Kibana showing exactly what we need to see.</p>
+
+<p>Finally the <code>text</code> section of our alert would look similar to:</p>
+
+<pre><code class="language-json">&quot;text&quot;: &quot;
+  *Job*: {{ctx.payload.job_id}}\n
+  Anomaly of score={{ctx.payload.anomaly_score}} at
+  {{ctx.payload.bucket_time}} influenced by:\n
+  {{#ctx.payload.anomaly_details}}influencer={{metric}}:
+  score={{score}}, actual={{actual}} (typical={{typical}})\n
+  {{/ctx.payload.anomaly_details}}\n\n
+
+  :kibana: &lt;KIBANA_URL&gt;&quot;
+}
+</code></pre>
+
+<blockquote>
+<p>Note: I&rsquo;ve removed the <code>KIBANA_URL</code> because it was discussed before and was making the entire example harder to read.</p>
+</blockquote>
+
+<h2 id="tl-dr">TL;DR</h2>
+
+<p>After gluing everything together we get a notification that looks like:</p>
+
+<p><img src="/images/es-watcher-ml-alert/final-alert-example.png" alt="Final example alert in Slack" title="Example of an alert with all information in Slack" /></p>
+
+<p>You can get the full code for the example discussed in this blog post <a href="https://gist.github.com/jorgelbg/b1111add2436ca946b1b049fb63aaddb">in this gist</a>.</p>
+
+    </section>
+</article>
+
+<footer id="post-meta" class="clearfix">
+    <a href="https://twitter.com/jorgelbg">
+    <img class="avatar" src="http://jorgelbg.github.io/images/avatar.png">
+    <div>
+        <span class="dark">Jorge Luis Betancourt</span>
+        <span>Software engineer with a passion for data, search and performance</span>
+    </div>
+    </a>
+    <section id="sharing">
+        <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fjorgelbg.github.io%2f2019%2f03%2fuseful-alerts-with-elastic-watcher-machine-learning%2f - Useful%20alerts%20with%20Elastic%20Watcher%20%26%20Machine%20Learning by @jorgelbg"><span class="icon-twitter"> tweet</span></a>
+
+<a class="facebook" href="#" onclick="
+    window.open(
+      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
+      'facebook-share-dialog',
+      'width=626,height=436');
+    return false;"><span class="icon-facebook-rect"> Share</span>
+</a>
+
+    </section>
+</footer>
+
+<div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "jorgelbg" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+<ul id="post-list" class="archive readmore">
+    <h3>Read more</h3>
+
+    
+    
+    
+        <li>
+            <a href="/2019/02/display-the-applications-version-in-your-grafana-dashboards/">Display the application&#39;s version in your Grafana dashboards<aside class="dates">Feb 17 2019</aside></a>
+        </li>
+    
+        <li>
+            <a href="/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/">Optimize Grafana dashboards with Elasticsearch index aliases<aside class="dates">Dec 20 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/2018/08/logs-and-metrics-for-small-data/">Logs and metrics for Small Data<aside class="dates">Aug 23 2018</aside></a>
+        </li>
+    
+        <li>
+            <a href="/2018/03/solr-contextual-synonyms-with-payloads/">Solr Contextual Synonyms with Payloads<aside class="dates">Mar 6 2018</aside></a>
+        </li>
+    
+</ul>
+
+
+
+        <footer id="footer">
+    
+        <div id="social">
+
+	
+	
+    
+    <a class="symbol" href="https://www.github.com/jorgelbg">
+        circlegithub
+    </a>
+    
+    <a class="symbol" href="https://www.twitter.com/jorgelbgm">
+        circletwitterbird
+    </a>
+    
+
+
+</div>
+
+    
+    <p class="small">
+    
+        © Copyright 2019 Jorge Luis Betancourt
+    
+    </p>
+</footer>
+
+    </section>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://jorgelbg.github.io/js/main.js"></script>
+<script src="http://jorgelbg.github.io/js/highlight.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-115201846-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+
+</body>
+</html>
