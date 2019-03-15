@@ -3,22 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>http://jorgelbg.github.io/posts/app-version-in-grafana/</loc>
+    <loc>http://jorgelbg.github.io/2019/02/display-the-applications-version-in-your-grafana-dashboards/</loc>
     <lastmod>2019-02-17T14:00:28+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://jorgelbg.github.io/posts/elasticsearch-indices-grafana/</loc>
+    <loc>http://jorgelbg.github.io/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/</loc>
     <lastmod>2018-12-20T00:00:00+01:00</lastmod>
   </url>
   
   <url>
-    <loc>http://jorgelbg.github.io/posts/logs-metrics-for-small-data/</loc>
+    <loc>http://jorgelbg.github.io/2018/08/logs-and-metrics-for-small-data/</loc>
     <lastmod>2018-08-23T05:42:44+02:00</lastmod>
   </url>
   
   <url>
-    <loc>http://jorgelbg.github.io/posts/solr-contextual-synonyms/</loc>
+    <loc>http://jorgelbg.github.io/2018/03/solr-contextual-synonyms-with-payloads/</loc>
     <lastmod>2018-03-06T01:00:00+01:00</lastmod>
   </url>
   
