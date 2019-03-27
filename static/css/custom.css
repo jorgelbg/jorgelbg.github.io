@@ -76,3 +76,7 @@ img[src$="#floatright"] {
 h1 {
   letter-spacing: 0;
 }
+
+#social svg {
+  margin: 5px;
+}
