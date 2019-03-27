@@ -1,26 +1,25 @@
 # Site settings
-baseurl = "http://jorgelbg.github.io/"
-themesDir = "themes/"
+baseurl = "https://example.org/"
+themesDir = "../.."
 languageCode = "en-us"
-title = "Jorge Luis Betancourt"
-theme = "jorgelbg"
+title = "Hugo Cactus Theme"
+theme = "hugo-cactus-theme"
 # Enter your tracking code to enable Google Analytics
-googleAnalytics = "UA-115201846-1"
+googleAnalytics = ""
 # Disable comments by leaving disqusShortname empty
-disqusShortname = "jorgelbg"
-# publishDir="docs"
+disqusShortname = "spf13"
 
 [params]
-	name = "Jorge Luis Betancourt"
-	description = "Computo Ergo Sum"
-	bio = "Backend Engineer. I play with Search, Relevance and Web Performance."
+	name = "John Doe"
+	description = "Describe your website"
+	bio = "Blogger & Programmer"
 	# Enter optionally your twitter account
-	twitter = "jorgelbg"
+	twitter = "Your Twitter account"
 	enableRSS = true
 
 	# Integrate Javascript files or stylesheets by adding the url to the external assets or by
 	# linking local files with their path relative to the static folder, e.g. "css/styles.css"
-	customCSS = ["css/custom.css"]
+	customCSS = []
 	customJS  = []
 
 	# The variables below are optionally too and can be used to
@@ -35,7 +34,7 @@ disqusShortname = "jorgelbg"
 	readMore = ""
 	copyright = ""
 	# Sharing options and author information in posts
-	aboutAuthor = "Software engineer with a passion for data, search and performance"
+	aboutAuthor = "I'm an blogger."
 	tweet = ""
 	share = ""
 	# 404 page
@@ -49,10 +48,7 @@ disqusShortname = "jorgelbg"
 
 # Add additional social link entries underneath
 [social]
-    twitter  = "https://www.twitter.com/jorgelbgm"
-    # facebook = "https://www.facebook.com/"
-    github   = "https://www.github.com/jorgelbg"
-    # dribble  = "https://www.dribbble.com/"
-
-[permalinks]
-  posts = "/:year/:month/:title/"
+    twitter  = "https://www.twitter.com/"
+    facebook = "https://www.facebook.com/"
+    github   = "https://www.github.com/"
+    dribble  = "https://www.dribbble.com/"
