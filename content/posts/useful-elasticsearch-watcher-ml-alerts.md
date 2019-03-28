@@ -87,9 +87,8 @@ Anomaly of score=<score> at <timestamp> influenced by:
 [This alert example](https://github.com/elastic/examples/blob/master/Alerting/Sample%20Watches/ml_examples/bucket_watch.json)
 it's a good starting point.
 
-First of all, we don't want to keep 1 alert per ML job because we would need to
-add one new alert every time that we add a new job, and also it would lead to a
-lot of duplication.
+First of all, we don't want to maintain one alert per ML job because 
+it would lead to a lot of duplication.
 
 Let's remove the `term` query that it's matching in the `job_id`:
 
