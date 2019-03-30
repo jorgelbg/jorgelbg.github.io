@@ -81,14 +81,23 @@ h1 {
   margin: 5px;
 }
 
-section p, section p > * {
+#post-body {
   --x-height-multiplier: 0.375;
   --baseline-multiplier: 0.17;
-  font-family: medium-content-serif-font,Georgia,Cambria,"Times New Roman",Times,serif;
-  letter-spacing: .01rem;
+  font-family: medium-content-serif-font, Georgia, Cambria, "Times New Roman",
+    Times, serif;
+  letter-spacing: 0.01rem;
   font-weight: 400;
   font-style: normal;
-  font-size: 1.0625rem;
+  font-size: 1.2rem;
   line-height: 1.58;
-  letter-spacing: -.003em;
+  letter-spacing: -0.003em;
+}
+
+.post h1 {
+  font-family: Georgia;
+  font-size: 2.5rem;
+  line-height: 1.5;
+  font-weight: 300;
+  letter-spacing: 1.6px;
 }
