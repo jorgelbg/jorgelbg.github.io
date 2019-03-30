@@ -12,7 +12,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 /* Spacing */
 .post h1, h3, h4, h5, p, .post-body ul, ol, pre {
-margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 /* Base */
@@ -149,9 +149,10 @@ a,
 }
 
 ul, ol 	{ margin:0; padding:0; margin-bottom: 20px; }
-ul { list-style-type:circle; }
 ol { list-style: decimal; }
-li	{  list-style-position:inside; }
+li	{
+	list-style-position:inside;
+}
 
 /* Line Height */
 #post-body, p { line-height:1.7; }
@@ -200,10 +201,16 @@ em, i { font-style: italic; }
 	font: 300 32px/1.4em "Helvetica Neue", Helvetica,Arial,sans-serif;
 }
 
+.post h3 {
+	font-family: sans-serif;
+	letter-spacing: 1.3px;
+}
+
 .post h2 {
 	margin-bottom: 40px;
-	  font: 300 24px/1.5 sans-serif;
-	  color: #111;
+	font: 400 1.5rem/1.5 sans-serif;
+	color: #111;
+	letter-spacing: 1.3px;
 }
 
 .post h2.subtitle {
@@ -556,7 +563,6 @@ h2.month {
 }
 
 #post-list.archive.readmore h3{
-
 	  font: 400 20px "Helvetica Neue", Helvetica,Arial,sans-serif;
 	  margin-bottom: 30px;
 }

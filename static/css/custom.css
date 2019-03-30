@@ -81,8 +81,7 @@ h1 {
   margin: 5px;
 }
 
-section p,
-section p > * {
+#post-body {
   --x-height-multiplier: 0.375;
   --baseline-multiplier: 0.17;
   font-family: medium-content-serif-font, Georgia, Cambria, "Times New Roman",
