@@ -223,7 +223,7 @@ em, i { font-style: italic; }
 	  display: inline-block;
 }
 
-#post-list h2 {
+#post-list p {
 	font: normal 17px/1.5em sans-serif;
 	color: #aaa;
 	max-width: 400px;
@@ -363,7 +363,7 @@ Post List
 	border-bottom: 1px solid #eee;
 }
 
-#post-list a {
+#post-list h2 {
 	color: #333;
 	display: block;
 	font: bold 19px/1.7 sans-serif;
