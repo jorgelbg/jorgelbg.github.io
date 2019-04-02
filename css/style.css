@@ -351,9 +351,9 @@ i {
 
 .post h2 {
   margin-bottom: 40px;
-  font: 400 1.5rem/1.5 sans-serif;
+  font: 600 1.5rem/1.5 -apple-system-subheadline, sans-serif;
   color: #111;
-  letter-spacing: 1.3px;
+  letter-spacing: -0.5px;
 }
 
 .post h2.subtitle {
@@ -390,8 +390,9 @@ h3 {
   font-size: 20px;
   font-weight: 400;
 }
+
 h4 {
-  font-size: 16px;
+  /* font-size: 16px; */
   font-weight: bold;
 }
 h5 {
