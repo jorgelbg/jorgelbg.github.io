@@ -36,7 +36,7 @@ get a notification about an *anomaly* that will be the first time that happens.
 If an alert answers the three previous questions it will steer you in the right
 direction.
 
-## Let's build something
+## Putting something together
 
 Elastic stack now supports (with the addition of X-pack)
 [alerting](https://www.elastic.co/products/stack/alerting). Even more
