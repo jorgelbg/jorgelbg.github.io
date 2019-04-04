@@ -2,17 +2,16 @@
 <article class="post">
     <header>
         <h1>{{ .Title }}</h1>
-        <h2 class="subtitle">{{ .Description | markdownify }}</h2>
         <h2 class="headline">
-        {{ .Date.Format "January 2, 2006" }}
-        <br>
-        {{ with .Params.tags }}
-        {{ if ge (len .) 1 }}
-            {{ range . }}
-                <a href="{{ printf "tags/%s" (. | urlize) | absURL }}">{{ . }}</a>
+            {{ .Date.Format "January 2, 2006" }}
+            <br>
+            {{ with .Params.tags }}
+            {{ if ge (len .) 1 }}
+                {{ range . }}
+                    <a href="{{ printf "tags/%s" (. | urlize) | absURL }}">{{ . }}</a>
+                {{ end }}
             {{ end }}
-        {{ end }}
-        {{ end}}
+            {{ end}}
         </h2>
     </header>
     <section id="post-body">
