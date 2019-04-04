@@ -154,8 +154,8 @@ body {
 }
 
 body {
-  font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif;
-  color: #666;
+  /* font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif; */
+  color: #3D4852;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -408,12 +408,12 @@ h6 {
 }
 
 p.small {
-  color: #bbb;
-  font-size: 14px;
+  color: #606F7B;
+  font-size: 1rem;
   line-height: 1.5;
   display: block;
   text-align: center;
-  margin-top: 20px;
+  /* margin-top: 20px; */
 }
 
 blockquote {

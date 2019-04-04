@@ -1,6 +1,6 @@
 ---
 title: "Solr Contextual Synonyms with Payloads"
-description: "A different approach for contextual synonyms with Apache Solr with terms payloads"
+description: "A different approach for contextual synonyms with Apache Solr using the term payload"
 date: 2018-03-06T01:00:00+01:00
 draft: false
 ---
