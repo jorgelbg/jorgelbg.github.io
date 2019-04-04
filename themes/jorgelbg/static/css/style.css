@@ -154,7 +154,6 @@ body {
 }
 
 body {
-  /* font: 16px/1 "Helvetica Neue", Helvetica, Arial, sans-serif; */
   color: #3D4852;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -173,7 +172,7 @@ h2 {
 }
 
 .profile #wrapper {
-  padding: 100px 40px 0px;
+  padding: 0 40px 0px;
   max-width: 800px;
   margin: 0 auto;
 }
@@ -204,35 +203,34 @@ h2 {
   font-weight: 300;
   color: #aaa;
   margin-top: 10px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   font-style: normal;
 }
 
 nav.main-nav {
   padding: 20px 20px 0;
-
   /*max-width: 600px;*/
   /*width:100%;*/
-  background: #fff;
-  background: rgba(255, 255, 255, 0.9);
   margin: 0 auto;
-  text-align: right;
+  /* text-align: right; */
   /*position: fixed;*/
   z-index: 100;
+  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-weight: 600;
 }
 
 nav.main-nav a {
   top: 8px;
   right: 6px;
   padding: 8px 12px;
-  color: #5badf0;
+  color: #5661B3;
   font-size: 13px;
   /*font-weight: bold;*/
   line-height: 1.35;
   border-radius: 3px;
 }
 nav.main-nav a.cta {
-  background: #5badf0;
+  background: #5661B3;
   color: #fff;
   margin-left: 12px;
 }
@@ -256,6 +254,13 @@ nav.main-nav a.cta {
   border-radius: 50%;
 }
 
+#post-list li:hover {
+  cursor: pointer;
+  border-left: 4px solid #5661B3;
+  padding-left: 15px;
+  border-radius: 3px;
+}
+
 /* Typography */
 /*Accent color*/
 a,
@@ -264,12 +269,11 @@ a,
 #post-list li:hover .dates,
 #title:hover {
   text-decoration: none;
-  color: #5badf0;
-  color: #5694f1;
+  color: #5661B3;
 }
 
 p a {
-  color: #5694f1;
+  color: #5661B3;
 }
 
 /*Transitions*/
@@ -346,7 +350,7 @@ i {
 .post h1 {
   margin-bottom: 0px;
   color: #222;
-  font: 300 32px/1.4em "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 300 32px/1.4em -apple-system-subheadline, sans-serif;
 }
 
 .post h2 {
@@ -357,13 +361,18 @@ i {
 }
 
 .post h2.subtitle {
-  font: italic 19px/1.3em Georgia, serif;
-  color: #bbb;
+  padding: 10px 30px;
+  text-align: left;
+  margin-top: 30px;
+  color: #606F7B;
+  font: 400 1.1rem/2rem -apple-system-subheadline, sans-serif;
+  border-left: 3px solid #606F7B;
+  letter-spacing: 0.05rem;
 }
 
 .post h2.headline {
   /*font: italic 22px/1.3em Georgia,serif;*/
-  font: normal 13px/1.5em sans-serif;
+  font: normal 13px/1.5em -apple-system-subheadline, sans-serif;;
   margin: -5px 0 40px 0;
   color: #b2b9be;
   font-size: 13px;
@@ -374,10 +383,11 @@ i {
 }
 
 #post-list p {
-  font: normal 17px/1.5em sans-serif;
-  color: #aaa;
+  font: normal 17px/1.5em -apple-system-subheadline, sans-serif;;
+  color: #8795A1;
   max-width: 400px;
   margin-top: 2px;
+  letter-spacing: 0.03rem;
 }
 
 h3,
@@ -418,7 +428,8 @@ p.small {
 
 blockquote {
   padding-left: 15px;
-  border-left: 3px solid #eee;
+  border-left: 3px solid #B8C2CC;
+  margin-left: 2rem;
 }
 
 hr {
@@ -430,13 +441,13 @@ hr {
 }
 
 span.code {
-  font-family: Menlo, Monaco, Courier;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
   background-color: #eee;
   font-size: 14px;
 }
 
 pre {
-  font-family: Menlo, Monaco, Courier;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
   white-space: pre-wrap;
   /*border: 1px solid #ddd;*/
   padding: 20px;
@@ -523,11 +534,15 @@ Post List
 
 #post-list li,
 #archive-list li {
-  border-top: 1px solid #eee;
+  /* border-top: 1px solid #eee; */
   padding-top: 20px;
   padding-bottom: 20px;
   list-style-type: none;
   margin-bottom: 0;
+  -webkit-transition: all 75ms ease-out 50ms;
+  -moz-transition: all 75ms ease-out 50ms;
+  -o-transition: all 75ms ease-out 50ms;
+  transition: all 75ms ease-out 50ms;
 }
 
 #post-list li:last-child {
@@ -535,17 +550,16 @@ Post List
 }
 
 #post-list h2 {
-  color: #333;
+  color: #3D4852;
   display: block;
-  font: bold 19px/1.7 sans-serif;
+  font: bold 19px/1.7 -apple-system-subheadline, sans-serif;
 }
 
 #post-list .dates {
   float: right;
   position: relative;
   top: 1px;
-  font: 300 17px/1.8 sans-serif;
-  color: #bbb;
+  font: 300 17px/1.8 -apple-system-subheadline, sans-serif;
 }
 
 #post-list-footer {
@@ -564,9 +578,9 @@ Post List
 }
 
 #archive-link:hover {
-  background: #5694f1;
+  background: #5661B3;
   color: #fff;
-  box-shadow: 0 0 0 1px #5694f1;
+  box-shadow: 0 0 0 1px #5661B3;
 }
 
 #archive-link span {
@@ -713,7 +727,7 @@ h2.month {
 
 #archive-list li a:hover,
 #archive-list li:hover .dates {
-  color: #5694f1;
+  color: #5661B3;
 }
 
 #post-meta img.avatar {
@@ -727,13 +741,13 @@ h2.month {
 }
 
 #post-list.archive.readmore h3 {
-  font: 400 20px "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 20px -apple-system-subheadline, sans-serif;
   margin-bottom: 30px;
 }
 
 #post-list.archive.readmore a {
   font: 400 16px/1.6 sans-serif;
-  color: #5694f1;
+  color: #5661B3;
 }
 
 #post-list.archive.readmore a:hover {
@@ -823,9 +837,9 @@ a.symbol:hover {
 }
 
 code {
-  font-family: Menlo, Monaco, Courier;
+  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
   background-color: #eee;
   font-size: 14px;
   padding: 4px;
-  font-weight: 600;
+  font-weight: 400;
 }

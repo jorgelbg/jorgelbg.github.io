@@ -5,8 +5,6 @@ date: 2018-03-06T01:00:00+01:00
 draft: false
 ---
 
-## TL;DR
-
 Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the `SynonymFilterFactory` which allow to specify a list of synonyms. Last year we saw some [improvements to this feature](https://lucidworks.com/2017/04/18/multi-word-synonyms-solr-adds-query-time-support/), focused around multi word synonyms.
 Even with the new changes introduced in Solr there are still some caveats, as explained by [Doug on this post](https://opensourceconnections.com/blog/2018/02/20/edismax-and-multiterm-synonyms-oddities/). To be honest this was developed some time ago, back when Solr 5 was the "cool" new version 😁.
 
