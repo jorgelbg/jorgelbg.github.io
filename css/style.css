@@ -201,7 +201,7 @@ h2 {
 .profile h2 {
   font-size: 20px;
   font-weight: 300;
-  color: #aaa;
+  color: #8795A1;
   margin-top: 10px;
   font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
   font-style: normal;
@@ -261,6 +261,10 @@ nav.main-nav a.cta {
   border-radius: 3px;
 }
 
+#post-list li:hover h2 {
+  color: #5661B3;
+}
+
 /* Typography */
 /*Accent color*/
 a,
@@ -270,6 +274,7 @@ a,
 #title:hover {
   text-decoration: none;
   color: #5661B3;
+  font-weight: 400;
 }
 
 p a {
@@ -371,9 +376,8 @@ i {
 }
 
 .post h2.headline {
-  /*font: italic 22px/1.3em Georgia,serif;*/
   font: normal 13px/1.5em -apple-system-subheadline, sans-serif;;
-  margin: -5px 0 40px 0;
+  /* margin: -5px 0 40px 0; */
   color: #b2b9be;
   font-size: 13px;
   text-transform: uppercase;
@@ -539,10 +543,10 @@ Post List
   padding-bottom: 20px;
   list-style-type: none;
   margin-bottom: 0;
-  -webkit-transition: all 75ms ease-out 50ms;
-  -moz-transition: all 75ms ease-out 50ms;
-  -o-transition: all 75ms ease-out 50ms;
-  transition: all 75ms ease-out 50ms;
+  -webkit-transition: all 75ms ease-out 30ms;
+  -moz-transition: all 75ms ease-out 30ms;
+  -o-transition: all 75ms ease-out 30ms;
+  transition: all 75ms ease-out 30ms;
 }
 
 #post-list li:last-child {
