@@ -30,18 +30,6 @@ body {
   font-size: 1.3rem;
 }
 
-.post h2.subtitle {
-  background-color: #F1F5F8;
-  /* border-right: 4px solid #5badf0;
-    border-bottom: 4px solid #5badf0; */
-  padding: 10px 30px;
-  text-align: left;
-  margin-top: 30px;
-  color: #606F7B;
-  font: normal 1.1rem/2rem sans-serif;
-  border-left: 3px solid #606F7B;
-}
-
 kbd {
   border: 1px solid #aaa;
   border-radius: 4px;
@@ -90,7 +78,7 @@ h1 {
   letter-spacing: 0.01rem;
   font-weight: 400;
   font-style: normal;
-  font-size: 1.18rem;
+  font-size: 1.22rem;
   line-height: 1.58;
   letter-spacing: -0.003em;
 }
@@ -117,5 +105,5 @@ h1 {
 }
 
 .symbol.rss:hover path {
-  fill: #DE751F;
+  fill: #F6993F;
 }
