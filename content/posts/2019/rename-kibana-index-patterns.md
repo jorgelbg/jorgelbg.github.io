@@ -3,8 +3,8 @@ title: "Renaming index patterns in Kibana"
 date: 2019-04-15T15:39:05+02:00
 draft: true
 description: >
-    How to rename some index patterns in Kibana without breaking your existing
-    visualizations or dashboards
+    How to rename index patterns in Kibana without breaking your existing
+    visualizations or dashboards.
 ---
 
 If you have been using Kibana long enough you probably have a large collection
@@ -66,7 +66,7 @@ visualizations/dashboards will continue to work.
 ```json
 [
   {
-    "_id": "logstash*",
+    "_id": "ehtekygbbnvfb0",
     "_type": "index-pattern",
     "_source": {
       "notExpandable": true,
@@ -88,18 +88,54 @@ visualizations/dashboards will continue to work.
 
 3. Now you can edit the `title` field to match the new index pattern, in our
    case this could be `logstash-*`. Since we include the `-` we're making sure
-   that the `logstash_dev*` indices are not matched by this index pattern.
+   that the `logstash_dev*` indices are not matched by this index pattern. You
+   may endup with a JSON file similar to:
+
+```json
+[
+  {
+    "_id": "ehtekygbbnvfb0",
+    "_type": "index-pattern",
+    "_source": {
+      "notExpandable": true,
+      "timeFieldName": "@timestamp",
+      "title": "logstash*",
+      "fields": "[{\"name\":\"@timestamp\",\"type\":\"date\",\"count\":0,\"scripted\":false,
+        \"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+        ...
+    },
+    "_meta": {
+      "savedObjectVersion": 2
+    },
+    "_migrationVersion": {
+      "index-pattern": "6.5.0"
+    }
+  }
+]
+```
+
+It is very important to keep the same `_id`. This is the field that Kibana will
+use to know which index pattern is associated with a given visualization.
 
 4. Delete your old index pattern.
 
-5. Import the new index pattern bu clicking in the Import icon on the Kibana
+5. Import the new index pattern by clicking in the Import icon on the Kibana
    Saved objects section and dragging your edited JSON into the UI.
 
+![Kibana import UI](https://jorgelbg.blob.core.windows.net/jorgelbg-dropshare/Screen-Shot-2019-04-15-5-04-43.22-PM.png)
+
 Now if you open some of your old visualizations, you will notice that the index
-pattern is only working for the desired subset of the data.
+pattern is working for the desired subset of the data and none of your
+visualizations are broken.
 
 ## Summary
 
-TBH this is nothing more than a workaround. This a feature that I expected that
-Kibana offered out of the box. If not directly into the UI at least through the
-edition of the Saved Objects UI.
+TBH this is, simply put, a workaround. This a feature that I expected Kibana
+offered out of the box. If not directly into the UI at least through the edition
+of the Saved Objects UI. Sadly this is not the case.
+
+I've oriented this post around using Kibana since, the [import
+API](https://www.elastic.co/guide/en/kibana/current/dashboard-import-api-import.html)
+will validate the payload. If you modify the ES documents directly you can
+literally modify the document in any way that you want, which may cause
+unintended consequences.
