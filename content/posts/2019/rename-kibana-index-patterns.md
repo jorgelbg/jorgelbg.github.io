@@ -72,8 +72,10 @@ visualizations/dashboards will continue to work.
       "notExpandable": true,
       "timeFieldName": "@timestamp",
       "title": "logstash*",
-      "fields": "[{\"name\":\"@timestamp\",\"type\":\"date\",\"count\":0,\"scripted\":false,
-        \"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+      "fields": "[{\"name\":\"@timestamp\",\"type\":\"date\",
+        \"count\":0,\"scripted\":false,
+        \"searchable\":true,\"aggregatable\":true,
+        \"readFromDocValues\":true}]"
         ...
     },
     "_meta": {
@@ -100,8 +102,10 @@ visualizations/dashboards will continue to work.
       "notExpandable": true,
       "timeFieldName": "@timestamp",
       "title": "logstash*",
-      "fields": "[{\"name\":\"@timestamp\",\"type\":\"date\",\"count\":0,\"scripted\":false,
-        \"searchable\":true,\"aggregatable\":true,\"readFromDocValues\":true}]"
+      "fields": "[{\"name\":\"@timestamp\",\"type\":\"date\",
+        \"count\":0,\"scripted\":false,
+        \"searchable\":true,\"aggregatable\":true,
+        \"readFromDocValues\":true}]"
         ...
     },
     "_meta": {
@@ -139,3 +143,7 @@ API](https://www.elastic.co/guide/en/kibana/current/dashboard-import-api-import.
 will validate the payload. If you modify the ES documents directly you can
 literally modify the document in any way that you want, which may cause
 unintended consequences.
+
+If you want to know more about the structure of the documents that Kibana
+persits in ES for its internal use you can check [this blog
+post](https://www.elastic.co/blog/kibana-under-the-hood-object-persistence)
