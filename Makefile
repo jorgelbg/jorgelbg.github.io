@@ -1,4 +1,5 @@
 YEAR := $(shell date +%Y)
+POSTS_PATH := 'content/posts/${YEAR}'
 
 .PHONY: run
 run:
@@ -6,7 +7,8 @@ run:
 
 .PHONY: new
 new: # Create a new article
-	@echo $(if $(word 2,$(MAKECMDGOALS)), hugo new posts/${YEAR}/$(word 2,$(MAKECMDGOALS)), "Specify the filename")
+	@echo "Bootstrapping new article"
+	$(if $(word 2,$(MAKECMDGOALS)), hugo new ${POSTS_PATH}/$(word 2,$(MAKECMDGOALS)), "Specify the filename")
 
 .PHONY: empty
 %:
