@@ -1,5 +1,5 @@
 ---
-title: "Renaming index patterns in Kibana"
+title: "How to rename index patterns in Kibana"
 date: 2019-04-15T15:39:05+02:00
 draft: true
 description: >
@@ -144,6 +144,9 @@ will validate the payload. If you modify the ES documents directly you can
 literally modify the document in any way that you want, which may cause
 unintended consequences.
 
+{{< info >}}
+
 If you want to know more about the structure of the documents that Kibana
-persits in ES for its internal use you can check [this blog
-post](https://www.elastic.co/blog/kibana-under-the-hood-object-persistence)
+persits in ES (for its internal use) you should check [this blog post](https://www.elastic.co/blog/kibana-under-the-hood-object-persistence)
+
+{{< /info >}}

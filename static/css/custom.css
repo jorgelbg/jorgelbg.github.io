@@ -93,7 +93,7 @@ h1 {
 }
 
 .symbol path {
-  fill: #3D4852;
+  fill: #3d4852;
 }
 
 .symbol.twitter:hover path {
@@ -101,9 +101,21 @@ h1 {
 }
 
 .symbol.github:hover path {
-  fill: #22292F;
+  fill: #22292f;
 }
 
 .symbol.rss:hover path {
-  fill: #ED8936;
+  fill: #ed8936;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  margin: 1rem 0;
+}
+
+.info p {
+  width: 100%;
+  margin: 0 0 0 1rem;
+  font-family: sans-serif;
 }
