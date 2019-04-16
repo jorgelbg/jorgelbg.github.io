@@ -10,9 +10,10 @@ googleAnalytics = "UA-115201846-1"
 disqusShortname = ""
 # publishDir="docs"
 # For a list of color schemes, see https://xyproto.github.io/splash/docs/all.html
-pygmentsstyle = "dracula"
+pygmentsstyle = "fruity"
 # Enable "```" for code blocks
 pygmentscodefences = true
+pygmentsUseClasses = true
 
 [params]
 	name = "Jorge Luis Betancourt"

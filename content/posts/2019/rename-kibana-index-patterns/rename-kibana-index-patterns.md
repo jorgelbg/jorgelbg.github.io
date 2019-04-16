@@ -52,7 +52,7 @@ visualizations/dashboards will continue to work.
 
 ## Step by step guide
 
-1. First let's export the index pattern that we want to update
+First let's export the index pattern that we want to update
 
 ![Index pattern export](/posts/2019/rename-kibana-index-patterns/export-ui.png)
 
@@ -60,9 +60,9 @@ visualizations/dashboards will continue to work.
 > selecting a single element only that one should be exported but on my tests it
 > is always exporting all of the index patterns
 
-2. Now you can open the JSON file with all the saved index patterns and (just
-   for safety) remove all other index patterns, except the one that you need.
-   You may end up with a JSON similar to:
+Open the JSON file with all the saved index patterns and (just for safety)
+remove all other index patterns, except the one that you need. You may end up
+with a JSON similar to:
 
 ```json
 [
@@ -89,12 +89,12 @@ visualizations/dashboards will continue to work.
 ]
 ```
 
-3. Now you can edit the `title` field to match the new index pattern, in our
-   case this could be `logstash-*`. Since we include the `-` we're making sure
-   that the `logstash_dev*` indices are not matched by this index pattern. You
-   may endup with a JSON file similar to:
+Now you can edit the `title` field to match the new index pattern, in our
+case this could be `logstash-*`. Since we include the `-` we're making sure
+that the `logstash_dev*` indices are not matched by this index pattern. You
+may endup with a JSON file similar to:
 
-```json
+{{< highlight json "hl_lines=3 8" >}}
 [
   {
     "_id": "ehtekygbbnvfb0",
@@ -102,7 +102,7 @@ visualizations/dashboards will continue to work.
     "_source": {
       "notExpandable": true,
       "timeFieldName": "@timestamp",
-      "title": "logstash*",
+      "title": "logstash-*",
       "fields": "[{\"name\":\"@timestamp\",\"type\":\"date\",
         \"count\":0,\"scripted\":false,
         \"searchable\":true,\"aggregatable\":true,
@@ -117,20 +117,19 @@ visualizations/dashboards will continue to work.
     }
   }
 ]
-```
+{{< /highlight >}}
 
 It is very important to keep the same `_id`. This is the field that Kibana will
 use to know which index pattern is associated with a given visualization.
 
-4. Delete your old index pattern.
+Delete your old index pattern.
 
-5. Import the new index pattern by clicking in the Import icon on the Kibana
-   Saved objects section and dragging your edited JSON into the UI.
+Import the new index pattern by clicking in the Import icon on the Kibana
+Saved objects section and dragging your edited JSON into the UI.
 
 ![Saved Objects import UI](/posts/2019/rename-kibana-index-patterns/import-ui.png)
 
-
-Now if you open some of your old visualizations, you will notice that the index
+If you open some of your old visualizations, you will notice that the index
 pattern is working for the desired subset of the data and none of your
 visualizations are broken.
 
