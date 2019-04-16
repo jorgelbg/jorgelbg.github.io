@@ -459,16 +459,20 @@ pre {
   white-space: pre-wrap;
   /*border: 1px solid #ddd;*/
   padding: 20px;
-  background-color: #fdfdfd;
+  background-color: #2d3748;
   /*font-size:14px;*/
   overflow: auto;
   border-radius: 3px;
-  background: #272b2d;
+  /* background: #272b2d; */
   font-family: "Source Code Pro", Menlo, monospace;
   font-size: 13px;
   line-height: 1.5em;
   font-weight: 500;
   color: #d0d4d7;
+}
+
+.highlight pre {
+  background-color: #2d3748 !important;
 }
 
 table {
