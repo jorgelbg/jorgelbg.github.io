@@ -471,7 +471,7 @@ pre {
   color: #d0d4d7;
 }
 
-.highlight pre {
+.highlight pre, .highlight pre span {
   background-color: #2d3748 !important;
 }
 
