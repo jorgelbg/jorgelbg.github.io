@@ -419,8 +419,13 @@ footer p.small {
 
 .post header h1 svg {
   display: none;
-  margin-left: -40px;
+  margin-left: -41px;
 }
+
+.post header h1>a {
+  color: #3D4852;
+}
+
 
 .post header h1:hover svg {
   display: inline-block;
