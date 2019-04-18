@@ -416,3 +416,12 @@ footer p.small {
   color: #606F7B;
   font-weight: 600;
 }
+
+.post header h1 svg {
+  display: none;
+  margin-left: -40px;
+}
+
+.post header h1:hover svg {
+  display: inline-block;
+}
