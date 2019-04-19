@@ -404,17 +404,17 @@ footer p.small {
 .post header h2 {
   width: 100%;
   text-align: left;
-  -webkit-transition: all 0.15s ease;
-  -moz-transition: all 0.15s ease;
-  -ms-transition: all 0.15s ease;
-  -o-transition: all 0.15s ease;
-  transition: all 0.15s ease;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
   margin: 10px 0 35px;
 }
 
 .post header:hover h2 {
   color: #606F7B;
-  font-weight: 600;
+  font-weight: 800;
 }
 
 .post header h1 svg {
