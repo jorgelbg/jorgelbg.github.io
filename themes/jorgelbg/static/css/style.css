@@ -410,6 +410,8 @@ h3 {
 h4 {
   /* font-size: 16px; */
   font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+  sans-serif;
 }
 h5 {
   font-size: 15px;
