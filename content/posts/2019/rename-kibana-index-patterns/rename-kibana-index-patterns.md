@@ -1,6 +1,6 @@
 ---
 title: "How to rename index patterns in Kibana"
-date: 2019-04-15T15:39:05+02:00
+date: 2019-05-15T17:00:00+02:00
 draft: true
 description: >
     How to rename index patterns in Kibana without breaking your existing
@@ -11,7 +11,9 @@ If you have been using Kibana long enough you probably have a large collection
 of visualizations and dashboards already created. From time to time you may have
 a need to *rename* an already index pattern. Turns out that Kibana doesn't
 support this. You can refresh the index pattern and you can drop it but that's
-it.
+it. There is an [open issue in Github]
+(https://github.com/elastic/kibana/issues/17542) to address this issue, but
+it is still open at the time of writing this post.
 
 Just to be clear, let's assume that, for the scope of this post, you have an
 index pattern called `logstash*` that matches your daily indices
