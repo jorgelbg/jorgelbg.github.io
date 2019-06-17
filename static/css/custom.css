@@ -88,7 +88,7 @@ h1 {
 
 .post h1 {
   font-family: -apple-system, Georgia;
-  font-size: 2.5rem;
+  font-size: 2.3rem;
   line-height: 1.5;
   font-weight: 300;
   letter-spacing: 1.6px;
@@ -449,7 +449,7 @@ nav.colors-3x {
 }
 
 #wrapper {
-  padding: 60px 40px 10px 40px;
+  padding: 0 40px 10px 40px;
 }
 
 #post-meta {
