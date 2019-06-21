@@ -466,6 +466,7 @@ svg.background {
 
 nav.main-nav {
   padding-top: 0 !important;
+  position: absolute;
 }
 
 .profile #avatar {
