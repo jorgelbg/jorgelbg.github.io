@@ -484,3 +484,17 @@ nav.main-nav {
     margin-top: -10%;
   }
 }
+
+@media screen and (min-width: 1400px) {
+  .dots {
+    display: none;
+  }
+
+  svg.background {
+    max-height: 300px;
+  }
+
+  #wrapper {
+    margin-top: -6%;
+  }
+}
