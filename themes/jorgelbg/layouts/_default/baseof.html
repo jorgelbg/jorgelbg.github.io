@@ -4,10 +4,17 @@
     {{ partial "head.html" . }}
     </head>
 <body>
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none" class="background">
-        <polygon class="svg--sm" fill="white" points="0,0 30,100 65,21 90,100 100,75 100,100 0,100"/>
-        <polygon class="svg--lg" fill="white" points="0,0 15,100 33,21 45,100 50,75 55,100 72,20 85,100 95,50 100,80 100,100 0,100" />
+    <svg class="background" preserveAspectRatio="none" viewBox="0 0 1441 237" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <g id="Artboard">
+            <path d="M0.0962366065,0 L1440,0 L1439.90376,9.24897394 C1371.70284,31.9284054 1289.96842,45.9945207 1194.7005,51.4473197 C857.665285,70.7380242 893.061178,150 719.951882,150 C622.268082,150 525.73955,64.6919277 443.716695,64.6919277 C361.69384,64.6919277 352.688968,87.5476092 287.037748,87.5476092 C243.270268,87.5476092 147.591019,61.4480641 0,9.24897394 L0.0962366065,0 Z" id="Rectangle" fill="#5A67D8"></path>
+            <circle id="Oval" stroke="#979797" fill="#A0C8FE" cx="142.5" cy="56.5" r="6.5"></circle>
+            <circle id="Oval-Copy" fill="#A0C8FE" cx="288.5" cy="89.5" r="6.5"></circle>
+            <circle id="Oval-Copy-2" fill="#A0C8FE" cx="444.5" cy="65.5" r="6.5"></circle>
+            <circle id="Oval-Copy-3" fill="#A0C8FE" cx="720.5" cy="149.5" r="6.5"></circle>
+            <circle id="Oval-Copy-4" fill="#A0C8FE" cx="1196.5" cy="51.5" r="6.5"></circle>
+        </g>
     </svg>
+
     {{ partial "nav.html" . }}
     <section id="wrapper">
         {{ block "profile" . }}{{ end }}
