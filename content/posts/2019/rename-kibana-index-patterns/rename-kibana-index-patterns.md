@@ -126,8 +126,8 @@ objects section and dragging your edited JSON into the UI.
 ![Saved Objects import
 UI](/posts/2019/rename-kibana-index-patterns/import-ui.png)
 
-At this point, if you open your old dashboard everything should be working as
-before;
+At this point, if you open your old dashboards everything should be working as
+before.
 
 ## Summary
 
