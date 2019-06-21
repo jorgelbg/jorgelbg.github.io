@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>index-pattern on Jorge Luis Betancourt</title>
+    <link>http://jorgelbg.github.io/tags/index-pattern/</link>
+    <description>Recent content in index-pattern on Jorge Luis Betancourt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Tue, 21 May 2019 17:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="http://jorgelbg.github.io/tags/index-pattern/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to rename index patterns in Kibana</title>
+      <link>http://jorgelbg.github.io/2019/05/how-to-rename-index-patterns-in-kibana/</link>
+      <pubDate>Tue, 21 May 2019 17:00:00 +0200</pubDate>
+      
+      <guid>http://jorgelbg.github.io/2019/05/how-to-rename-index-patterns-in-kibana/</guid>
+      <description>If you have been using Kibana long enough you probably have a large collection of visualizations and dashboards already created. From time to time you may have a need to rename an already index pattern. Turns out that Kibana doesn&amp;rsquo;t support this. You can refresh the index pattern and you can drop it but that&amp;rsquo;s it. There is an open issue in Github to address this issue, but it is still open at the time of writing this post.</description>
+    </item>
+    
+  </channel>
+</rss>

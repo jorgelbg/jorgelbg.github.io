@@ -6,9 +6,28 @@
     <description>Recent content in Tags on Jorge Luis Betancourt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Tue, 21 May 2019 17:00:00 +0200</lastBuildDate>
     
 	<atom:link href="http://jorgelbg.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>index-pattern</title>
+      <link>http://jorgelbg.github.io/tags/index-pattern/</link>
+      <pubDate>Tue, 21 May 2019 17:00:00 +0200</pubDate>
+      
+      <guid>http://jorgelbg.github.io/tags/index-pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>kibana</title>
+      <link>http://jorgelbg.github.io/tags/kibana/</link>
+      <pubDate>Tue, 21 May 2019 17:00:00 +0200</pubDate>
+      
+      <guid>http://jorgelbg.github.io/tags/kibana/</guid>
+      <description></description>
+    </item>
     
   </channel>
 </rss>
