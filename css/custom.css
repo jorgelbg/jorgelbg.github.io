@@ -45,6 +45,10 @@ kbd {
   margin: 30px 0 15px;
 }
 
+.post {
+  margin-top: 0;
+}
+
 img[src$="#center"] {
   display: block;
   margin: 0.7rem auto; /* you can replace the vertical '0.7rem' by
@@ -450,7 +454,6 @@ nav.colors-3x {
 
 #wrapper {
   padding: 0 40px 10px 40px;
-  margin-top: -8%;
 }
 
 #post-meta {
@@ -466,7 +469,6 @@ svg.background {
 
 nav.main-nav {
   padding-top: 0 !important;
-  position: absolute;
 }
 
 .profile #avatar {
@@ -475,13 +477,21 @@ nav.main-nav {
   height: 100px;
 }
 
+.profile {
+  margin-top: -10%;
+}
+
+#header {
+  margin-bottom: 0;
+}
+
 @media only screen and (max-width: 600px) {
   .dots {
     display: none;
   }
 
   #wrapper {
-    margin-top: -10%;
+    padding: 0 20px 10px;
   }
 }
 
@@ -493,8 +503,5 @@ nav.main-nav {
   svg.background {
     max-height: 300px;
   }
-
-  #wrapper {
-    margin-top: -6%;
-  }
 }
+
