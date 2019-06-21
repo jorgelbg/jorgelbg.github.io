@@ -450,7 +450,7 @@ nav.colors-3x {
 
 #wrapper {
   padding: 0 40px 10px 40px;
-  margin-top: -130px;
+  margin-top: -8%;
 }
 
 #post-meta {
@@ -460,7 +460,7 @@ nav.colors-3x {
 
 svg.background {
   width: 100%;
-  height: 200px;
+  /* height: 300px; */
   /* background-color: #5a67d8; */
 }
 
@@ -472,4 +472,14 @@ nav.main-nav {
   border: 6px solid white;
   width: 100px;
   height: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+  .dots {
+    display: none;
+  }
+
+  #wrapper {
+    margin-top: -10%;
+  }
 }
