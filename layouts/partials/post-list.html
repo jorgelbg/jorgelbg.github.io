@@ -5,7 +5,7 @@
                 <aside class="dates">{{ .Date.Format "Jan" }}
                     <span>{{ .Date.Format "2" }}</span>{{ .Date.Format "2006" }}</aside>
             </a>
-            <a href='{{ .URL }}'>
+            <a href='{{ .URL }}' class="title">
                 <h2>{{ .LinkTitle }}</h2>
                 <p>{{ .Description | markdownify }}</p>
             </a>

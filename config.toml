@@ -9,6 +9,11 @@ googleAnalytics = "UA-115201846-1"
 # Disable comments by leaving disqusShortname empty
 disqusShortname = ""
 # publishDir="docs"
+# For a list of color schemes, see https://xyproto.github.io/splash/docs/all.html
+pygmentsstyle = "fruity"
+# Enable "```" for code blocks
+pygmentscodefences = true
+pygmentsUseClasses = true
 
 [params]
 	name = "Jorge Luis Betancourt"

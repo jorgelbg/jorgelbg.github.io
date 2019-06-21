@@ -154,7 +154,7 @@ body {
 }
 
 body {
-  color: #3D4852;
+  color: #3d4852;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -201,9 +201,10 @@ h2 {
 .profile h2 {
   font-size: 20px;
   font-weight: 300;
-  color: #8795A1;
+  color: #8795a1;
   margin-top: 10px;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   font-style: normal;
 }
 
@@ -215,7 +216,8 @@ nav.main-nav {
   /* text-align: right; */
   /*position: fixed;*/
   z-index: 100;
-  font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   font-weight: 600;
 }
 
@@ -223,14 +225,14 @@ nav.main-nav a {
   top: 8px;
   right: 6px;
   padding: 8px 12px;
-  color: #5661B3;
+  color: #5661b3;
   font-size: 13px;
   /*font-weight: bold;*/
   line-height: 1.35;
   border-radius: 3px;
 }
 nav.main-nav a.cta {
-  background: #5661B3;
+  background: #5661b3;
   color: #fff;
   margin-left: 12px;
 }
@@ -256,13 +258,13 @@ nav.main-nav a.cta {
 
 #post-list li:hover {
   cursor: pointer;
-  border-left: 4px solid #5A67D8;
+  border-left: 4px solid #5a67d8;
   padding-left: 15px;
   border-radius: 3px;
 }
 
 #post-list li:hover h2 {
-  color: #5661B3;
+  color: #5661b3;
 }
 
 /* Typography */
@@ -273,12 +275,12 @@ a,
 #post-list li:hover .dates,
 #title:hover {
   text-decoration: none;
-  color: #5661B3;
+  color: #5661b3;
   font-weight: 400;
 }
 
 p a {
-  color: #5661B3;
+  color: #5661b3;
 }
 
 /*Transitions*/
@@ -369,14 +371,14 @@ i {
   padding: 10px 30px;
   text-align: left;
   margin-top: 30px;
-  color: #606F7B;
+  color: #606f7b;
   font: 400 1.1rem/2rem -apple-system-subheadline, sans-serif;
-  border-left: 3px solid #606F7B;
+  border-left: 3px solid #606f7b;
   letter-spacing: 0.05rem;
 }
 
 .post h2.headline {
-  font: normal 13px/1.5em -apple-system-subheadline, sans-serif;;
+  font: normal 13px/1.5em -apple-system-subheadline, sans-serif;
   /* margin: -5px 0 40px 0; */
   color: #b2b9be;
   font-size: 13px;
@@ -387,8 +389,8 @@ i {
 }
 
 #post-list p {
-  font: normal 17px/1.5em -apple-system-subheadline, sans-serif;;
-  color: #8795A1;
+  font: normal 17px/1.5em -apple-system-subheadline, sans-serif;
+  color: #8795a1;
   max-width: 400px;
   margin-top: 2px;
   letter-spacing: 0.03rem;
@@ -408,6 +410,9 @@ h3 {
 h4 {
   /* font-size: 16px; */
   font-weight: bold;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
+    sans-serif;
+  letter-spacing: -0.3px;
 }
 h5 {
   font-size: 15px;
@@ -422,7 +427,7 @@ h6 {
 }
 
 p.small {
-  color: #606F7B;
+  color: #606f7b;
   font-size: 1rem;
   line-height: 1.5;
   display: block;
@@ -432,7 +437,7 @@ p.small {
 
 blockquote {
   padding-left: 15px;
-  border-left: 3px solid #B8C2CC;
+  border-left: 3px solid #b8c2cc;
   margin-left: 2rem;
 }
 
@@ -445,26 +450,32 @@ hr {
 }
 
 span.code {
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+    monospace;
   background-color: #eee;
   font-size: 14px;
 }
 
 pre {
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+    monospace;
   white-space: pre-wrap;
   /*border: 1px solid #ddd;*/
   padding: 20px;
-  background-color: #fdfdfd;
+  background-color: #2d3748;
   /*font-size:14px;*/
   overflow: auto;
   border-radius: 3px;
-  background: #272b2d;
+  /* background: #272b2d; */
   font-family: "Source Code Pro", Menlo, monospace;
   font-size: 13px;
   line-height: 1.5em;
   font-weight: 500;
   color: #d0d4d7;
+}
+
+.highlight pre {
+  background-color: #2d3748 !important;
 }
 
 table {
@@ -554,7 +565,7 @@ Post List
 }
 
 #post-list h2 {
-  color: #3D4852;
+  color: #3d4852;
   display: block;
   font: bold 19px/1.7 -apple-system-subheadline, sans-serif;
 }
@@ -582,9 +593,9 @@ Post List
 }
 
 #archive-link:hover {
-  background: #5661B3;
+  background: #5661b3;
   color: #fff;
-  box-shadow: 0 0 0 1px #5661B3;
+  box-shadow: 0 0 0 1px #5661b3;
 }
 
 #archive-link span {
@@ -731,7 +742,7 @@ h2.month {
 
 #archive-list li a:hover,
 #archive-list li:hover .dates {
-  color: #5661B3;
+  color: #5661b3;
 }
 
 #post-meta img.avatar {
@@ -751,7 +762,7 @@ h2.month {
 
 #post-list.archive.readmore a {
   font: 400 16px/1.6 sans-serif;
-  color: #5661B3;
+  color: #5661b3;
 }
 
 #post-list.archive.readmore a:hover {
@@ -841,8 +852,8 @@ a.symbol:hover {
 }
 
 code {
-  font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
-  background-color: #eee;
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
+    monospace;
   font-size: 14px;
   padding: 4px;
   font-weight: 400;
