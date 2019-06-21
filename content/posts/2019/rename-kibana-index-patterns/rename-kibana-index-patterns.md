@@ -5,6 +5,9 @@ draft: false
 description: >
     How to rename index patterns in Kibana without
     breaking your existing visualizations or dashboards.
+tags: ["kibana", "index-pattern"]
+images:
+- /posts/2019/rename-kibana-index-patterns/kibana.png
 ---
 
 If you have been using Kibana long enough you probably have a large collection
