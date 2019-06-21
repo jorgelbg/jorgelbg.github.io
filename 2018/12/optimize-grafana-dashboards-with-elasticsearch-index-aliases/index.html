@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Jorge Luis Betancourt">
 <meta name="description" content="Computo Ergo Sum">
-<meta name="generator" content="Hugo 0.54.0" />
+<meta name="generator" content="Hugo 0.55.6" />
 <title>Optimize Grafana dashboards with Elasticsearch index aliases</title>
 <link rel="shortcut icon" href="http://jorgelbg.github.io/images/favicon.ico">
 <link rel="stylesheet" href="http://jorgelbg.github.io/css/style.css">
@@ -51,6 +51,14 @@
 
     </head>
 <body>
+    <svg class="background" preserveAspectRatio="none" viewBox="0 0 1441 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        
+        <g id="Artboard">
+            <path class="lightline" d="M0.0962366065,0 L1440,0 L1439.90376,9.24897394 C1371.70284,31.9284054 1289.96842,45.9945207 1194.7005,51.4473197 C857.665285,70.7380242 893.061178,150 719.951882,150 C622.268082,150 525.73955,64.6919277 443.716695,64.6919277 C361.69384,64.6919277 352.688968,87.5476092 287.037748,87.5476092 C243.270268,87.5476092 147.591019,61.4480641 0,9.24897394 L0.0962366065,0 Z" id="Rectangle" fill="#5A67D8" opacity="0.496433424"></path>
+            <path class="darkline"d="M142.5,63 C138.910149,63 136,60.0898509 136,56.5 C136,52.9101491 138.910149,50 142.5,50 C146.089851,50 149,52.9101491 149,56.5 C149,60.0898509 146.089851,63 142.5,63 Z M288.5,94 C284.910149,94 282,91.0898509 282,87.5 C282,83.9101491 284.910149,81 288.5,81 C292.089851,81 295,83.9101491 295,87.5 C295,91.0898509 292.089851,94 288.5,94 Z M444.5,72 C440.910149,72 438,69.0898509 438,65.5 C438,61.9101491 440.910149,59 444.5,59 C448.089851,59 451,61.9101491 451,65.5 C451,69.0898509 448.089851,72 444.5,72 Z M720.5,156 C716.910149,156 714,153.089851 714,149.5 C714,145.910149 716.910149,143 720.5,143 C724.089851,143 727,145.910149 727,149.5 C727,153.089851 724.089851,156 720.5,156 Z M1196.5,58 C1192.91015,58 1190,55.0898509 1190,51.5 C1190,47.9101491 1192.91015,45 1196.5,45 C1200.08985,45 1203,47.9101491 1203,51.5 C1203,55.0898509 1200.08985,58 1196.5,58 Z" id="Combined-Shape" fill="#3080E8" opacity="0.637058424"></path>
+            <path clas="dots" d="M0.0962366065,0 L1440,0 L1439.90376,9.24897394 C1384.05302,46.9189177 1339.81116,65.7538896 1307.17816,65.7538896 C1258.22868,65.7538896 1187.78567,37.7500322 1135.79982,37.7500322 C994.060728,37.7500322 1040.09806,133.961647 870.12796,104.480824 C813.407641,94.6428476 759.201718,65.746529 719,65.7538896 C678.798282,65.7612502 591.920537,104.480824 535.791086,104.480824 C438.107286,104.480824 403.594187,37.7500322 321.571333,37.7500322 C239.548478,37.7500322 189.071667,75 147.326626,75 C119.496599,75 70.3877232,53.0829913 0,9.24897394 L0.0962366065,0 Z" id="Rectangle-Copy" fill="#8564F2" opacity="0.627943841"></path>
+        </g>
+    </svg>
     <nav class="main-nav">
 	
 		<a href='http://jorgelbg.github.io/'>
@@ -69,7 +77,11 @@
         
 <article class="post">
     <header>
-        <h1>Optimize Grafana dashboards with Elasticsearch index aliases</h1>
+        <h1>
+            <a href="/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/">
+            <svg width="30" xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 483 483"><path d="M255 209c-5 6-5 14 0 19 22 22 22 58 0 80L140 423a56 56 0 0 1-79 0l-18-17a56 56 0 0 1 0-80l115-115c6-5 6-14 1-19s-14-5-20 0L24 307a83 83 0 0 0 0 118l18 17a83 83 0 0 0 117 0l115-115c33-32 33-85 0-118-5-5-13-5-19 0z"/><path d="M459 58l-18-17a83 83 0 0 0-117 0L209 156a83 83 0 0 0 0 118c5 5 13 5 19 0s5-14 0-20a56 56 0 0 1 0-79L343 60c22-22 57-22 79 0l17 17c22 22 22 58 0 80L324 272c-5 5-5 13 0 19 3 2 7 4 10 4s7-1 9-4l115-115a83 83 0 0 0 1-118z"/></svg>
+            Optimize Grafana dashboards with Elasticsearch index aliases
+        </a></h1>
         <h2 class="headline">
             December 20, 2018
             <br>
@@ -118,36 +130,33 @@ something like this:</p>
 we can see the query that Grafana sends to ES (actually to the proxy, but
 this detail is not important). The relevant section is the
 <code>request.data</code> attribute, that looks like:</p>
-
-<pre><code class="language-json">{
-  &quot;size&quot;: 0,
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;filter&quot;: [
-        {
-          &quot;range&quot;: {
-            &quot;@timestamp&quot;: {
-              &quot;gte&quot;: &quot;1544518226265&quot;,
-              &quot;lte&quot;: &quot;1544539826265&quot;,
-              &quot;format&quot;: &quot;epoch_millis&quot;
-            }
-          }
-        },
-        {
-          &quot;query_string&quot;: {
-            &quot;analyze_wildcard&quot;: true,
-            &quot;query&quot;: &quot;header.senderId:www*&quot;
-          }
-        }
-      ]
-    }
-  },
-  &quot;aggs&quot;: {
-      &quot;...&quot;: &quot;...&quot;,
-  }
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;size&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;bool&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;filter&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;range&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;@timestamp&#34;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&#34;gte&#34;</span><span class="p">:</span> <span class="s2">&#34;1544518226265&#34;</span><span class="p">,</span>
+              <span class="nt">&#34;lte&#34;</span><span class="p">:</span> <span class="s2">&#34;1544539826265&#34;</span><span class="p">,</span>
+              <span class="nt">&#34;format&#34;</span><span class="p">:</span> <span class="s2">&#34;epoch_millis&#34;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;query_string&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;analyze_wildcard&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="s2">&#34;header.senderId:www*&#34;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nt">&#34;aggs&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;...&#34;</span><span class="p">:</span> <span class="s2">&#34;...&#34;</span><span class="p">,</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>We can see that Grafana is applying a
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/6.5/query-dsl-filtered-query.html">Filtered Query</a>.
 One small detail is that whatever we put in our &ldquo;Lucene query&rdquo; input field will
@@ -201,93 +210,84 @@ profiling itself. We knew that on production for the last 2 days this time
 was ~7s. So we decided to use the 40s as a base reference.</p>
 
 <p>The real query looked very similar to:</p>
-
-<pre><code class="language-json">{
-  &quot;size&quot;: 0,
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;filter&quot;: [
-        {
-          &quot;range&quot;: {
-            &quot;@timestamp&quot;: {
-              &quot;gte&quot;: &quot;1544315703107&quot;,
-              &quot;lte&quot;: &quot;1544445303107&quot;,
-              &quot;format&quot;: &quot;epoch_millis&quot;
-            }
-          }
-        },
-        {
-          &quot;query_string&quot;: {
-            &quot;analyze_wildcard&quot;: true,
-            &quot;query&quot;: &quot;(header.senderId:www1 OR header.senderId:www1 OR header.senderId:www2)&quot;
-          }
-        }
-      ]
-    }
-  }
-  &quot;...&quot;: &quot;...&quot;
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;size&#34;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;bool&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;filter&#34;</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;range&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;@timestamp&#34;</span><span class="p">:</span> <span class="p">{</span>
+              <span class="nt">&#34;gte&#34;</span><span class="p">:</span> <span class="s2">&#34;1544315703107&#34;</span><span class="p">,</span>
+              <span class="nt">&#34;lte&#34;</span><span class="p">:</span> <span class="s2">&#34;1544445303107&#34;</span><span class="p">,</span>
+              <span class="nt">&#34;format&#34;</span><span class="p">:</span> <span class="s2">&#34;epoch_millis&#34;</span>
+            <span class="p">}</span>
+          <span class="p">}</span>
+        <span class="p">},</span>
+        <span class="p">{</span>
+          <span class="nt">&#34;query_string&#34;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">&#34;analyze_wildcard&#34;</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+            <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="s2">&#34;(header.senderId:www1 OR header.senderId:www1 OR header.senderId:www2)&#34;</span>
+          <span class="p">}</span>
+        <span class="p">}</span>
+      <span class="p">]</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+  <span class="s2">&#34;...&#34;</span><span class="p">:</span> <span class="s2">&#34;...&#34;</span>
+<span class="p">}</span></code></pre></div>
 <p>The tricky section was that the host filter included over 30 servers
 (hostnames). <em>The original query also included a couple of more conditions that
 we can disregard for the sake of this article</em>. Of course, executing this over
 19M documents it is expensive and time-consuming (even for ES). The
 <code>query_string</code> is not very optimal for filtering data. If we look at the
 &ldquo;internal query&rdquo; that ES will execute we see something like:</p>
-
-<pre><code class="language-json">{
-  &quot;valid&quot; : true,
-  &quot;explanations&quot; : [
-    {
-      &quot;index&quot; : &quot;accesslogs-2018.12.10&quot;,
-      &quot;valid&quot; : true,
-      &quot;explanation&quot; : &quot;#@timestamp:[1544315703107 TO 1544445303107] 
-                      #(+(header.senderId:www1 header.senderId:www2 ... )&quot;
-    }
-  ]
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;valid&#34;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+  <span class="nt">&#34;explanations&#34;</span> <span class="p">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="nt">&#34;index&#34;</span> <span class="p">:</span> <span class="s2">&#34;accesslogs-2018.12.10&#34;</span><span class="p">,</span>
+      <span class="nt">&#34;valid&#34;</span> <span class="p">:</span> <span class="kc">true</span><span class="p">,</span>
+      <span class="nt">&#34;explanation&#34;</span> <span class="p">:</span> <span class="s2">&#34;#@timestamp:[1544315703107 TO 1544445303107] 
+</span><span class="s2">                      #(+(header.senderId:www1 header.senderId:www2 ... )&#34;</span>
+    <span class="p">}</span>
+  <span class="p">]</span>
+<span class="p">}</span></code></pre></div>
 <p>This means that internally ES will treat this as a boolean query and will execute
 that query against every document that falls in the time range. Even after
 Grafana selected the right indices to query, this was a lot of processing to
 do. Can we find a better way to write this query?</p>
 
 <p>If we take the very long list of hosts and apply that as a <code>must</code> filter:</p>
-
-<pre><code class="language-json">{
-  &quot;query&quot;: {
-    &quot;bool&quot;: {
-      &quot;filter&quot;: {
-        &quot;bool&quot;: {
-          &quot;must&quot;: [
-            {
-              &quot;terms&quot;: {
-                &quot;header.senderId&quot;: [
-                  &quot;www1&quot;,
-                  &quot;www2&quot;,
-                  ...
-                ]
-              }
-            },
-            {
-              &quot;range&quot;: {
-                &quot;@timestamp&quot;: {
-                  &quot;gte&quot;: &quot;1544315703107&quot;,
-                  &quot;lte&quot;: &quot;1544445303107&quot;,
-                  &quot;format&quot;: &quot;epoch_millis&quot;
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
-  }
-}
-</code></pre>
-
+<div class="highlight"><pre class="chroma"><code class="language-json" data-lang="json"><span class="p">{</span>
+  <span class="nt">&#34;query&#34;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">&#34;bool&#34;</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">&#34;filter&#34;</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">&#34;bool&#34;</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">&#34;must&#34;</span><span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+              <span class="nt">&#34;terms&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&#34;header.senderId&#34;</span><span class="p">:</span> <span class="p">[</span>
+                  <span class="s2">&#34;www1&#34;</span><span class="p">,</span>
+                  <span class="s2">&#34;www2&#34;</span><span class="p">,</span>
+                  <span class="err">...</span>
+                <span class="p">]</span>
+              <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+              <span class="nt">&#34;range&#34;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="nt">&#34;@timestamp&#34;</span><span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">&#34;gte&#34;</span><span class="p">:</span> <span class="s2">&#34;1544315703107&#34;</span><span class="p">,</span>
+                  <span class="nt">&#34;lte&#34;</span><span class="p">:</span> <span class="s2">&#34;1544445303107&#34;</span><span class="p">,</span>
+                  <span class="nt">&#34;format&#34;</span><span class="p">:</span> <span class="s2">&#34;epoch_millis&#34;</span>
+                <span class="p">}</span>
+              <span class="p">}</span>
+            <span class="p">}</span>
+          <span class="p">]</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>And check the internal query that ES will execute in the profiler:</p>
 
 <pre><code>&quot;valid&quot; : true,
@@ -335,7 +335,6 @@ has not been addressed yet.</p>
 <figure>
     <img src="/images/elasticsearch-indices-grafana/filter-all-the-things.jpg#center"/> 
 </figure>
-
 
 <p>Elasticsearch supports the use of
 <a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html"><em>aliases</em></a>.
@@ -422,15 +421,9 @@ which alias (or aliases) it responds to 😀.</p>
     </div>
     </a>
     <section id="sharing">
-        <a class="twitter" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fjorgelbg.github.io%2f2018%2f12%2foptimize-grafana-dashboards-with-elasticsearch-index-aliases%2f - Optimize%20Grafana%20dashboards%20with%20Elasticsearch%20index%20aliases by @jorgelbg"><span class="icon-twitter"> tweet</span></a>
+        <a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=http%3a%2f%2fjorgelbg.github.io%2f2018%2f12%2foptimize-grafana-dashboards-with-elasticsearch-index-aliases%2f - Optimize%20Grafana%20dashboards%20with%20Elasticsearch%20index%20aliases by @jorgelbg"><span class="icon-twitter"> tweet</span></a>
 
-<a class="facebook" href="#" onclick="
-    window.open(
-      'https://www.facebook.com/sharer/sharer.php?u='+encodeURIComponent(location.href),
-      'facebook-share-dialog',
-      'width=626,height=436');
-    return false;"><span class="icon-facebook-rect"> Share</span>
-</a>
+
 
     </section>
 </footer>
@@ -455,17 +448,13 @@ which alias (or aliases) it responds to 😀.</p>
             <a href="/2018/08/logs-and-metrics-for-small-data/">Logs and metrics for Small Data<aside class="dates">Aug 23 2018</aside></a>
         </li>
     
-        <li>
-            <a href="/2018/03/solr-contextual-synonyms-with-payloads/">Solr Contextual Synonyms with Payloads<aside class="dates">Mar 6 2018</aside></a>
-        </li>
-    
 </ul>
 
 
 
         <footer id="footer">
-    
-        <div id="social">
+  
+  <div id="social">
     
     <a class="symbol github" href="https://github.com/jorgelbg">
     
@@ -486,21 +475,28 @@ which alias (or aliases) it responds to 😀.</p>
     
 </div>
 
+  
+  <p class="small">
     
-    <p class="small">
+    © Copyright 2019 Jorge Luis Betancourt
     
-        © Copyright 2019 Jorge Luis Betancourt
-    
-    </p>
+  </p>
+  <p class="small cc">
+    Icons made by
+    <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from
+    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is
+    licensed by
+    <a
+      href="http://creativecommons.org/licenses/by/3.0/"
+      title="Creative Commons BY 3.0"
+      target="_blank"
+      >CC 3.0 BY</a
+    >
+  </p>
 </footer>
 
     </section>
     
-
-<script src="http://jorgelbg.github.io/js/highlight.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
-
 
 
 <script type="application/javascript">
