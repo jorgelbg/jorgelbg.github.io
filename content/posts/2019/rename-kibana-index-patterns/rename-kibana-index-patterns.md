@@ -1,7 +1,7 @@
 ---
 title: "How to rename index patterns in Kibana"
-date: 2019-05-15T17:00:00+02:00
-draft: true
+date: 2019-05-21T17:00:00+02:00
+draft: false
 description: >
     How to rename index patterns in Kibana without
     breaking your existing visualizations or dashboards.
