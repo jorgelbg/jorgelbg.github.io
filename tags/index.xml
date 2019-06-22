@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Jorge Luis Betancourt</title>
-    <link>http://jorgelbg.github.io/tags/</link>
+    <link>//jorgelbg.me/tags/</link>
     <description>Recent content in Tags on Jorge Luis Betancourt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 21 May 2019 17:00:00 +0200</lastBuildDate>
     
-	<atom:link href="http://jorgelbg.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//jorgelbg.me/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>index-pattern</title>
-      <link>http://jorgelbg.github.io/tags/index-pattern/</link>
+      <link>//jorgelbg.me/tags/index-pattern/</link>
       <pubDate>Tue, 21 May 2019 17:00:00 +0200</pubDate>
       
-      <guid>http://jorgelbg.github.io/tags/index-pattern/</guid>
+      <guid>//jorgelbg.me/tags/index-pattern/</guid>
       <description></description>
     </item>
     
     <item>
       <title>kibana</title>
-      <link>http://jorgelbg.github.io/tags/kibana/</link>
+      <link>//jorgelbg.me/tags/kibana/</link>
       <pubDate>Tue, 21 May 2019 17:00:00 +0200</pubDate>
       
-      <guid>http://jorgelbg.github.io/tags/kibana/</guid>
+      <guid>//jorgelbg.me/tags/kibana/</guid>
       <description></description>
     </item>
     

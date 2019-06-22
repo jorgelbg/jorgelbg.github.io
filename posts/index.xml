@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Jorge Luis Betancourt</title>
-    <link>http://jorgelbg.github.io/posts/</link>
+    <link>//jorgelbg.me/posts/</link>
     <description>Recent content in Posts on Jorge Luis Betancourt</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Tue, 21 May 2019 17:00:00 +0200</lastBuildDate>
     
-	<atom:link href="http://jorgelbg.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//jorgelbg.me/posts/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How to rename index patterns in Kibana</title>
-      <link>http://jorgelbg.github.io/2019/05/how-to-rename-index-patterns-in-kibana/</link>
+      <link>//jorgelbg.me/2019/05/how-to-rename-index-patterns-in-kibana/</link>
       <pubDate>Tue, 21 May 2019 17:00:00 +0200</pubDate>
       
-      <guid>http://jorgelbg.github.io/2019/05/how-to-rename-index-patterns-in-kibana/</guid>
+      <guid>//jorgelbg.me/2019/05/how-to-rename-index-patterns-in-kibana/</guid>
       <description>If you have been using Kibana long enough you probably have a large collection of visualizations and dashboards already created. From time to time you may have a need to rename an already index pattern. Turns out that Kibana doesn&amp;rsquo;t support this. You can refresh the index pattern and you can drop it but that&amp;rsquo;s it. There is an open issue in Github to address this issue, but it is still open at the time of writing this post.</description>
     </item>
     
     <item>
       <title>Useful alerts with Elastic Watcher &amp; Machine Learning</title>
-      <link>http://jorgelbg.github.io/2019/03/useful-alerts-with-elastic-watcher-machine-learning/</link>
+      <link>//jorgelbg.me/2019/03/useful-alerts-with-elastic-watcher-machine-learning/</link>
       <pubDate>Fri, 15 Mar 2019 13:00:00 +0100</pubDate>
       
-      <guid>http://jorgelbg.github.io/2019/03/useful-alerts-with-elastic-watcher-machine-learning/</guid>
+      <guid>//jorgelbg.me/2019/03/useful-alerts-with-elastic-watcher-machine-learning/</guid>
       <description>Alerts should be meaningful, simply getting a notification about something happening is not enough. A good alert should be actionable and investigable. For me, this means getting a answer to the following questions:
 What happened? Was the traffic to the Web site unusually low? Did the number of errors increase? This is the type of information that the alert should contain in a clear and visible way.
 Why an alert triggered?</description>
@@ -33,10 +33,10 @@ Why an alert triggered?</description>
     
     <item>
       <title>Display the application&#39;s version in your Grafana dashboards</title>
-      <link>http://jorgelbg.github.io/2019/02/display-the-applications-version-in-your-grafana-dashboards/</link>
+      <link>//jorgelbg.me/2019/02/display-the-applications-version-in-your-grafana-dashboards/</link>
       <pubDate>Sun, 17 Feb 2019 14:00:28 +0100</pubDate>
       
-      <guid>http://jorgelbg.github.io/2019/02/display-the-applications-version-in-your-grafana-dashboards/</guid>
+      <guid>//jorgelbg.me/2019/02/display-the-applications-version-in-your-grafana-dashboards/</guid>
       <description>At work, we needed a way to monitor the lag of some Kafka consumers reading business-critical topics.
 We ended up using this exporter that provided exactly the metrics that we needed. After adding metadata caching to reduce the load on our Kafka cluster we deployed the exporter to our Nomad cluster and started to build dashboards.
 While I was making changes to the application. I needed not only to check the logs but also to graph the data that the exporter was getting from Kafka, to make sure that my changes were not breaking the normal behavior.</description>
@@ -44,30 +44,30 @@ While I was making changes to the application. I needed not only to check the lo
     
     <item>
       <title>Optimize Grafana dashboards with Elasticsearch index aliases</title>
-      <link>http://jorgelbg.github.io/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/</link>
+      <link>//jorgelbg.me/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/</link>
       <pubDate>Thu, 20 Dec 2018 00:00:00 +0100</pubDate>
       
-      <guid>http://jorgelbg.github.io/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/</guid>
+      <guid>//jorgelbg.me/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/</guid>
       <description>Grafana is a very popular opensource dashboarding solution. Provides support for a long list of storage solutions, including Elasticsearch. Unfortunately, the ES support is not at the same level as the one you get for InfluxDB, for instance. Still, Grafana allows combining in the same dashboard different data sources. It is possible to have a panel fetching data from ES and a different panel fetching data from InfluxDB.
 Grafana ❤️ Elasticsearch Grafana provides stellar support for InfluxDB &amp;amp; Prometheus, among others.</description>
     </item>
     
     <item>
       <title>Logs and metrics for Small Data</title>
-      <link>http://jorgelbg.github.io/2018/08/logs-and-metrics-for-small-data/</link>
+      <link>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</link>
       <pubDate>Thu, 23 Aug 2018 05:42:44 +0200</pubDate>
       
-      <guid>http://jorgelbg.github.io/2018/08/logs-and-metrics-for-small-data/</guid>
+      <guid>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</guid>
       <description>This post is a personal comment. I&amp;rsquo;m going to talk about how using some tools thought for &amp;ldquo;Big Data&amp;rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus, you wouldn&amp;rsquo;t think about a system to run your laptop during development, right?
 Logs Concatenating files, parsing logs, are some of those tasks that are part of our daily routine as developers. We type lots of commands (usually connected via pipes |) to accomplish a given goal.</description>
     </item>
     
     <item>
       <title>Solr Contextual Synonyms with Payloads</title>
-      <link>http://jorgelbg.github.io/2018/03/solr-contextual-synonyms-with-payloads/</link>
+      <link>//jorgelbg.me/2018/03/solr-contextual-synonyms-with-payloads/</link>
       <pubDate>Tue, 06 Mar 2018 01:00:00 +0100</pubDate>
       
-      <guid>http://jorgelbg.github.io/2018/03/solr-contextual-synonyms-with-payloads/</guid>
+      <guid>//jorgelbg.me/2018/03/solr-contextual-synonyms-with-payloads/</guid>
       <description>Solr comes with a great set of tools to dealing with usual text processing tasks. One of this tools is the SynonymFilterFactory which allow to specify a list of synonyms. Last year we saw some improvements to this feature, focused around multi word synonyms. Even with the new changes introduced in Solr there are still some caveats, as explained by Doug on this post. To be honest this was developed some time ago, back when Solr 5 was the &amp;ldquo;cool&amp;rdquo; new version 😁.</description>
     </item>
     
