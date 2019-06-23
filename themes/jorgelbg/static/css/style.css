@@ -7,17 +7,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 	padding: 0;
 }
 
-article,
-aside,
-details,
-figcaption,
-figure,
-footer,
-header,
-hgroup,
-menu,
-nav,
-section {
+article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 
@@ -28,31 +18,19 @@ body {
 	text-rendering: optimizeLegibility;
 }
 
-blockquote,
-q {
+blockquote, q {
 	quotes: none;
 }
 
-blockquote:before,
-blockquote:after,
-q:before,
-q:after {
+blockquote:before, blockquote:after, q:before, q:after {
 	content: none;
 }
 
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
-	width: 100%;
-	margin: 40px 0;
-	border-collapse: collapse;
-	font-size: 13px;
-	line-height: 1.5em;
+a {
+	text-decoration: none;
 }
 
-*,
-:before,
-:after {
+*, :before, :after {
 	-moz-box-sizing: border-box;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
@@ -64,23 +42,11 @@ table {
 	clear: both;
 }
 
-.hidden {
-	display: none;
-}
-
-.post h1,
-h3,
-h4,
-h5,
-p,
-.post-body ul,
-ol,
-pre {
+.post h1, h3, h4, h5, p, .post-body ul, ol, pre {
 	margin-bottom: 20px;
 }
 
-html,
-body {
+html, body {
 	height: 100%;
 }
 
@@ -136,6 +102,7 @@ nav.main-nav a {
 	font-size: 13px;
 	line-height: 1.35;
 	border-radius: 3px;
+	padding: 0;
 }
 
 nav.main-nav a.cta {
@@ -170,19 +137,13 @@ nav.main-nav a.cta {
 	border-radius: 3px;
 }
 
-a,
-#title,
-#post-list a:hover,
-#post-list li:hover .dates,
-#title:hover {
+#post-list li:hover .dates {
 	text-decoration: none;
 	color: #5661b3;
 	font-weight: 400;
 }
 
-a,
-#post-nav a,
-#post-list a {
+a, #post-nav a, #post-list a {
 	-webkit-transition: all .15s ease;
 	-moz-transition: all .15s ease;
 	-ms-transition: all .15s ease;
@@ -190,8 +151,7 @@ a,
 	transition: all .15s ease;
 }
 
-ul,
-ol {
+ul, ol {
 	margin: 0;
 	padding: 0;
 	margin-bottom: 20px;
@@ -205,19 +165,16 @@ li {
 	list-style-position: inside;
 }
 
-#post-body,
-p {
+#post-body, p {
 	line-height: 1.7;
 }
 
-b,
-strong {
+b, strong {
 	font-weight: 500;
 	color: #1e2025;
 }
 
-em,
-i {
+em, i {
 	font-style: italic;
 }
 
@@ -265,11 +222,12 @@ i {
 
 .post h2.headline {
 	font: normal 13px/1.5em -apple-system-subheadline, sans-serif;
-	color: #b2b9be;
+	color: #606f7b;
 	font-size: 13px;
 	text-transform: uppercase;
 	letter-spacing: 2px;
 	display: inline-block;
+	font-weight: 800;
 }
 
 #post-list p {
@@ -1036,6 +994,7 @@ nav.main-nav {
 #post-list a.title,
 svg.background {
 	width: 100%;
+	text-decoration: none;
 }
 
 @media only screen and (max-width: 600px) {
