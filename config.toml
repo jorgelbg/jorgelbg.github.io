@@ -18,14 +18,14 @@ pygmentsUseClasses = true
 [params]
 	name = "Jorge Luis Betancourt"
 	description = "Computo Ergo Sum"
-	bio = "Backend Engineer. I play with Search, Relevance and Web Performance."
+	bio = "Backend Engineer. I play with Search, Relevance and Observability. "
 	# Enter optionally your twitter account
 	twitter = "jorgelbg"
 	enableRSS = true
 
 	# Integrate Javascript files or stylesheets by adding the url to the external assets or by
 	# linking local files with their path relative to the static folder, e.g. "css/styles.css"
-	customCSS = ["css/custom.css"]
+	customCSS = []
 	customJS  = []
 
 	# The variables below are optionally too and can be used to
