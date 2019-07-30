@@ -4,8 +4,10 @@
             <a href="{{ "about" | absURL }}">
                 <img id="avatar" class="2x" src="{{ "images/avatar.png" | absURL }}"/>
             </a>
-            <h1>{{ .Site.Params.name }}</h1>
-            <h2>{{ .Site.Params.bio | markdownify }}</h2>
+            <div>
+                <h1>{{ .Site.Params.name }}</h1>
+                <h2>{{ .Site.Params.bio | markdownify }}</h2>
+            </div>
         </header>
     </section>
 </div>

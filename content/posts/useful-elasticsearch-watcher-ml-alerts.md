@@ -4,6 +4,7 @@ description: >
  Create more useful alerts using Elastic's Watcher and
  Machine Learning.
 date: 2019-03-15T13:00:00+01:00
+tags: ["elasticsearch", "watcher", "machine learning"]
 draft: false
 ---
 
