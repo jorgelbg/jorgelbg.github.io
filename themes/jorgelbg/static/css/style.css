@@ -111,12 +111,12 @@ body {
 }
 
 nav.main-nav {
-  padding: 20px 20px 0;
   margin: 0 auto;
   z-index: 100;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
   font-weight: 600;
+  display: grid;
 }
 
 nav.main-nav a {
@@ -464,7 +464,7 @@ img {
 }
 
 #post-meta {
-  font-size: 13px;
+  /* font-size: 13px; */
   font-weight: 700;
   line-height: 1.4;
   border-top: 1px solid #eee;
@@ -582,14 +582,14 @@ h2.month {
   color: #bbb;
 }
 
-#post-meta img.avatar {
+#post-meta .avatar {
 	height: 36px;
 	width: 36px;
 	float: left;
-	border-radius: 50%;
+	/* border-radius: 50%; */
+	/* box-shadow: 0 0 0 3px #fff, 0 0 0 4px #eee; */
 	margin-top: 3px;
 	margin-right: 20px;
-	box-shadow: 0 0 0 3px #fff, 0 0 0 4px #eee;
 }
 
 #post-list.archive.readmore h3 {

@@ -49,10 +49,8 @@ pygmentsUseClasses = true
 
 # Add additional social link entries underneath
 [social]
-    twitter  = "https://www.twitter.com/jorgelbgm"
-    # facebook = "https://www.facebook.com/"
+    twitter  = "https://twitter.com/jorgelbg"
     github   = "https://github.com/jorgelbg"
-    # dribble  = "https://www.dribbble.com/"
 
 [permalinks]
   posts = "/:year/:month/:title/"
