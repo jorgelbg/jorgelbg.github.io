@@ -1,18 +1,16 @@
 <!DOCTYPE html>
 <html lang="en-us">
 	<head>
-    <meta charset="utf-8">
+    <link rel="stylesheet" href="//jorgelbg.me/css/style.css">
+<meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="author" content="Jorge Luis Betancourt">
 <meta name="description" content="Computo Ergo Sum">
-<meta name="generator" content="Hugo 0.55.6" />
+<meta name="generator" content="Hugo 0.56.2" />
 <title>Solr Contextual Synonyms with Payloads</title>
 <link rel="shortcut icon" href="//jorgelbg.me/images/favicon.ico">
-<link rel="stylesheet" href="//jorgelbg.me/css/style.css">
-<link rel="stylesheet" href="//jorgelbg.me/css/highlight.css">
-
-<link rel="stylesheet" href="//jorgelbg.me/css/custom.css">
+<link rel="dns-prefetch" href="//www.google-analytics.com/" />
 
 
 
@@ -23,9 +21,8 @@
 <meta property="og:description" content="A different approach for contextual synonyms with Apache Solr using the term payload" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="//jorgelbg.me/2018/03/solr-contextual-synonyms-with-payloads/" />
-<meta property="article:published_time" content="2018-03-06T01:00:00&#43;01:00"/>
-<meta property="article:modified_time" content="2018-03-06T01:00:00&#43;01:00"/>
-
+<meta property="article:published_time" content="2018-03-06T01:00:00+01:00" />
+<meta property="article:modified_time" content="2018-03-06T01:00:00+01:00" />
 
 
 <meta itemprop="name" content="Solr Contextual Synonyms with Payloads">
@@ -38,7 +35,7 @@
 
 
 
-<meta itemprop="keywords" content="" />
+<meta itemprop="keywords" content="solr,synonyms," />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Solr Contextual Synonyms with Payloads"/>
@@ -49,14 +46,7 @@
     </head>
 <body>
     <div class="first">
-        <svg class="background" preserveAspectRatio="none" viewBox="0 0 1441 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-        
-        <g id="Artboard">
-            <path class="darkline" d="M0.0962366065,0 L1440,0 L1439.90376,9.24897394 C1371.70284,31.9284054 1289.96842,45.9945207 1194.7005,51.4473197 C857.665285,70.7380242 893.061178,150 719.951882,150 C622.268082,150 525.73955,64.6919277 443.716695,64.6919277 C361.69384,64.6919277 352.688968,87.5476092 287.037748,87.5476092 C243.270268,87.5476092 147.591019,61.4480641 0,9.24897394 L0.0962366065,0 Z" id="Rectangle" fill="#5A67D8" opacity="0.496433424"></path>
-            <path class="dots"d="M142.5,63 C138.910149,63 136,60.0898509 136,56.5 C136,52.9101491 138.910149,50 142.5,50 C146.089851,50 149,52.9101491 149,56.5 C149,60.0898509 146.089851,63 142.5,63 Z M288.5,94 C284.910149,94 282,91.0898509 282,87.5 C282,83.9101491 284.910149,81 288.5,81 C292.089851,81 295,83.9101491 295,87.5 C295,91.0898509 292.089851,94 288.5,94 Z M444.5,72 C440.910149,72 438,69.0898509 438,65.5 C438,61.9101491 440.910149,59 444.5,59 C448.089851,59 451,61.9101491 451,65.5 C451,69.0898509 448.089851,72 444.5,72 Z M720.5,156 C716.910149,156 714,153.089851 714,149.5 C714,145.910149 716.910149,143 720.5,143 C724.089851,143 727,145.910149 727,149.5 C727,153.089851 724.089851,156 720.5,156 Z M1196.5,58 C1192.91015,58 1190,55.0898509 1190,51.5 C1190,47.9101491 1192.91015,45 1196.5,45 C1200.08985,45 1203,47.9101491 1203,51.5 C1203,55.0898509 1200.08985,58 1196.5,58 Z" id="Combined-Shape" fill="#3080E8" opacity="0.637058424"></path>
-            <path class="lightline" d="M0.0962366065,0 L1440,0 L1439.90376,9.24897394 C1384.05302,46.9189177 1339.81116,65.7538896 1307.17816,65.7538896 C1258.22868,65.7538896 1187.78567,37.7500322 1135.79982,37.7500322 C994.060728,37.7500322 1040.09806,133.961647 870.12796,104.480824 C813.407641,94.6428476 759.201718,65.746529 719,65.7538896 C678.798282,65.7612502 591.920537,104.480824 535.791086,104.480824 C438.107286,104.480824 403.594187,37.7500322 321.571333,37.7500322 C239.548478,37.7500322 189.071667,75 147.326626,75 C119.496599,75 70.3877232,53.0829913 0,9.24897394 L0.0962366065,0 Z" id="Rectangle-Copy" fill="#8564F2" opacity="0.627943841"></path>
-        </g>
-    </svg>
+        <svg class="background" preserveAspectRatio="none" viewBox="0 0 1441 200"><path class="darkline" d="M.096 0H1440l-.096 9.249c-68.201 22.68-149.936 36.746-245.204 42.198C857.665 70.738 893.061 150 719.952 150c-97.684 0-194.212-85.308-276.235-85.308-82.023 0-91.028 22.856-156.68 22.856-43.767 0-139.446-26.1-287.037-78.299L.096 0z" fill="#5A67D8" opacity=".496"/><path class="lightline" d="M.096 0H1440l-.096 9.249c-55.851 37.67-100.093 56.505-132.726 56.505-48.95 0-119.392-28.004-171.378-28.004-141.74 0-95.702 96.212-265.672 66.73C813.408 94.644 759.202 65.748 719 65.755c-40.202.007-127.08 38.727-183.209 38.727-97.684 0-132.197-66.731-214.22-66.731S189.071 75 147.327 75C119.497 75 70.387 53.083 0 9.249L.096 0z" fill="#8564F2" opacity=".628"/></svg>
     
     </div>
     <nav class="main-nav">
@@ -84,6 +74,21 @@
         <h2 class="headline">
             March 6, 2018
             <br>
+            <br>
+            
+            
+                
+                <span class="tag">
+                    <svg fill="#718096" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path class="heroicon-ui" d="M2.59 13.41A1.98 1.98 0 0 1 2 12V7a5 5 0 0 1 5-5h4.99c.53 0 1.04.2 1.42.59l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82 0l-8-8zM20 12l-8-8H7a3 3 0 0 0-3 3v5l8 8 8-8zM7 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+                    <a style="margin-left: 10px;" href="//jorgelbg.me/tags/solr">solr</a>
+                </span>
+                
+                <span class="tag">
+                    <svg fill="#718096" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path class="heroicon-ui" d="M2.59 13.41A1.98 1.98 0 0 1 2 12V7a5 5 0 0 1 5-5h4.99c.53 0 1.04.2 1.42.59l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82 0l-8-8zM20 12l-8-8H7a3 3 0 0 0-3 3v5l8 8 8-8zM7 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
+                    <a style="margin-left: 10px;" href="//jorgelbg.me/tags/synonyms">synonyms</a>
+                </span>
+                
+            
             
         </h2>
     </header>
@@ -162,27 +167,27 @@ In each occurrence of `domain name server`, the synonym will be used. With our i
 <p>The tokens are placed in the edges of the graph and the nodes are the states/positions of the token. But for our task at hand we can rely on the first graph for an easier representation.</p>
 
 <p>So <code>B</code> and <code>E</code> should have the same position in the token graph (1). A phrase query like: <code>&quot;B C&quot;</code> will match our document, but also <code>&quot;E C&quot;</code> or <code>&quot;A E&quot;</code>. To do this we&rsquo;ll need to use the <code>PositionIncrementAttribute</code> class. The code for our <code>incrementToken()</code> method is roughly something like:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span> <span class="o">(!</span><span class="n">extraTokens</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
-  <span class="n">restoreState</span><span class="o">(</span><span class="n">state</span><span class="o">);</span>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">extraTokens</span><span class="p">.</span><span class="na">isEmpty</span><span class="p">())</span> <span class="p">{</span>
+  <span class="n">restoreState</span><span class="p">(</span><span class="n">state</span><span class="p">);</span>
 
-  <span class="n">posIncrAtt</span><span class="o">.</span><span class="na">setPositionIncrement</span><span class="o">(</span><span class="n">0</span><span class="o">);</span> <span class="c1">// keep the same position of the token
-</span><span class="c1"></span>  <span class="n">typeAtt</span><span class="o">.</span><span class="na">setType</span><span class="o">(</span><span class="n">SynonymFilter</span><span class="o">.</span><span class="na">TYPE_SYNONYM</span><span class="o">);</span>
-  <span class="n">termAtt</span><span class="o">.</span><span class="na">setEmpty</span><span class="o">().</span><span class="na">append</span><span class="o">(</span><span class="n">extraTokens</span><span class="o">.</span><span class="na">remove</span><span class="o">());</span>
+  <span class="n">posIncrAtt</span><span class="p">.</span><span class="na">setPositionIncrement</span><span class="p">(</span><span class="n">0</span><span class="p">);</span> <span class="c1">// keep the same position of the token
+</span><span class="c1"></span>  <span class="n">typeAtt</span><span class="p">.</span><span class="na">setType</span><span class="p">(</span><span class="n">SynonymFilter</span><span class="p">.</span><span class="na">TYPE_SYNONYM</span><span class="p">);</span>
+  <span class="n">termAtt</span><span class="p">.</span><span class="na">setEmpty</span><span class="p">().</span><span class="na">append</span><span class="p">(</span><span class="n">extraTokens</span><span class="p">.</span><span class="na">remove</span><span class="p">());</span>
 
-  <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-<span class="o">}</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="k">if</span> <span class="o">(</span><span class="n">input</span><span class="o">.</span><span class="na">incrementToken</span><span class="o">())</span> <span class="o">{</span>
-  <span class="n">BytesRef</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">payAtt</span><span class="o">.</span><span class="na">getPayload</span><span class="o">();</span>
+<span class="k">if</span> <span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="na">incrementToken</span><span class="p">())</span> <span class="p">{</span>
+  <span class="n">BytesRef</span> <span class="nf">payload</span> <span class="o">=</span> <span class="n">payAtt</span><span class="p">.</span><span class="na">getPayload</span><span class="p">();</span>
 
-  <span class="n">extraTokens</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">payload</span><span class="o">.</span><span class="na">utf8ToString</span><span class="o">());</span>
-  <span class="n">state</span> <span class="o">=</span> <span class="n">captureState</span><span class="o">();</span>
+  <span class="n">extraTokens</span><span class="p">.</span><span class="na">add</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="na">utf8ToString</span><span class="p">());</span>
+  <span class="n">state</span> <span class="o">=</span> <span class="n">captureState</span><span class="p">();</span>
 
-  <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-<span class="o">}</span>
+  <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+<span class="p">}</span>
 
-<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-<span class="o">}</span></code></pre></div>
+<span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
 <p>The <code>incrementToken()</code> method returns the metadata for the next token. Because of this, we need to save the state of the attributes to &ldquo;insert&rdquo; the  synonym in the right position. Also the position increment needs to be set to 0 or the term will be in the wrong position.</p>
 
 <p>Our implementation detects the token with a payload and in the next call we add the payload as a new token. In the final implementation we do a couple more of things:</p>
@@ -201,34 +206,34 @@ In each occurrence of `domain name server`, the synonym will be used. With our i
 <p>But what do we want to test?</p>
 
 <p>To &ldquo;glue&rdquo; everything in Solr, we need the <code>solr.DelimitedPayloadTokenFilterFactory</code> to index tokens and payloads. But this class is already tested in the Lucence/Solr codebase. For testing our custom filter we need tokens with payloads attached. Let&rsquo;s write a dummy <code>TokenFilter</code> that will provide us with a proper stream of tokens with payloads.</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="kd">final</span> <span class="kd">class</span> <span class="nc">DummyPayloadTokenFilter</span> <span class="kd">extends</span> <span class="n">TokenFilter</span> <span class="o">{</span>
-  <span class="kd">private</span> <span class="kd">final</span> <span class="n">CharTermAttribute</span> <span class="n">termAtt</span> <span class="o">=</span> <span class="n">addAttribute</span><span class="o">(</span><span class="n">CharTermAttribute</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-  <span class="kd">private</span> <span class="kd">final</span> <span class="n">PayloadAttribute</span> <span class="n">payAtt</span> <span class="o">=</span> <span class="n">addAttribute</span><span class="o">(</span><span class="n">PayloadAttribute</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">private</span> <span class="nf">final</span> <span class="kd">class</span> <span class="nf">DummyPayloadTokenFilter</span> <span class="kd">extends</span> <span class="nf">TokenFilter</span> <span class="p">{</span>
+  <span class="kd">private</span> <span class="nf">final</span> <span class="n">CharTermAttribute</span> <span class="nf">termAtt</span> <span class="o">=</span> <span class="n">addAttribute</span><span class="p">(</span><span class="n">CharTermAttribute</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+  <span class="kd">private</span> <span class="nf">final</span> <span class="n">PayloadAttribute</span> <span class="nf">payAtt</span> <span class="o">=</span> <span class="n">addAttribute</span><span class="p">(</span><span class="n">PayloadAttribute</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 
-  <span class="kd">private</span> <span class="kd">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="n">payloadTokens</span> <span class="o">=</span> <span class="n">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">,</span> <span class="s">&#34;B&#34;</span><span class="o">,</span> <span class="s">&#34;C&#34;</span><span class="o">);</span>
-  <span class="kd">private</span> <span class="kd">final</span> <span class="n">PayloadEncoder</span> <span class="n">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IdentityEncoder</span><span class="o">();</span>
-  <span class="kd">private</span> <span class="kd">final</span> <span class="n">BytesRef</span> <span class="n">payload</span><span class="o">;</span>
+  <span class="kd">private</span> <span class="nf">final</span> <span class="n">List</span><span class="o">&lt;</span><span class="n">String</span><span class="o">&gt;</span> <span class="nf">payloadTokens</span> <span class="o">=</span> <span class="n">Arrays</span><span class="p">.</span><span class="na">asList</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">,</span> <span class="s">&#34;B&#34;</span><span class="p">,</span> <span class="s">&#34;C&#34;</span><span class="p">);</span>
+  <span class="kd">private</span> <span class="nf">final</span> <span class="n">PayloadEncoder</span> <span class="nf">encoder</span> <span class="o">=</span> <span class="k">new</span> <span class="n">IdentityEncoder</span><span class="p">();</span>
+  <span class="kd">private</span> <span class="nf">final</span> <span class="n">BytesRef</span> <span class="nf">payload</span><span class="p">;</span>
 
-  <span class="kd">private</span> <span class="nf">DummyPayloadTokenFilter</span><span class="o">(</span><span class="n">TokenStream</span> <span class="n">input</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">(</span><span class="n">input</span><span class="o">);</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">payload</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="s">&#34;D&#34;</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">());</span>
-  <span class="o">}</span>
+  <span class="kd">private</span> <span class="nf">DummyPayloadTokenFilter</span><span class="p">(</span><span class="n">TokenStream</span> <span class="nf">input</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">super</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">payload</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="s">&#34;D&#34;</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">());</span>
+  <span class="p">}</span>
 
-  <span class="kd">private</span> <span class="nf">DummyPayloadTokenFilter</span><span class="o">(</span><span class="n">TokenStream</span> <span class="n">input</span><span class="o">,</span> <span class="n">String</span> <span class="n">payloadValue</span><span class="o">)</span> <span class="o">{</span>
-    <span class="kd">super</span><span class="o">(</span><span class="n">input</span><span class="o">);</span>
-    <span class="k">this</span><span class="o">.</span><span class="na">payload</span> <span class="o">=</span> <span class="n">encoder</span><span class="o">.</span><span class="na">encode</span><span class="o">(</span><span class="n">payloadValue</span><span class="o">.</span><span class="na">toCharArray</span><span class="o">());</span>
-  <span class="o">}</span>
+  <span class="kd">private</span> <span class="nf">DummyPayloadTokenFilter</span><span class="p">(</span><span class="n">TokenStream</span> <span class="nf">input</span><span class="p">,</span> <span class="n">String</span> <span class="nf">payloadValue</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">super</span><span class="p">(</span><span class="n">input</span><span class="p">);</span>
+    <span class="k">this</span><span class="p">.</span><span class="na">payload</span> <span class="o">=</span> <span class="n">encoder</span><span class="p">.</span><span class="na">encode</span><span class="p">(</span><span class="n">payloadValue</span><span class="p">.</span><span class="na">toCharArray</span><span class="p">());</span>
+  <span class="p">}</span>
 
   <span class="nd">@Override</span>
-  <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">incrementToken</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">IOException</span> <span class="o">{</span>
-    <span class="k">if</span> <span class="o">(</span><span class="n">input</span><span class="o">.</span><span class="na">incrementToken</span><span class="o">())</span> <span class="o">{</span>
-      <span class="k">if</span> <span class="o">(</span><span class="n">payloadTokens</span><span class="o">.</span><span class="na">contains</span><span class="o">(</span><span class="n">termAtt</span><span class="o">.</span><span class="na">toString</span><span class="o">()))</span> <span class="n">payAtt</span><span class="o">.</span><span class="na">setPayload</span><span class="o">(</span><span class="n">payload</span><span class="o">);</span>
-      <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
-    <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-      <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
-    <span class="o">}</span>
-  <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
+  <span class="kd">public</span> <span class="nf">boolean</span> <span class="n">incrementToken</span><span class="p">()</span> <span class="kd">throws</span> <span class="nf">IOException</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">input</span><span class="p">.</span><span class="na">incrementToken</span><span class="p">())</span> <span class="p">{</span>
+      <span class="k">if</span> <span class="p">(</span><span class="n">payloadTokens</span><span class="p">.</span><span class="na">contains</span><span class="p">(</span><span class="n">termAtt</span><span class="p">.</span><span class="na">toString</span><span class="p">()))</span> <span class="n">payAtt</span><span class="p">.</span><span class="na">setPayload</span><span class="p">(</span><span class="n">payload</span><span class="p">);</span>
+      <span class="k">return</span> <span class="kc">true</span><span class="p">;</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>With this dummy <code>TokenFilter</code> we can wrap a mock of a <code>TokenStream</code> and feed it into our <code>PayloadSynonymTokenFilter</code> and test our custom logic.</p>
 
 <p>Now to the next item, how do we test a <code>TokenFilter</code>? We need to start with a string (<code>A B C</code>), which needs to converted into a <code>TokenStream</code>. For this we can use the handy helper method <code>whitespaceMockTokenizer()</code>. This methods will tokenize the string at any occurrence of a whitespace character. Once we have an actual <code>TokenStream</code> to feed to our filter we can start writting assertions.</p>
@@ -236,61 +241,61 @@ In each occurrence of `domain name server`, the synonym will be used. With our i
 <p>We need to call <code>incrementToken()</code> and at each step check if the current term is correct and if any other term attribute (such as our beloved payload) has also the expected value.</p>
 
 <p>This assertions are not hard to write. Peeking around the Lucene test suite I came across this handy method than resembled a lot to what I was writing. I decided to use it instead (no harm no fall).</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">assertTermEquals</span><span class="o">(</span><span class="n">String</span> <span class="n">expected</span><span class="o">,</span> <span class="n">TokenStream</span> <span class="n">stream</span><span class="o">,</span> <span class="n">CharTermAttribute</span> <span class="n">termAtt</span><span class="o">,</span> <span class="n">PayloadAttribute</span> <span class="n">payAtt</span><span class="o">,</span>
-    <span class="kt">byte</span><span class="o">[]</span> <span class="n">expectPay</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-  <span class="n">assertTrue</span><span class="o">(</span><span class="n">stream</span><span class="o">.</span><span class="na">incrementToken</span><span class="o">());</span>
-  <span class="n">assertEquals</span><span class="o">(</span><span class="n">expected</span><span class="o">,</span> <span class="n">termAtt</span><span class="o">.</span><span class="na">toString</span><span class="o">());</span>
-  <span class="n">BytesRef</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">payAtt</span><span class="o">.</span><span class="na">getPayload</span><span class="o">();</span>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="kt">void</span> <span class="nf">assertTermEquals</span><span class="p">(</span><span class="n">String</span> <span class="nf">expected</span><span class="p">,</span> <span class="n">TokenStream</span> <span class="nf">stream</span><span class="p">,</span> <span class="n">CharTermAttribute</span> <span class="nf">termAtt</span><span class="p">,</span> <span class="n">PayloadAttribute</span> <span class="nf">payAtt</span><span class="p">,</span>
+    <span class="kt">byte</span><span class="p">[]</span> <span class="nf">expectPay</span><span class="p">)</span> <span class="kd">throws</span> <span class="nf">Exception</span> <span class="p">{</span>
+  <span class="n">assertTrue</span><span class="p">(</span><span class="n">stream</span><span class="p">.</span><span class="na">incrementToken</span><span class="p">());</span>
+  <span class="n">assertEquals</span><span class="p">(</span><span class="n">expected</span><span class="p">,</span> <span class="n">termAtt</span><span class="p">.</span><span class="na">toString</span><span class="p">());</span>
+  <span class="n">BytesRef</span> <span class="nf">payload</span> <span class="o">=</span> <span class="n">payAtt</span><span class="p">.</span><span class="na">getPayload</span><span class="p">();</span>
 
-  <span class="k">if</span> <span class="o">(</span><span class="n">payload</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
-    <span class="n">assertTrue</span><span class="o">(</span><span class="n">payload</span><span class="o">.</span><span class="na">length</span> <span class="o">+</span> <span class="s">&#34; does not equal: &#34;</span> <span class="o">+</span> <span class="n">expectPay</span><span class="o">.</span><span class="na">length</span><span class="o">,</span> <span class="n">payload</span><span class="o">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">expectPay</span><span class="o">.</span><span class="na">length</span><span class="o">);</span>
-    <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">0</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">expectPay</span><span class="o">.</span><span class="na">length</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
-      <span class="n">assertTrue</span><span class="o">(</span><span class="n">expectPay</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">+</span> <span class="s">&#34; does not equal: &#34;</span> <span class="o">+</span> <span class="n">payload</span><span class="o">.</span><span class="na">bytes</span><span class="o">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">payload</span><span class="o">.</span><span class="na">offset</span><span class="o">],</span>
-          <span class="n">expectPay</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">==</span> <span class="n">payload</span><span class="o">.</span><span class="na">bytes</span><span class="o">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">payload</span><span class="o">.</span><span class="na">offset</span><span class="o">]);</span>
-    <span class="o">}</span>
-  <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
-    <span class="n">assertTrue</span><span class="o">(</span><span class="s">&#34;expectPay is not null and it should be&#34;</span><span class="o">,</span> <span class="n">expectPay</span> <span class="o">==</span> <span class="kc">null</span><span class="o">);</span>
-  <span class="o">}</span>
-<span class="o">}</span></code></pre></div>
+  <span class="k">if</span> <span class="p">(</span><span class="n">payload</span> <span class="o">!=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">assertTrue</span><span class="p">(</span><span class="n">payload</span><span class="p">.</span><span class="na">length</span> <span class="o">+</span> <span class="s">&#34; does not equal: &#34;</span> <span class="o">+</span> <span class="n">expectPay</span><span class="p">.</span><span class="na">length</span><span class="p">,</span> <span class="n">payload</span><span class="p">.</span><span class="na">length</span> <span class="o">==</span> <span class="n">expectPay</span><span class="p">.</span><span class="na">length</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="nf">i</span> <span class="o">=</span> <span class="n">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">expectPay</span><span class="p">.</span><span class="na">length</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+      <span class="n">assertTrue</span><span class="p">(</span><span class="n">expectPay</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+</span> <span class="s">&#34; does not equal: &#34;</span> <span class="o">+</span> <span class="n">payload</span><span class="p">.</span><span class="na">bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">payload</span><span class="p">.</span><span class="na">offset</span><span class="p">],</span>
+          <span class="n">expectPay</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">payload</span><span class="p">.</span><span class="na">bytes</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="n">payload</span><span class="p">.</span><span class="na">offset</span><span class="p">]);</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="n">assertTrue</span><span class="p">(</span><span class="s">&#34;expectPay is not null and it should be&#34;</span><span class="p">,</span> <span class="n">expectPay</span> <span class="o">==</span> <span class="kc">null</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span></code></pre></div>
 <p>Using this method our test code is a series of calls to <code>assertTermEquals</code> passing the right arguments.</p>
 
 <p>Let&rsquo;s go back to our initial test string. Assuming that only the <code>A</code> token carries a payload, our expected <code>TokenStream</code> should look like <code>A D B C</code>.  <code>D</code> should be a synonym of <code>A</code>: both <code>A</code> and <code>D</code> should have the same position in the stream. The test would look something like:</p>
 <div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="nd">@Test</span>
-<span class="kd">public</span> <span class="kt">void</span> <span class="nf">testSingleSynonym</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
-  <span class="n">String</span> <span class="n">test</span> <span class="o">=</span> <span class="s">&#34;A B C&#34;</span><span class="o">;</span>
+<span class="kd">public</span> <span class="nf">void</span> <span class="n">testSingleSynonym</span><span class="p">()</span> <span class="kd">throws</span> <span class="nf">Exception</span> <span class="p">{</span>
+  <span class="n">String</span> <span class="nf">test</span> <span class="o">=</span> <span class="s">&#34;A B C&#34;</span><span class="p">;</span>
 
-  <span class="n">PayloadSynonymTokenFilter</span> <span class="n">filter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PayloadSynonymTokenFilter</span><span class="o">(</span>
-    <span class="k">new</span> <span class="n">DummyPayloadTokenFilter</span><span class="o">(</span><span class="n">whitespaceMockTokenizer</span><span class="o">(</span><span class="n">test</span><span class="o">)),</span>
-    <span class="kc">false</span><span class="o">,</span> <span class="kc">false</span><span class="o">,</span> <span class="s">&#34;_&#34;</span>
-  <span class="o">);</span>
+  <span class="n">PayloadSynonymTokenFilter</span> <span class="nf">filter</span> <span class="o">=</span> <span class="k">new</span> <span class="n">PayloadSynonymTokenFilter</span><span class="p">(</span>
+    <span class="k">new</span> <span class="n">DummyPayloadTokenFilter</span><span class="p">(</span><span class="n">whitespaceMockTokenizer</span><span class="p">(</span><span class="n">test</span><span class="p">)),</span>
+    <span class="kc">false</span><span class="p">,</span> <span class="kc">false</span><span class="p">,</span> <span class="s">&#34;_&#34;</span>
+  <span class="p">);</span>
 
-  <span class="n">CharTermAttribute</span> <span class="n">termAtt</span> <span class="o">=</span> <span class="n">filter</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="n">CharTermAttribute</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
-  <span class="n">PayloadAttribute</span> <span class="n">payAtt</span> <span class="o">=</span> <span class="n">filter</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="n">PayloadAttribute</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+  <span class="n">CharTermAttribute</span> <span class="nf">termAtt</span> <span class="o">=</span> <span class="n">filter</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="n">CharTermAttribute</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
+  <span class="n">PayloadAttribute</span> <span class="nf">payAtt</span> <span class="o">=</span> <span class="n">filter</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="n">PayloadAttribute</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 
-  <span class="n">filter</span><span class="o">.</span><span class="na">reset</span><span class="o">();</span>
+  <span class="n">filter</span><span class="p">.</span><span class="na">reset</span><span class="p">();</span>
 
-  <span class="n">assertTermEquals</span><span class="o">(</span><span class="s">&#34;A&#34;</span><span class="o">,</span> <span class="n">filter</span><span class="o">,</span> <span class="n">termAtt</span><span class="o">,</span> <span class="n">payAtt</span><span class="o">,</span>
-    <span class="s">&#34;D&#34;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="n">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">)</span>
-  <span class="o">);</span>
-  <span class="n">assertTermEquals</span><span class="o">(</span><span class="s">&#34;D&#34;</span><span class="o">,</span> <span class="n">filter</span><span class="o">,</span> <span class="n">termAtt</span><span class="o">,</span> <span class="n">payAtt</span><span class="o">,</span>
-    <span class="s">&#34;D&#34;</span><span class="o">.</span><span class="na">getBytes</span><span class="o">(</span><span class="n">StandardCharsets</span><span class="o">.</span><span class="na">UTF_8</span><span class="o">)</span>
-  <span class="o">);</span>
-  <span class="n">assertTermEquals</span><span class="o">(</span><span class="s">&#34;B&#34;</span><span class="o">,</span> <span class="n">filter</span><span class="o">,</span> <span class="n">termAtt</span><span class="o">,</span> <span class="n">payAtt</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-  <span class="n">assertTermEquals</span><span class="o">(</span><span class="s">&#34;C&#34;</span><span class="o">,</span> <span class="n">filter</span><span class="o">,</span> <span class="n">termAtt</span><span class="o">,</span> <span class="n">payAtt</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
-  <span class="n">assertFalse</span><span class="o">(</span><span class="n">filter</span><span class="o">.</span><span class="na">incrementToken</span><span class="o">());</span>
+  <span class="n">assertTermEquals</span><span class="p">(</span><span class="s">&#34;A&#34;</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="n">termAtt</span><span class="p">,</span> <span class="n">payAtt</span><span class="p">,</span>
+    <span class="s">&#34;D&#34;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">)</span>
+  <span class="p">);</span>
+  <span class="n">assertTermEquals</span><span class="p">(</span><span class="s">&#34;D&#34;</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="n">termAtt</span><span class="p">,</span> <span class="n">payAtt</span><span class="p">,</span>
+    <span class="s">&#34;D&#34;</span><span class="p">.</span><span class="na">getBytes</span><span class="p">(</span><span class="n">StandardCharsets</span><span class="p">.</span><span class="na">UTF_8</span><span class="p">)</span>
+  <span class="p">);</span>
+  <span class="n">assertTermEquals</span><span class="p">(</span><span class="s">&#34;B&#34;</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="n">termAtt</span><span class="p">,</span> <span class="n">payAtt</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+  <span class="n">assertTermEquals</span><span class="p">(</span><span class="s">&#34;C&#34;</span><span class="p">,</span> <span class="n">filter</span><span class="p">,</span> <span class="n">termAtt</span><span class="p">,</span> <span class="n">payAtt</span><span class="p">,</span> <span class="kc">null</span><span class="p">);</span>
+  <span class="n">assertFalse</span><span class="p">(</span><span class="n">filter</span><span class="p">.</span><span class="na">incrementToken</span><span class="p">());</span>
 
-  <span class="n">filter</span><span class="o">.</span><span class="na">end</span><span class="o">();</span>
-  <span class="n">filter</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
-<span class="o">}</span></code></pre></div>
+  <span class="n">filter</span><span class="p">.</span><span class="na">end</span><span class="p">();</span>
+  <span class="n">filter</span><span class="p">.</span><span class="na">close</span><span class="p">();</span>
+<span class="p">}</span></code></pre></div>
 <p>For the <code>A</code> and <code>D</code> tokens we&rsquo;re also checking that the payload is still there (since we haven&rsquo;t removed it yet), but for <code>B</code> and <code>C</code> there should be no payload at all, so we pass a <code>null</code> parameter to validate this assumption.</p>
 
 <p>Its important to check that the filter returns <code>false</code> when it reaches the end of the <code>TokenStream</code>.</p>
 
 <p>There is still something missing in our test. Let&rsquo;s go back to the couple of figures at the beginning of the post, where we represent the <code>TokenStream</code> as a graph. In those graphs we can see that the token and the synonym should have the same <strong>positional information</strong>. In other words, both terms should be at the same position within the token stream. Or, said in the &ldquo;Lucene jargon&rdquo; the position increment of the synonym should be <code>0</code>. To check this in our test we need to use the <code>PositionIncrementAttribute</code> class:</p>
-<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">PositionIncrementAttribute</span> <span class="n">posIncAtt</span> <span class="o">=</span>
-    <span class="n">filter</span><span class="o">.</span><span class="na">getAttribute</span><span class="o">(</span><span class="n">PositionIncrementAttribute</span><span class="o">.</span><span class="na">class</span><span class="o">);</span>
+<div class="highlight"><pre class="chroma"><code class="language-java" data-lang="java"><span class="n">PositionIncrementAttribute</span> <span class="nf">posIncAtt</span> <span class="o">=</span>
+    <span class="n">filter</span><span class="p">.</span><span class="na">getAttribute</span><span class="p">(</span><span class="n">PositionIncrementAttribute</span><span class="p">.</span><span class="na">class</span><span class="p">);</span>
 
-<span class="n">assertEquals</span><span class="o">(</span><span class="n">0</span><span class="o">,</span> <span class="n">posIncAtt</span><span class="o">.</span><span class="na">getPositionIncrement</span><span class="o">());</span></code></pre></div>
+<span class="n">assertEquals</span><span class="p">(</span><span class="n">0</span><span class="p">,</span> <span class="n">posIncAtt</span><span class="p">.</span><span class="na">getPositionIncrement</span><span class="p">());</span></code></pre></div>
 <p>The default position increment for the rest of the <code>TokenStream</code> should be 1, which we could also test.</p>
 
 <p>Lucene use &ldquo;attributes&rdquo; to store information about a single token. Instead of storing the actual position of a term, Lucene stores the increment of each token. This <code>increment</code> is then used to figure out the actual position of the token in the stream. We can see this information in the analysis page of the Solr Admin UI. This is the internal mechanism that Lucene uses for phrase search and span queries, etc.</p>
@@ -402,7 +407,7 @@ In each occurrence of `domain name server`, the synonym will be used. With our i
     <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is
     licensed by
     <a
-      href="http://creativecommons.org/licenses/by/3.0/"
+      href="https://creativecommons.org/licenses/by/3.0/"
       title="Creative Commons BY 3.0"
       target="_blank"
       >CC 3.0 BY</a

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>grafana on Jorge Luis Betancourt</title>
+    <link>//jorgelbg.me/tags/grafana/</link>
+    <description>Recent content in grafana on Jorge Luis Betancourt</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 17 Feb 2019 14:00:28 +0100</lastBuildDate>
+    
+	<atom:link href="//jorgelbg.me/tags/grafana/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Display the application&#39;s version in your Grafana dashboards</title>
+      <link>//jorgelbg.me/2019/02/display-the-applications-version-in-your-grafana-dashboards/</link>
+      <pubDate>Sun, 17 Feb 2019 14:00:28 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/2019/02/display-the-applications-version-in-your-grafana-dashboards/</guid>
+      <description>At work, we needed a way to monitor the lag of some Kafka consumers reading business-critical topics.
+We ended up using this exporter that provided exactly the metrics that we needed. After adding metadata caching to reduce the load on our Kafka cluster we deployed the exporter to our Nomad cluster and started to build dashboards.
+While I was making changes to the application. I needed not only to check the logs but also to graph the data that the exporter was getting from Kafka, to make sure that my changes were not breaking the normal behavior.</description>
+    </item>
+    
+    <item>
+      <title>Optimize Grafana dashboards with Elasticsearch index aliases</title>
+      <link>//jorgelbg.me/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/</link>
+      <pubDate>Thu, 20 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/2018/12/optimize-grafana-dashboards-with-elasticsearch-index-aliases/</guid>
+      <description>Grafana is a very popular opensource dashboarding solution. Provides support for a long list of storage solutions, including Elasticsearch. Unfortunately, the ES support is not at the same level as the one you get for InfluxDB, for instance. Still, Grafana allows combining in the same dashboard different data sources. It is possible to have a panel fetching data from ES and a different panel fetching data from InfluxDB.
+Grafana ❤️ Elasticsearch Grafana provides stellar support for InfluxDB &amp;amp; Prometheus, among others.</description>
+    </item>
+    
+    <item>
+      <title>Logs and metrics for Small Data</title>
+      <link>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</link>
+      <pubDate>Thu, 23 Aug 2018 05:42:44 +0200</pubDate>
+      
+      <guid>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</guid>
+      <description>This post is a personal comment. I&amp;rsquo;m going to talk about how using some tools thought for &amp;ldquo;Big Data&amp;rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus, you wouldn&amp;rsquo;t think about a system to run your laptop during development, right?
+Logs Concatenating files, parsing logs, are some of those tasks that are part of our daily routine as developers. We type lots of commands (usually connected via pipes |) to accomplish a given goal.</description>
+    </item>
+    
+  </channel>
+</rss>

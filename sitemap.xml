@@ -43,8 +43,38 @@
   </url>
   
   <url>
+    <loc>//jorgelbg.me/tags/elasticsearch/</loc>
+    <lastmod>2019-03-15T13:00:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/machine-learning/</loc>
+    <lastmod>2019-03-15T13:00:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/watcher/</loc>
+    <lastmod>2019-03-15T13:00:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>//jorgelbg.me/2019/02/display-the-applications-version-in-your-grafana-dashboards/</loc>
     <lastmod>2019-02-17T14:00:28+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/grafana/</loc>
+    <lastmod>2019-02-17T14:00:28+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/prometheus/</loc>
+    <lastmod>2019-02-17T14:00:28+01:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -58,8 +88,26 @@
   </url>
   
   <url>
+    <loc>//jorgelbg.me/tags/elk/</loc>
+    <lastmod>2018-08-23T05:42:44+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>//jorgelbg.me/2018/03/solr-contextual-synonyms-with-payloads/</loc>
     <lastmod>2018-03-06T01:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/solr/</loc>
+    <lastmod>2018-03-06T01:00:00+01:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/synonyms/</loc>
+    <lastmod>2018-03-06T01:00:00+01:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>

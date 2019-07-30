@@ -29,5 +29,77 @@
       <description></description>
     </item>
     
+    <item>
+      <title>elasticsearch</title>
+      <link>//jorgelbg.me/tags/elasticsearch/</link>
+      <pubDate>Fri, 15 Mar 2019 13:00:00 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/tags/elasticsearch/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>machine learning</title>
+      <link>//jorgelbg.me/tags/machine-learning/</link>
+      <pubDate>Fri, 15 Mar 2019 13:00:00 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/tags/machine-learning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>watcher</title>
+      <link>//jorgelbg.me/tags/watcher/</link>
+      <pubDate>Fri, 15 Mar 2019 13:00:00 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/tags/watcher/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>grafana</title>
+      <link>//jorgelbg.me/tags/grafana/</link>
+      <pubDate>Sun, 17 Feb 2019 14:00:28 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/tags/grafana/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>prometheus</title>
+      <link>//jorgelbg.me/tags/prometheus/</link>
+      <pubDate>Sun, 17 Feb 2019 14:00:28 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/tags/prometheus/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>elk</title>
+      <link>//jorgelbg.me/tags/elk/</link>
+      <pubDate>Thu, 23 Aug 2018 05:42:44 +0200</pubDate>
+      
+      <guid>//jorgelbg.me/tags/elk/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>solr</title>
+      <link>//jorgelbg.me/tags/solr/</link>
+      <pubDate>Tue, 06 Mar 2018 01:00:00 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/tags/solr/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>synonyms</title>
+      <link>//jorgelbg.me/tags/synonyms/</link>
+      <pubDate>Tue, 06 Mar 2018 01:00:00 +0100</pubDate>
+      
+      <guid>//jorgelbg.me/tags/synonyms/</guid>
+      <description></description>
+    </item>
+    
   </channel>
 </rss>
