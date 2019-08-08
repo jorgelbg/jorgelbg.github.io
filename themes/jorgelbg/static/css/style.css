@@ -50,11 +50,16 @@ section {
   display: block;
 }
 
+aside {
+  max-width: 350px;
+}
+
 body {
   line-height: 1;
   color: #3d4852;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  display: flex;
 }
 
 blockquote,
@@ -163,6 +168,7 @@ nav.main-nav a {
   max-width: 800px;
   margin: 0 auto;
   padding: 60px 40px 100px;
+  flex-grow: 1;
 }
 
 #post-list li:hover {
@@ -536,6 +542,14 @@ h1.archive,
 }
 
 @media screen and (max-width: 540px) {
+  body {
+    flex-direction: column;
+  }
+
+  aside {
+    max-width: 100%;
+  }
+
   #wrapper {
     padding: 20px;
   }
@@ -834,10 +848,6 @@ svg.background {
   svg.background {
     max-height: 300px;
   }
-}
-
-body {
-  letter-spacing: 0.3px;
 }
 
 span.tag {
