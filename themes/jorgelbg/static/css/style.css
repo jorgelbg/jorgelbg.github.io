@@ -60,6 +60,8 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
 blockquote,
@@ -705,8 +707,37 @@ h1 {
   text-align: left;
 }
 
+#social {
+  background: linear-gradient(
+    to left,
+    red 0, 
+    red 33.3%,
+    orange 33.3%, 
+    orange 66.6%, 
+    blue 66.6%, 
+    blue) no-repeat;
+  background-size: 60% 3px ;
+  background-position: top center;
+  padding-top: 20px;
+}
+
+.graph rect {
+  fill: #38B2AC;
+}
+
+.graph text {
+  /* transform: scale(1, -1); */
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+  font-size: 8pt;
+  font-weight: bold;
+}
+
+.symbol svg {
+  width: 22px;
+}
+
 .symbol path {
-  fill: #3d4852;
+  fill: #718096;
 }
 
 .symbol.twitter:hover path {
@@ -804,7 +835,8 @@ nav.main-nav {
 }
 
 .profile {
-  margin-top: -10%;
+  /* margin-top: -10%; */
+  padding-top: 20px;
 }
 
 #header {

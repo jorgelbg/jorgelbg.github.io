@@ -1,7 +1,4 @@
 <footer id="footer">
-  {{ if .Site.Social }}
-  {{ partial "social.html" . }}
-  {{ end }}
   <p class="small">
     {{ with.Site.Params.copyright }}
     {{ . | markdownify }}
@@ -14,11 +11,6 @@
     <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from
     <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is
     licensed by
-    <a
-      href="https://creativecommons.org/licenses/by/3.0/"
-      title="Creative Commons BY 3.0"
-      target="_blank"
-      >CC 3.0 BY</a
-    >
+    <a href="https://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
   </p>
 </footer>
