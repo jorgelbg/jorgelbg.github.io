@@ -52,6 +52,7 @@ section {
 
 aside {
   max-width: 350px;
+  width: 100%;
 }
 
 body {
@@ -60,7 +61,7 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   display: flex;
-  max-width: 1000px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
