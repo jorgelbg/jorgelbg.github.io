@@ -8,33 +8,38 @@
   </url>
   
   <url>
-    <loc>//jorgelbg.me/</loc>
-    <lastmod>2019-05-21T17:00:00+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//jorgelbg.me/posts/</loc>
-    <lastmod>2019-05-21T17:00:00+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//jorgelbg.me/tags/</loc>
-    <lastmod>2019-05-21T17:00:00+02:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>//jorgelbg.me/tags/index-pattern/</loc>
     <lastmod>2019-05-21T17:00:00+02:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/</loc>
+    <lastmod>2019-05-21T17:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>//jorgelbg.me/tags/kibana/</loc>
     <lastmod>2019-05-21T17:00:00+02:00</lastmod>
-    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/posts/</loc>
+    <lastmod>2019-05-21T17:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/</loc>
+    <lastmod>2019-05-21T17:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/elasticsearch/</loc>
+    <lastmod>2019-03-15T13:00:00+01:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//jorgelbg.me/tags/machine-learning/</loc>
+    <lastmod>2019-03-15T13:00:00+01:00</lastmod>
   </url>
   
   <url>
@@ -43,21 +48,8 @@
   </url>
   
   <url>
-    <loc>//jorgelbg.me/tags/elasticsearch/</loc>
-    <lastmod>2019-03-15T13:00:00+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>//jorgelbg.me/tags/machine-learning/</loc>
-    <lastmod>2019-03-15T13:00:00+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>//jorgelbg.me/tags/watcher/</loc>
     <lastmod>2019-03-15T13:00:00+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -68,13 +60,11 @@
   <url>
     <loc>//jorgelbg.me/tags/grafana/</loc>
     <lastmod>2019-02-17T14:00:28+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>//jorgelbg.me/tags/prometheus/</loc>
     <lastmod>2019-02-17T14:00:28+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
@@ -83,14 +73,18 @@
   </url>
   
   <url>
+    <loc>//jorgelbg.me/tags/elk/</loc>
+    <lastmod>2018-08-23T05:42:44+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</loc>
     <lastmod>2018-08-23T05:42:44+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//jorgelbg.me/tags/elk/</loc>
-    <lastmod>2018-08-23T05:42:44+02:00</lastmod>
-    <priority>0</priority>
+    <loc>//jorgelbg.me/tags/solr/</loc>
+    <lastmod>2018-03-06T01:00:00+01:00</lastmod>
   </url>
   
   <url>
@@ -99,20 +93,12 @@
   </url>
   
   <url>
-    <loc>//jorgelbg.me/tags/solr/</loc>
-    <lastmod>2018-03-06T01:00:00+01:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>//jorgelbg.me/tags/synonyms/</loc>
     <lastmod>2018-03-06T01:00:00+01:00</lastmod>
-    <priority>0</priority>
   </url>
   
   <url>
     <loc>//jorgelbg.me/categories/</loc>
-    <priority>0</priority>
   </url>
   
 </urlset>
