@@ -18,7 +18,7 @@ pygmentsUseClasses = true
 [params]
 	name = "Jorge Luis Betancourt"
 	description = "Computo Ergo Sum"
-	bio = "Backend Engineer. I play with Search, Relevance and Observability. "
+	bio = "Backend Engineer. I play with Search, Relevance and Observability."
 	# Enter optionally your twitter account
 	twitter = "jorgelbg"
 	enableRSS = true
