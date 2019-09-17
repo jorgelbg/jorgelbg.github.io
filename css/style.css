@@ -421,7 +421,7 @@ img {
 }
 
 .post {
-  margin: 80px 0 0;
+  margin: 3rem 0 0;
 }
 
 #post-meta {
@@ -674,10 +674,6 @@ body {
 
 .post h2 {
   margin: 30px 0 15px;
-}
-
-.post {
-  margin-top: 0;
 }
 
 img[src$="#center"] {
