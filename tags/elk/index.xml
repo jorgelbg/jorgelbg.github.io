@@ -1,25 +1,2 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>elk on Jorge Luis Betancourt</title>
-    <link>//jorgelbg.me/tags/elk/</link>
-    <description>Recent content in elk on Jorge Luis Betancourt</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Thu, 23 Aug 2018 05:42:44 +0200</lastBuildDate>
-    
-	<atom:link href="//jorgelbg.me/tags/elk/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Logs and metrics for Small Data</title>
-      <link>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</link>
-      <pubDate>Thu, 23 Aug 2018 05:42:44 +0200</pubDate>
-      
-      <guid>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</guid>
-      <description>This post is a personal comment. I&amp;rsquo;m going to talk about how using some tools thought for &amp;ldquo;Big Data&amp;rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus, you wouldn&amp;rsquo;t think about a system to run your laptop during development, right?
-Logs Concatenating files, parsing logs, are some of those tasks that are part of our daily routine as developers. We type lots of commands (usually connected via pipes |) to accomplish a given goal.</description>
-    </item>
-    
-  </channel>
-</rss>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>elk on Jorge Luis Betancourt</title><link>//jorgelbg.me/tags/elk/</link><description>Recent content in elk on Jorge Luis Betancourt</description><generator>Hugo -- gohugo.io</generator><language>en-us</language><lastBuildDate>Thu, 23 Aug 2018 05:42:44 +0200</lastBuildDate><atom:link href="//jorgelbg.me/tags/elk/index.xml" rel="self" type="application/rss+xml"/><item><title>Logs and metrics for Small Data</title><link>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</link><pubDate>Thu, 23 Aug 2018 05:42:44 +0200</pubDate><guid>//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/</guid><description>This post is a personal comment. I&amp;rsquo;m going to talk about how using some tools thought for &amp;ldquo;Big Data&amp;rdquo;™ makes sense for common development tasks. If you hear someone talking about ELK, Grafana or Prometheus, you wouldn&amp;rsquo;t think about a system to run your laptop during development, right?
+Logs Concatenating files, parsing logs, are some of those tasks that are part of our daily routine as developers. We type lots of commands (usually connected via pipes |) to accomplish a given goal.</description></item></channel></rss>

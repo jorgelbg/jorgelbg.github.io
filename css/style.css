@@ -107,6 +107,7 @@ pre {
 
 html {
   background-color: #f7fafc !important;
+  border-top: 10px solid #38b2ac;
 }
 
 body {

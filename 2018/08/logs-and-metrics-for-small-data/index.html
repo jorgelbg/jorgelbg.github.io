@@ -1,324 +1,76 @@
-<!DOCTYPE html>
-<html lang="en-us">
-<head>
-<link rel="preload" href="//jorgelbg.me/css/style.css" as="style">
-<link rel="stylesheet" href="//jorgelbg.me/css/style.css" media="print" onload="this.media='all'">
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="author" content="Jorge Luis Betancourt">
-<meta name="description" content="Computo Ergo Sum">
-<meta name="generator" content="Hugo 0.58.2" />
-<title>Logs and metrics for Small Data</title>
-<link rel="shortcut icon" href="//jorgelbg.me/images/favicon.ico">
-<link rel="dns-prefetch" href="//www.google-analytics.com/" />
-
-
-
-<link href="//jorgelbg.me/index.xml" rel="alternate" type="application/rss+xml" title="Jorge Luis Betancourt" />
-
-
-<meta property="og:title" content="Logs and metrics for Small Data" />
-<meta property="og:description" content="Use Docker, ELK stack, Prometheus and Grafana to solve common problems in your local environment." />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/" />
-<meta property="article:published_time" content="2018-08-23T05:42:44+02:00" />
-<meta property="article:modified_time" content="2018-08-23T05:42:44+02:00" />
-
-
-<meta itemprop="name" content="Logs and metrics for Small Data">
-<meta itemprop="description" content="Use Docker, ELK stack, Prometheus and Grafana to solve common problems in your local environment.">
-
-
-<meta itemprop="datePublished" content="2018-08-23T05:42:44&#43;02:00" />
-<meta itemprop="dateModified" content="2018-08-23T05:42:44&#43;02:00" />
-<meta itemprop="wordCount" content="1099">
-
-
-
-<meta itemprop="keywords" content="prometheus,grafana,elk," />
-
-<meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="Logs and metrics for Small Data"/>
-<meta name="twitter:description" content="Use Docker, ELK stack, Prometheus and Grafana to solve common problems in your local environment."/>
-<meta name="twitter:site" content="@https://twitter.com/jorgelbg"/>
-
-
-</head>
-<body class="">
-    
-    <section id="wrapper">
-        <nav class="main-nav">
-	
-		<a href='//jorgelbg.me'>
-			
-			
-			
-			
-		</a>
-	
-
-	
-
-	
-</nav>
-
-        
-<article class="post">
-    <header>
-        <h1>
-            <a href="/2018/08/logs-and-metrics-for-small-data/">
-            <svg width="30" xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 483 483"><path d="M255 209c-5 6-5 14 0 19 22 22 22 58 0 80L140 423a56 56 0 0 1-79 0l-18-17a56 56 0 0 1 0-80l115-115c6-5 6-14 1-19s-14-5-20 0L24 307a83 83 0 0 0 0 118l18 17a83 83 0 0 0 117 0l115-115c33-32 33-85 0-118-5-5-13-5-19 0z"/><path d="M459 58l-18-17a83 83 0 0 0-117 0L209 156a83 83 0 0 0 0 118c5 5 13 5 19 0s5-14 0-20a56 56 0 0 1 0-79L343 60c22-22 57-22 79 0l17 17c22 22 22 58 0 80L324 272c-5 5-5 13 0 19 3 2 7 4 10 4s7-1 9-4l115-115a83 83 0 0 0 1-118z"/></svg>
-            Logs and metrics for Small Data
-            </a>
-        </h1>
-        <h2 class="headline">
-            August 23, 2018
-            <br>
-            <br>
-            
-            
-                
-                <span class="tag">
-                    <svg fill="#718096" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path class="heroicon-ui" d="M2.59 13.41A1.98 1.98 0 0 1 2 12V7a5 5 0 0 1 5-5h4.99c.53 0 1.04.2 1.42.59l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82 0l-8-8zM20 12l-8-8H7a3 3 0 0 0-3 3v5l8 8 8-8zM7 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
-                    <a style="margin-left: 10px;" href="//jorgelbg.me/tags/prometheus">prometheus</a>
-                </span>
-                
-                <span class="tag">
-                    <svg fill="#718096" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path class="heroicon-ui" d="M2.59 13.41A1.98 1.98 0 0 1 2 12V7a5 5 0 0 1 5-5h4.99c.53 0 1.04.2 1.42.59l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82 0l-8-8zM20 12l-8-8H7a3 3 0 0 0-3 3v5l8 8 8-8zM7 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
-                    <a style="margin-left: 10px;" href="//jorgelbg.me/tags/grafana">grafana</a>
-                </span>
-                
-                <span class="tag">
-                    <svg fill="#718096" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path class="heroicon-ui" d="M2.59 13.41A1.98 1.98 0 0 1 2 12V7a5 5 0 0 1 5-5h4.99c.53 0 1.04.2 1.42.59l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82 0l-8-8zM20 12l-8-8H7a3 3 0 0 0-3 3v5l8 8 8-8zM7 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>
-                    <a style="margin-left: 10px;" href="//jorgelbg.me/tags/elk">elk</a>
-                </span>
-                
-            
-            
-        </h2>
-    </header>
-    <section id="post-body">
-        
-
-<p>This post is a personal comment. I&rsquo;m going to talk about how using some tools
+<!doctype html><html lang=en-us><head><link rel=preload href=//jorgelbg.me/css/style.css as=style><link rel=stylesheet href=//jorgelbg.me/css/style.css media=print onload="this.media='all'"><meta charset=utf-8><meta http-equiv=x-ua-compatible content="IE=edge,chrome=1"><meta name=viewport content="width=device-width,initial-scale=1"><meta name=author content="Jorge Luis Betancourt"><meta name=description content="Computo Ergo Sum"><meta name=generator content="Hugo 0.58.3"><title>Logs and metrics for Small Data</title><link rel="shortcut icon" href=//jorgelbg.me/images/favicon.ico><link rel=dns-prefetch href=//www.google-analytics.com/><link href=//jorgelbg.me/index.xml rel=alternate type=application/rss+xml title="Jorge Luis Betancourt"><meta property=og:title content="Logs and metrics for Small Data"><meta property=og:description content="Use Docker, ELK stack, Prometheus and Grafana to solve common problems in your local environment."><meta property=og:type content=article><meta property=og:url content=//jorgelbg.me/2018/08/logs-and-metrics-for-small-data/><meta property=article:published_time content=2018-08-23T05:42:44+02:00><meta property=article:modified_time content=2018-08-23T05:42:44+02:00><meta itemprop=name content="Logs and metrics for Small Data"><meta itemprop=description content="Use Docker, ELK stack, Prometheus and Grafana to solve common problems in your local environment."><meta itemprop=datePublished content=2018-08-23T05:42:44&#43;02:00><meta itemprop=dateModified content=2018-08-23T05:42:44&#43;02:00><meta itemprop=wordCount content=1099><meta itemprop=keywords content=prometheus,grafana,elk,><meta name=twitter:card content=summary><meta name=twitter:title content="Logs and metrics for Small Data"><meta name=twitter:description content="Use Docker, ELK stack, Prometheus and Grafana to solve common problems in your local environment."><meta name=twitter:site content=@https://twitter.com/jorgelbg></head><body><section id=wrapper><nav class=main-nav><a href=//jorgelbg.me></a></nav><article class=post><header><h1><a href=/2018/08/logs-and-metrics-for-small-data/><svg width="30" xmlns="http://www.w3.org/2000/svg" version="1" viewBox="0 0 483 483"><path d="M255 209c-5 6-5 14 0 19 22 22 22 58 0 80L140 423a56 56 0 0 1-79 0l-18-17a56 56 0 0 1 0-80l115-115c6-5 6-14 1-19s-14-5-20 0L24 307a83 83 0 0 0 0 118l18 17a83 83 0 0 0 117 0l115-115c33-32 33-85 0-118-5-5-13-5-19 0z"/><path d="M459 58l-18-17a83 83 0 0 0-117 0L209 156a83 83 0 0 0 0 118c5 5 13 5 19 0s5-14 0-20a56 56 0 0 1 0-79L343 60c22-22 57-22 79 0l17 17c22 22 22 58 0 80L324 272c-5 5-5 13 0 19 3 2 7 4 10 4s7-1 9-4l115-115a83 83 0 0 0 1-118z"/></svg>Logs and metrics for Small Data</a></h1><h2 class=headline>August 23, 2018<br><br><span class=tag><svg fill="#718096" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path class="heroicon-ui" d="M2.59 13.41A1.98 1.98.0 0 1 2 12V7a5 5 0 0 1 5-5h4.99c.53.0 1.04.2 1.42.59l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82.0l-8-8zM20 12l-8-8H7a3 3 0 0 0-3 3v5l8 8 8-8zM7 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg><a style=margin-left:10px href=//jorgelbg.me/tags/prometheus>prometheus</a></span>
+<span class=tag><svg fill="#718096" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path class="heroicon-ui" d="M2.59 13.41A1.98 1.98.0 0 1 2 12V7a5 5 0 0 1 5-5h4.99c.53.0 1.04.2 1.42.59l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82.0l-8-8zM20 12l-8-8H7a3 3 0 0 0-3 3v5l8 8 8-8zM7 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg><a style=margin-left:10px href=//jorgelbg.me/tags/grafana>grafana</a></span>
+<span class=tag><svg fill="#718096" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16"><path class="heroicon-ui" d="M2.59 13.41A1.98 1.98.0 0 1 2 12V7a5 5 0 0 1 5-5h4.99c.53.0 1.04.2 1.42.59l8 8a2 2 0 0 1 0 2.82l-8 8a2 2 0 0 1-2.82.0l-8-8zM20 12l-8-8H7a3 3 0 0 0-3 3v5l8 8 8-8zM7 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg><a style=margin-left:10px href=//jorgelbg.me/tags/elk>elk</a></span></h2></header><section id=post-body><p>This post is a personal comment. I&rsquo;m going to talk about how using some tools
 thought for &ldquo;Big Data&rdquo;™ makes sense for common development tasks. If you hear
 someone talking about ELK, Grafana or Prometheus, you wouldn&rsquo;t think about a
-system to run your laptop during development, right?</p>
-
-<h2 id="logs">Logs</h2>
-
-<p>Concatenating files, parsing logs, are some of those tasks that are part of our
+system to run your laptop during development, right?</p><h2 id=logs>Logs</h2><p>Concatenating files, parsing logs, are some of those tasks that are part of our
 daily routine as developers. We type lots of commands (usually connected via
-pipes <code>|</code>) to accomplish a given goal.</p>
-
-<p>Of course, I love my terminal. I spend a great amount of time in the console:
-committing code,  running tests, etc. I guess that typing something like:</p>
-
-<pre><code>$ cat ../../fixtures/json/payload1.json | tr -d '\n' | gsed 's/]}/]}\n/g' | phony --tick 100ms | ./main
-</code></pre>
-
-<p>comes natural to a lot of developers out there.</p>
-
-<p>A few days ago, in my spare time, I was troubleshooting a bug with a Java
-application. I was debugging a local run of a crawl cycle using <a href="http://nutch.apache.org/">Apache
+pipes <code>|</code>) to accomplish a given goal.</p><p>Of course, I love my terminal. I spend a great amount of time in the console:
+committing code, running tests, etc. I guess that typing something like:</p><pre><code>$ cat ../../fixtures/json/payload1.json | tr -d '\n' | gsed 's/]}/]}\n/g' | phony --tick 100ms | ./main
+</code></pre><p>comes natural to a lot of developers out there.</p><p>A few days ago, in my spare time, I was troubleshooting a bug with a Java
+application. I was debugging a local run of a crawl cycle using <a href=http://nutch.apache.org/>Apache
 Nutch</a>. My normal workflow involves several panels in
-my terminal (iTerm) and a lot of <code>cat</code>, <code>grep</code>, <code>sed</code>, etc.</p>
-
-<p>At some point, I realized that the events I was looking for in the logs were
+my terminal (iTerm) and a lot of <code>cat</code>, <code>grep</code>, <code>sed</code>, etc.</p><p>At some point, I realized that the events I was looking for in the logs were
 spread in several log files and in different positions. Finding those events was
 not going to be easy. I needed to not only find one specific line, but the cases
-happening around that specific line.</p>
-
-<p>And, it hit me. I have to do this several times a day at my normal job. As part
+happening around that specific line.</p><p>And, it hit me. I have to do this several times a day at my normal job. As part
 of the Web performance team, we need to watch graphs and find specific events in
 the logs of hundreds of servers. Of course, dealing with that amount of data
-requires some infrastructure. We have an <a href="https://www.elastic.co/elk-stack">ELK</a>
+requires some infrastructure. We have an <a href=https://www.elastic.co/elk-stack>ELK</a>
 cluster that holds several TBs of logs, and we use
-<a href="https://www.elastic.co/products/kibana">Kibana</a> on a daily basis for this very
+<a href=https://www.elastic.co/products/kibana>Kibana</a> on a daily basis for this very
 purpose. It has to be like this, no one would think of maintaining an
-application at this scale without a centralized logging system.</p>
-
-<p>Well, why couldn’t I use the same setup in my project? Right? Turns out that
+application at this scale without a centralized logging system.</p><p>Well, why couldn’t I use the same setup in my project? Right? Turns out that
 replicating a similar setup on my laptop wasn’t that difficult. Docker and the
-fact that Elastic provides all its products as Docker images was a blessing.</p>
-
-<p>I only needed to send the logs to Elasticsearch, then search the desired
-information using Kibana.</p>
-
-<p>I used Logstash to ingest the logs, you need to figure out how you want your
-logs stored in Elasticsearch. It&rsquo;s possible that you&rsquo;ll (<a href="https://sematext.com/blog/handling-stack-traces-with-logstash/">need to deal with
+fact that Elastic provides all its products as Docker images was a blessing.</p><p>I only needed to send the logs to Elasticsearch, then search the desired
+information using Kibana.</p><p>I used Logstash to ingest the logs, you need to figure out how you want your
+logs stored in Elasticsearch. It&rsquo;s possible that you&rsquo;ll (<a href=https://sematext.com/blog/handling-stack-traces-with-logstash/>need to deal with
 Java Stack traces</a>.
-There are plenty of resources on how to do this (and more) online.</p>
-
-<p>Now it was only a matter of running one more container: Kibana. Which allowed
-using the full-text search capabilities of Elasticsearch.</p>
-
-<p>The best of all: Although I spent some more minutes settings things up, no more
+There are plenty of resources on how to do this (and more) online.</p><p>Now it was only a matter of running one more container: Kibana. Which allowed
+using the full-text search capabilities of Elasticsearch.</p><p>The best of all: Although I spent some more minutes settings things up, no more
 than 30 minutes, for sure. The setup is already there for the next time that I
-need to use it.</p>
-
-<p>It’s amazing how Docker have allowed us to run these tools without any complex
+need to use it.</p><p>It’s amazing how Docker have allowed us to run these tools without any complex
 installation. Could I’ve done the same using the good old terminal commands?
 Definitively! But sometimes is easier to use the same setup that you have for
-dealing with hundreds of servers.</p>
-
-<h2 id="metrics">Metrics</h2>
-
-<p>The second part of this post is about metrics. Recently I’ve been working on a
+dealing with hundreds of servers.</p><h2 id=metrics>Metrics</h2><p>The second part of this post is about metrics. Recently I’ve been working on a
 very interesting project at work. Enough to say that involves HTTP connections
-and payloads.</p>
-
-<p>In the beginning, we focus on building the prototype and validating the initial
+and payloads.</p><p>In the beginning, we focus on building the prototype and validating the initial
 idea. Then, we structured the code as a reusable library. But, at some point
-in-between we were curious to see how our little experiment was behaving.</p>
-
-<p>Since this was only to please our curiosity we didn’t want to spend a lot of
-time on it.  What we needed was at the core a histogram, so we wrote a little
+in-between we were curious to see how our little experiment was behaving.</p><p>Since this was only to please our curiosity we didn’t want to spend a lot of
+time on it. What we needed was at the core a histogram, so we wrote a little
 piece of code. Calculate the length of the payload and store that as a key of
 the map and a counter as the value. At the end of our test, we printed the map
-to the terminal.</p>
-
-<p>It’s no coincidence that I’m in the Web Performance Team 🤔 we are responsible
+to the terminal.</p><p>It’s no coincidence that I’m in the Web Performance Team 🤔 we are responsible
 for looking at graphs the entire day. I like graphs! I wanted to see some
-graphs!</p>
-
-<p>On a more serious note, although the map allowed us to see the distribution of
+graphs!</p><p>On a more serious note, although the map allowed us to see the distribution of
 the payload size, we still lacked one thing. How was our code behaving <em>over time</em>?
 For this, we changed our implementation and printed the first <code>N</code> samples to the
 terminal. Of course, at some point, I just copied the numbers into Excel and
-created a couple of graphs (I mentioned that I like graphs right?).</p>
-
-<p>After we implemented the core feature of the application, I still wanted to see
+created a couple of graphs (I mentioned that I like graphs right?).</p><p>After we implemented the core feature of the application, I still wanted to see
 some &ldquo;real time&rdquo; graphs. I mean, the Excel visualization was great, but it was
-not very interactive.</p>
-
-<p>At this point again, I realized that we’ve already solved this problem on a
+not very interactive.</p><p>At this point again, I realized that we’ve already solved this problem on a
 larger scale. We use InfluxDB &amp; Grafana for creating dashboards and monitoring
 our entire infrastructure &amp; application. More recently we’ve been using
-Prometheus and the new pull approach as well.</p>
-
-<p>I didn’t want to send the metrics of my local application into our production
+Prometheus and the new pull approach as well.</p><p>I didn’t want to send the metrics of my local application into our production
 InfluxDB server. There was no good reason to do so. I ended up replicating our
-“production” environment on my laptop for my personal use.</p>
-
-<p>A simple <code>docker-compose.yml</code> file with only 57 lines and a few default config
+“production” environment on my laptop for my personal use.</p><p>A simple <code>docker-compose.yml</code> file with only 57 lines and a few default config
 files in my local repo were enough. Ok, I ended up wanting to try the new
-<a href="https://promcon.io/2018-munich/talks/explore-your-prometheus-data-in-grafana/">Grafana Explore UI for
+<a href=https://promcon.io/2018-munich/talks/explore-your-prometheus-data-in-grafana/>Grafana Explore UI for
 Prometheus</a>
-so I added one more config file for Grafana.</p>
-
-<p>A few more lines to instrument my code with
-<a href="https://github.com/prometheus/client_golang">client_golang</a> and that was it.</p>
-
-<p>The best part, beautiful interactive graphs, that are a pleasure to use. And
-they&rsquo;re very useful for spotting problems.</p>
-
-<p><img src="/images/logs-and-metrics/grafana-prometheus.png" alt="Grafana dashboard with Prometheus
-datasource" title="Grafana dashboard" /></p>
-
-<h2 id="tl-dr">TL;DR</h2>
-
-<p>We often hear how good Docker is for replicating your local environment in
+so I added one more config file for Grafana.</p><p>A few more lines to instrument my code with
+<a href=https://github.com/prometheus/client_golang>client_golang</a> and that was it.</p><p>The best part, beautiful interactive graphs, that are a pleasure to use. And
+they&rsquo;re very useful for spotting problems.</p><p><img src=/images/logs-and-metrics/grafana-prometheus.png alt="Grafana dashboard with Prometheus
+datasource" title="Grafana dashboard"></p><h2 id=tl-dr>TL;DR</h2><p>We often hear how good Docker is for replicating your local environment in
 production. Or how it can revolutionize your CI/CD pipeline. We also heard about
-the new version of &ldquo;it works on my machine&rdquo; 😂</p>
-
-<blockquote class="twitter-tweet"><p lang="en" dir="ltr">Before DevOps / After DevOps<a href="https://twitter.com/hashtag/comic?src=hash&amp;ref_src=twsrc%5Etfw">#comic</a> <a href="https://twitter.com/hashtag/devops?src=hash&amp;ref_src=twsrc%5Etfw">#devops</a> <a href="https://twitter.com/hashtag/sysadmin?src=hash&amp;ref_src=twsrc%5Etfw">#sysadmin</a><a href="https://t.co/SQjVLTcV6Z">https://t.co/SQjVLTcV6Z</a> <a href="https://t.co/gVwcvcv2h1">pic.twitter.com/gVwcvcv2h1</a></p>&mdash; turnoff.us (@turnoff_us) <a href="https://twitter.com/turnoff_us/status/917564505416073216?ref_src=twsrc%5Etfw">October 10, 2017</a></blockquote>
-<script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-
-<p>And of course, it&rsquo;s true, but sometimes we forget that it also works the other
+the new version of &ldquo;it works on my machine&rdquo; 😂</p><blockquote class=twitter-tweet><p lang=en dir=ltr>Before DevOps / After DevOps<a href="https://twitter.com/hashtag/comic?src=hash&amp;ref_src=twsrc%5Etfw">#comic</a> <a href="https://twitter.com/hashtag/devops?src=hash&amp;ref_src=twsrc%5Etfw">#devops</a> <a href="https://twitter.com/hashtag/sysadmin?src=hash&amp;ref_src=twsrc%5Etfw">#sysadmin</a><a href=https://t.co/SQjVLTcV6Z>https://t.co/SQjVLTcV6Z</a> <a href=https://t.co/gVwcvcv2h1>pic.twitter.com/gVwcvcv2h1</a></p>&mdash; turnoff.us (@turnoff_us) <a href="https://twitter.com/turnoff_us/status/917564505416073216?ref_src=twsrc%5Etfw">October 10, 2017</a></blockquote><script async src=https://platform.twitter.com/widgets.js></script><p>And of course, it&rsquo;s true, but sometimes we forget that it also works the other
 way around. Docker allows developers to apply already proven solutions to
-problems in a local environment.</p>
-
-<p>Tools like Elasticsearch, Logstash, and Kibana can deal with huge amounts of
+problems in a local environment.</p><p>Tools like Elasticsearch, Logstash, and Kibana can deal with huge amounts of
 data. But, can also work for &ldquo;small data&rdquo; problems, like debugging some issues
-in your local environment.</p>
-
-<p>At the same time, Prometheus, InfluxDB, and Grafana have made storing and
+in your local environment.</p><p>At the same time, Prometheus, InfluxDB, and Grafana have made storing and
 visualizing metrics a very easy task. Even for that small application that
-you&rsquo;re developing on your laptop.</p>
-
-    </section>
-</article>
-
-<footer id="post-meta" class="clearfix">
-    <svg class="avatar" width="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-        <path fill="#CBD5E0" d="M20.3 12.04l1.01 3a1 1 0 0 1-1.26 1.27l-3.01-1a7 7 0 1 1 3.27-3.27zM11 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"></path>
-        <path fill="#4A5568" d="M15.88 17.8a7 7 0 0 1-8.92 2.5l-3 1.01a1 1 0 0 1-1.27-1.26l1-3.01A6.97 6.97 0 0 1 5 9.1a9 9 0 0 0 10.88 8.7z"></path>
-    </svg>
-    <a href="https://twitter.com/jorgelbg">
-    
-    <div>
-        
-        
-        <span class="dark">Want to leave a comment?</span>
-        <span>Drop me a message on Twitter @jorgelbg </span>
-    </div>
-    </a>
-    <section id="sharing">
-        <a class="twitter" target="_blank" href="https://twitter.com/intent/tweet?text=%2f%2fjorgelbg.me%2f2018%2f08%2flogs-and-metrics-for-small-data%2f - Logs%20and%20metrics%20for%20Small%20Data by @jorgelbg"><span class="icon-twitter"> tweet</span></a>
-
-
-
-    </section>
-</footer>
-
-
-
-<ul id="post-list" class="archive readmore">
-    <h3>Read more</h3>
-
-    
-    
-    
-        <li>
-            <a href="/2019/05/how-to-rename-index-patterns-in-kibana/">How to rename index patterns in Kibana<aside class="dates">May 21 2019</aside></a>
-        </li>
-    
-        <li>
-            <a href="/2019/03/useful-alerts-with-elastic-watcher-machine-learning/">Useful alerts with Elastic Watcher &amp; Machine Learning<aside class="dates">Mar 15 2019</aside></a>
-        </li>
-    
-        <li>
-            <a href="/2019/02/display-the-applications-version-in-your-grafana-dashboards/">Display the application&#39;s version in your Grafana dashboards<aside class="dates">Feb 17 2019</aside></a>
-        </li>
-    
-</ul>
-
-
-        <footer id="footer">
-  <p class="small">
-    
-    © Copyright 2019 Jorge Luis Betancourt
-    
-  </p>
-  <p class="small cc">
-    Icons made by
-    <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from
-    <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is
-    licensed by
-    <a href="https://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
-  </p>
-</footer>
-
-    </section>
-    
-
-
-<script type="application/javascript">
-var doNotTrack = false;
-if (!doNotTrack) {
-	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-	ga('create', 'UA-115201846-1', 'auto');
-	
-	ga('send', 'pageview');
-}
-</script>
-
-
-</body>
-</html>
+you&rsquo;re developing on your laptop.</p></section></article><footer id=post-meta class=clearfix><svg class="avatar" width="50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#cbd5e0" d="M20.3 12.04l1.01 3a1 1 0 0 1-1.26 1.27l-3.01-1a7 7 0 1 1 3.27-3.27zM11 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm3 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/><path fill="#4a5568" d="M15.88 17.8a7 7 0 0 1-8.92 2.5l-3 1.01a1 1 0 0 1-1.27-1.26l1-3.01A6.97 6.97.0 0 1 5 9.1a9 9 0 0 0 10.88 8.7z"/></svg><a href=https://twitter.com/jorgelbg><div><span class=dark>Want to leave a comment?</span>
+<span>Drop me a message on Twitter @jorgelbg</span></div></a><section id=sharing><a class=twitter target=_blank href="https://twitter.com/intent/tweet?text=%2f%2fjorgelbg.me%2f2018%2f08%2flogs-and-metrics-for-small-data%2f - Logs%20and%20metrics%20for%20Small%20Data by @jorgelbg"><span class=icon-twitter>tweet</span></a></section></footer><ul id=post-list class="archive readmore"><h3>Read more</h3><li><a href=/2019/05/how-to-rename-index-patterns-in-kibana/>How to rename index patterns in Kibana<aside class=dates>May 21 2019</aside></a></li><li><a href=/2019/03/useful-alerts-with-elastic-watcher-machine-learning/>Useful alerts with Elastic Watcher &amp; Machine Learning<aside class=dates>Mar 15 2019</aside></a></li><li><a href=/2019/02/display-the-applications-version-in-your-grafana-dashboards/>Display the application&#39;s version in your Grafana dashboards<aside class=dates>Feb 17 2019</aside></a></li></ul><footer id=footer><p class=small>© Copyright 2019 Jorge Luis Betancourt</p><p class="small cc">Icons made by
+<a href=https://www.freepik.com/ title=Freepik>Freepik</a> from
+<a href=https://www.flaticon.com/ title=Flaticon>www.flaticon.com</a> is
+licensed by
+<a href=https://creativecommons.org/licenses/by/3.0/ title="Creative Commons BY 3.0" target=_blank>CC 3.0 BY</a></p></footer></section><script type=application/javascript>var doNotTrack=false;if(!doNotTrack){(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');ga('create','UA-115201846-1','auto');ga('send','pageview');}</script></body></html>
