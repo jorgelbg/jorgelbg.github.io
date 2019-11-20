@@ -117,6 +117,10 @@ body {
   min-height: 100vh;
 }
 
+.first svg {
+  color: #38b2ac;
+}
+
 body.nf {
   height: 100vh;
 }
@@ -734,10 +738,6 @@ h1 {
   background-size: 60% 3px;
   background-position: top center;
   padding-top: 20px;
-}
-
-.graph rect {
-  fill: #38b2ac;
 }
 
 .graph text {
