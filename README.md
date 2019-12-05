@@ -1,5 +1,6 @@
 # jorgelbg.github.io
 
-[![CircleCI](https://circleci.com/gh/jorgelbg/jorgelbg.github.io/tree/hugo.svg?style=svg)](https://circleci.com/gh/jorgelbg/jorgelbg.github.io/tree/hugo)
+[![Actions Status](https://github.com/jorgelbg/jorgelbg.github.io/workflows/github%20pages/badge.svg)](https://github.com/jorgelbg/jorgelbg.github.io/actions)
+
 
 Personal site
