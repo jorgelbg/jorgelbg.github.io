@@ -55,6 +55,22 @@ aside {
   width: 100%;
 }
 
+html {
+  background-color: #f7fafc;
+  border-top: 10px solid #38b2ac;
+}
+
+@media (prefers-color-scheme: dark) {
+  html,
+  body {
+    background-color: #2e2e2e;
+  }
+
+  article svg {
+    filter: invert(100%);
+  }
+}
+
 body {
   --text-color: #3d4852;
   --light-text-color: #728597;
@@ -112,11 +128,6 @@ p,
 .post-body ul,
 pre {
   margin-bottom: 20px;
-}
-
-html {
-  background-color: #f7fafc !important;
-  border-top: 10px solid #38b2ac;
 }
 
 .first svg {
@@ -353,7 +364,7 @@ pre {
 }
 
 .highlight pre {
-  background-color: #2d3748 !important;
+  background-color: #2d3748;
 }
 
 img {
@@ -841,7 +852,7 @@ footer p.small {
 }
 
 nav.main-nav {
-  padding-top: 0 !important;
+  padding-top: 0;
 }
 
 .profile #avatar {
