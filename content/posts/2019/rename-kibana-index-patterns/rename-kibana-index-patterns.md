@@ -137,8 +137,8 @@ the Saved Objects UI. Sadly this is not the case.
 
 I've oriented this post around using Kibana since, the [import
 API](https://www.elastic.co/guide/en/kibana/current/dashboard-import-api-import.html)
-for exporting and importing the saved objects. The same is posible by using the
-Kibana API.
+for exporting and importing the saved objects validates the data. The same is
+posible by using the Elasticsearch API (modifying the documents directly).
 
 {{< info >}}
 

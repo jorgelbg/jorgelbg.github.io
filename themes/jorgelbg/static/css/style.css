@@ -87,6 +87,7 @@ body {
   :root {
     --background-color: #2e2e2e;
     --text-color: #cbd5e0;
+    --light-gray: #4a5568;
   }
 
   article svg {
