@@ -838,7 +838,7 @@ footer p.small {
   -ms-transition: all 0.5s ease;
   -o-transition: all 0.5s ease;
   transition: all 0.5s ease;
-  margin: 10px 0 35px;
+  margin-bottom: 10px;
 }
 
 .post header:hover h2 {
@@ -944,4 +944,13 @@ span.tag > a {
 
 .page-404 svg {
   width: 100%;
+}
+
+header .last-edited {
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans",
+    "Helvetica Neue", sans-serif;
+  text-align: left;
+  font-size: 10pt;
+  text-transform: uppercase;
+  margin-bottom: 30px;
 }
