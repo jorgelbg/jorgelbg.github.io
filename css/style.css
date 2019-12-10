@@ -61,11 +61,12 @@ aside {
   --main-color: #5a67d8;
   --light-gray: #eee;
   --background-color: white;
+  --green: #38b2ac;
 }
 
 html {
   background-color: var(--background-color);
-  border-top: 10px solid #38b2ac;
+  border-top: 10px solid var(--main-color);
 }
 
 body {
@@ -88,6 +89,7 @@ body {
     --background-color: #2e2e2e;
     --text-color: #cbd5e0;
     --light-gray: #4a5568;
+    --main-color: #a3bffa;
   }
 
   article svg {
@@ -145,7 +147,7 @@ pre {
 }
 
 .first svg {
-  color: #38b2ac;
+  color: var(--main-color);
 }
 
 body.nf {
@@ -931,6 +933,7 @@ span.tag {
   float: right;
   margin-right: 10px;
   font-weight: 500;
+  font-size: 8pt;
 }
 
 span.tag > a {
