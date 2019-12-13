@@ -14,6 +14,7 @@ pygmentsstyle = "fruity"
 # Enable "```" for code blocks
 pygmentscodefences = true
 pygmentsUseClasses = true
+enableGitInfo = true
 
 [params]
 	name = "Jorge Luis Betancourt"
