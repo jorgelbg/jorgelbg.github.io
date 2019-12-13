@@ -61,7 +61,11 @@ aside {
   --main-color: #5a67d8;
   --light-gray: #eee;
   --background-color: white;
+<<<<<<< HEAD
+  --button-background: linear-gradient(178deg, #fff, #fff, #fff, #ddd);
+=======
   --green: #38b2ac;
+>>>>>>> 2a5046fa0fb8ae4b8bd51eff096793f2d4c629b9
 }
 
 html {
@@ -89,6 +93,7 @@ body {
     --background-color: #2e2e2e;
     --text-color: #cbd5e0;
     --light-gray: #4a5568;
+    --button-background: none;
     --main-color: #a3bffa;
   }
 
@@ -946,6 +951,17 @@ span.tag > a {
   width: 100%;
 }
 
+<<<<<<< HEAD
+kbd {
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  display: inline-block;
+  padding: 0px 9px;
+  background: var(--button-background);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1rem;
+=======
 header .last-edited {
   font-family: -apple-system, BlinkMacSystemFont, Roboto, "Open Sans",
     "Helvetica Neue", sans-serif;
@@ -953,4 +969,5 @@ header .last-edited {
   font-size: 10pt;
   text-transform: uppercase;
   margin-bottom: 30px;
+>>>>>>> 2a5046fa0fb8ae4b8bd51eff096793f2d4c629b9
 }
