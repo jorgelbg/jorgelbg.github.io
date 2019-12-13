@@ -1,7 +1,7 @@
 ---
 title: "Optimize Grafana dashboards with Elasticsearch index aliases"
-description: > 
-  Elasticsearch aliases can apply filters automatically to your queries. 
+description: >
+  Elasticsearch aliases can apply filters automatically to your queries.
   Let's use it to speed up some Grafana dashboards."
 tags: ["grafana", "elasticsearch"]
 date: 2018-12-20T00:00:00+01:00
@@ -79,7 +79,7 @@ this detail is not important). The relevant section is the
 }
 ```
 
-We can see that Grafana is applying a 
+We can see that Grafana is applying a
 [Filtered Query](https://www.elastic.co/guide/en/elasticsearch/reference/6.5/query-dsl-filtered-query.html).
 One small detail is that whatever we put in our "Lucene query" input field will
 be placed in the `query_string` section, as an extra *filter*. This is
@@ -116,10 +116,10 @@ of how efficient ES/Lucene is.
 ## Time to profile
 
 At this point, there is not a lot of things that we can do, except profiling the
-query. Kibana comes bundled with a 
+query. Kibana comes bundled with a
 [Search Profiler](https://www.elastic.co/guide/en/kibana/current/xpack-profiler.html)
 with the basic version of X-pack. Putting the query in the profiler and hitting
-the <kbd>Profile</kbd> button already provided a lot of insight:
+the {{< button >}}Profile{{< /button >}} button already provided a lot of insight:
 
 ![Profile of the original Grafana query](/images/elasticsearch-indices-grafana/original-query-profile.png "Profiling of the original query taking a long time")
 
@@ -173,7 +173,7 @@ we can disregard for the sake of this article*. Of course, executing this over
     {
       "index" : "accesslogs-2018.12.10",
       "valid" : true,
-      "explanation" : "#@timestamp:[1544315703107 TO 1544445303107] 
+      "explanation" : "#@timestamp:[1544315703107 TO 1544445303107]
                       #(+(header.senderId:www1 header.senderId:www2 ... )"
     }
   ]
@@ -229,7 +229,7 @@ And check the internal query that ES will execute in the profiler:
       "index" : "accesslogs-2018.12.10",
       "valid" : true,
       "explanation" : "(ConstantScore(+
-                      @timestamp:[1544315703107 TO 1544445303107] 
+                      @timestamp:[1544315703107 TO 1544445303107]
                       +header.senderId:(www1 www2 ...)))^0.0"
     }
   ]
@@ -270,7 +270,7 @@ Elasticsearch supports the use of
 [*aliases*](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html).
 This allows having a different name of referencing some index. Think on a pointer
 to an actual index (very similar to a symbolic link). What is even more
-powerful is that we can have 
+powerful is that we can have
 [*filtered aliases*](https://www.elastic.co/guide/en/elasticsearch/reference/current/indices-aliases.html#filtered).
 
 According to the documentation:
