@@ -3,7 +3,7 @@ POSTS_PATH := 'content/posts/${YEAR}'
 
 .PHONY: run
 run:
-	hugo serve -E -D
+	hugo serve -EDF
 
 .PHONY: new
 new: # Create a new article
