@@ -680,6 +680,11 @@ code {
   font-weight: 400;
 }
 
+p > code {
+  background-color: #EAEDEE;
+  border-radius: 4px;
+}
+
 body {
   letter-spacing: 0.3px;
 }
