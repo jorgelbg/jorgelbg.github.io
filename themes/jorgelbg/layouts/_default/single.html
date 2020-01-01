@@ -20,7 +20,7 @@
             {{ end }}
             {{ end}}
         </h2>
-        {{ if .GitInfo }}
+        {{ if ne .GitInfo nil }}
         <p class="last-edited">
             <a href="{{ .Site.Social.github }}/jorgelbg.github.io/commit/{{.GitInfo.Hash}}" title="{{.GitInfo.Subject}}">Last edited on {{ .Lastmod.Format "2 January 2006" }}</a>
         </p>
