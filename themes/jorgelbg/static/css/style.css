@@ -61,11 +61,9 @@ aside {
   --main-color: #5a67d8;
   --light-gray: #eee;
   --background-color: white;
-<<<<<<< HEAD
   --button-background: linear-gradient(178deg, #fff, #fff, #fff, #ddd);
-=======
   --green: #38b2ac;
->>>>>>> 2a5046fa0fb8ae4b8bd51eff096793f2d4c629b9
+  --gray: #eaedee;
 }
 
 html {
@@ -95,6 +93,7 @@ body {
     --light-gray: #4a5568;
     --button-background: none;
     --main-color: #a3bffa;
+    --gray: #1e3458;
   }
 
   article svg {
@@ -681,7 +680,7 @@ code {
 }
 
 p > code {
-  background-color: #EAEDEE;
+  background-color: var(--gray);
   border-radius: 4px;
 }
 
