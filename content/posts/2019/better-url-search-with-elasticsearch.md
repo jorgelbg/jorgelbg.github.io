@@ -200,11 +200,11 @@ it is kind of intuitive what is going on if we need to share the query with a co
 
 {{< info >}}
 
-We could've decided to write our tokenizer to deal with URLs or query components. We would have had
-full control over the Token Stream (i.e tokens or terms) produced by Elasticsearch. Dealing with
-custom analyzers involves writing and maintaining custom plugins, which would be definitively more difficult
-to support in the long run. Instead, we chose to leverage the already quite flexible toolbox provided
-by Elasticsearch.
+We could've decided to write our own tokenizer to deal with URLs or query components. We would have
+provided us with full control over the Token Stream (i.e tokens or terms) produced by Elasticsearch.
+Still, dealing with custom analyzers involves writing and maintaining custom plugins, which would be
+definitively more difficult to support in the long run. Instead, we chose to leverage the already
+quite flexible toolbox provided by Elasticsearch.
 
 {{</ info >}}
 
