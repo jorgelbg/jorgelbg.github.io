@@ -1,7 +1,7 @@
 ---
 title: "Better URL search with Elasticsearch"
 date: 2020-01-01T11:46:14-05:00
-draft: true
+draft: false
 description: >
     Improved URL search using a custom analyzer with Elasticsearch
 ---
