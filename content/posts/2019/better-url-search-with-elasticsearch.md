@@ -210,6 +210,6 @@ by Elasticsearch.
 
 ## Thanks
 
-I want to say thank you to my colleague [🦄 Dario Segger](https://github.com/unidario) (currently
-ex-teammate) that did the implementation described in this post. We've been using the approach
-outlined in this post for some time now.
+I want thanks my colleague [🦄 Dario Segger](https://github.com/unidario) (currently ex-teammate)
+that did the implementation described in this post. We've been using the approach outlined in this
+post for some time now.
