@@ -3,7 +3,8 @@ title: "Better URL search with Elasticsearch"
 date: 2020-01-01T11:46:14-05:00
 draft: false
 description: >
-    Improved URL search using a custom analyzer with Elasticsearch
+    Improved URL search in Elasticsearch using custom analyzers.
+tags: ["elasticsearch", "search", "url"]
 ---
 
 At trivago, we generate a huge amount of logs, although we have our [own custom setup for shipping
