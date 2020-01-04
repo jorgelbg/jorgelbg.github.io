@@ -2,11 +2,11 @@
     <h3>{{ .Site.Params.readMore | default "Read more" }}</h3>
 
     {{ $kind := where .Site.RegularPages "Section" "!=" "" }}
-    {{ $othr := where $kind "URL" "!=" .URL }}
+    {{ $othr := where $kind "Permalink" "!=" .Permalink }}
     {{ range first 3 $othr }}
         <li>
-            <a href="{{ .URL }}">
-                <span>{{ .LinkTitle }}</span> 
+            <a href="{{ .Permalink }}">
+                <span>{{ .LinkTitle }}</span>
                 <aside class="dates">{{ .Date.Format "Jan 2 2006" }}</aside></a>
         </li>
     {{ end }}
