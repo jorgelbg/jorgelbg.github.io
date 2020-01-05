@@ -117,12 +117,12 @@ The tokenization can be implemented in different places in the pipeline. Using t
 filter](https://www.elastic.co/guide/en/logstash/current/plugins-filters-split.html) or the
 previously mentioned [kv
 filter](https://www.elastic.co/guide/en/logstash/current/plugins-filters-kv.html). We decided to
-use a custom analyzer on the Elasticsearch side.
+use a [custom pattern analyzer](https://www.elastic.co/guide/en/elasticsearch/reference/current/analysis-pattern-analyzer.html) on the Elasticsearch side.
 
 Our `pattern_analyzer` uses a custom tokenizer defined as:
 
 ```json
-"custom_pattern": {
+"url_pattern": {
     "pattern": "&",
     "type": "pattern"
 }
@@ -133,7 +133,7 @@ equivalent, which makes the queries more user friendly:
 
 ```json
 "char_filter": {
-    "custom_char_filter_mapping": {
+    "url_escape_filter_mapping": {
         "type": "mapping",
         "mappings": [
             "%20 => +",
@@ -162,10 +162,10 @@ Finally, we define a custom analyzer called `pattern_analyzer`:
     ],
     "char_filter": [
         "html_strip",
-        "custom_char_filter_mapping"
+        "url_escape_filter_mapping"
     ],
     "type": "custom",
-    "tokenizer": "custom_pattern"
+    "tokenizer": "url_pattern"
 }
 ```
 
