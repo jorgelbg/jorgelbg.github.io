@@ -72,6 +72,8 @@ html {
 }
 
 body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   line-height: 1;
   color: var(--text-color);
   -webkit-font-smoothing: antialiased;
@@ -375,7 +377,6 @@ pre {
   background-color: #2d3748;
   overflow: auto;
   border-radius: 3px;
-  font-family: source code pro, Menlo, monospace;
   font-size: 13px;
   line-height: 1.5em;
   font-weight: 500;
@@ -744,8 +745,8 @@ h1 {
 }
 
 #post-body {
-  font-family: medium-content-serif-font, Georgia, Cambria, times new roman,
-    Times, serif;
+  font-family: Palatino, "Palatino Linotype", "Palatino LT STD", "Book Antiqua",
+    Georgia, serif;
   letter-spacing: 0.01rem;
   font-weight: 400;
   font-style: normal;
