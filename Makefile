@@ -1,5 +1,5 @@
 YEAR := $(shell date +%Y)
-POSTS_PATH := 'content/posts/${YEAR}'
+POSTS_PATH := 'posts/${YEAR}'
 
 .PHONY: run
 run:
