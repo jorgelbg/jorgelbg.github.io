@@ -12,7 +12,7 @@ logs](https://tech.trivago.com/2016/01/19/logstash_protobuf_codec/). We end up w
 fields in ES that contain partial (or full) URLs. For instance in our specific case we store the
 [query component](https://en.wikipedia.org/wiki/URL#Syntax) of the URL in a field called `query` and
 the [path component](https://en.wikipedia.org/wiki/URL#Syntax) in a field named `url_path`. Sample
-values for these fields would be like:
+values for these fields could be:
 
 ```sh
 url_path = "/webservice/search/hotels/43326/rates"
@@ -47,8 +47,8 @@ Producing the following list of tokens:
 ```
 
 
-If we test the value of the `query` field against this tokenizer, we can see that it produces a lot of
-useless tokens:
+If we test the value of the `query` field against this tokenizer, we can see that it produces a lot
+of useless tokens:
 
 ```json
 [ "from_date", "2020", "06", "01T00", "00", "00", "2B02", "00", "to_date", "2020", "06", "10T00", "00", "00", "2B02", "00", "currency", "EUR", "room_type", "9", "room_0", "2a", "fixed_status", "1" ]
@@ -93,10 +93,11 @@ A query such as this one:
 query.name:"currency" AND query.value:"9"
 ```
 
-would match our document although it would be matching for the _"wrong reasons"_. In our example,
-`currency` doesn't have a value of `9`, but since both boolean conditions are evaluated as `true`,
-the given document would produce a match. It is more likely that the user firing this query wants to
-match on `currency` having the value `9` which _should_ produce _no matches_ in our sample data.
+would match our sample document although it would be matching for the _"wrong reasons"_. In our
+example, `currency` doesn't have a value of `9`, but since both boolean conditions are evaluated as
+`true`, the given document would produce a match. It is more likely that the user firing this query
+wants to match on `currency` having the value `9` which _should not_ produce any matches in our sample
+data.
 
 ## Our solution
 
@@ -195,8 +196,8 @@ We get a more useful list of tokens:
 [ "from_date=2020-06-01t00:00:00+02:00", "to_date=2020-06-10t00:00:00+02:00", "currency=eur", "room_type=9", "room_0=2a", "fixed_status=1" ]
 ```
 
-Using this list of tokens, it is easier to find those specific requests that we're looking for. Even more
-it is kind of intuitive what is going on if we need to share the query with a colleague.
+Using this list of tokens, it is easier to find those specific requests that we're looking for. It is
+even more intuitive what is going on if we need to share the query with a colleague.
 
 {{< info >}}
 
