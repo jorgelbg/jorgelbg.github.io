@@ -7,12 +7,13 @@ description: >
 tags: ["elasticsearch", "search", "url"]
 ---
 
-At trivago, we generate a huge amount of logs, although we have our [own custom setup for shipping
-logs](https://tech.trivago.com/2016/01/19/logstash_protobuf_codec/). We end up with some
-fields in ES that contain partial (or full) URLs. For instance in our specific case we store the
-[query component](https://en.wikipedia.org/wiki/URL#Syntax) of the URL in a field called `query` and
-the [path component](https://en.wikipedia.org/wiki/URL#Syntax) in a field named `url_path`. Sample
-values for these fields could be:
+At trivago, we generate a huge amount of logs and we have our [own custom setup for shipping
+logs](https://tech.trivago.com/2016/01/19/logstash_protobuf_codec/) using mostly [Protocol
+Buffers](https://developers.google.com/protocol-buffers). Eventually we end up with some fields in ES
+that contain partial (or full) URLs. For instance in our specific case we store the [query
+component](https://en.wikipedia.org/wiki/URL#Syntax) of the URL in a field called `query` and the
+[path component](https://en.wikipedia.org/wiki/URL#Syntax) in a field named `url_path`. Sample values
+for these fields could be:
 
 ```sh
 url_path = "/webservice/search/hotels/43326/rates"
