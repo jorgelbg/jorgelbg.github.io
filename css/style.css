@@ -810,7 +810,7 @@ h1 {
 
 .info {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   margin: 1rem 0;
 }
 
