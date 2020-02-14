@@ -98,7 +98,11 @@ body {
     --gray: #1e3458;
   }
 
-  article svg {
+  body {
+    box-shadow: none;
+  }
+
+  h1 svg {
     filter: invert(100%);
   }
 
@@ -862,7 +866,7 @@ footer p.small {
 
 .post header h1 svg {
   display: none;
-  margin-left: -41px;
+  margin-left: -36px;
 }
 
 .post header h1 > a {
