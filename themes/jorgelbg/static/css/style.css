@@ -680,6 +680,10 @@ code {
   font-weight: 400;
 }
 
+.chroma code {
+  padding: 0;
+}
+
 p > code {
   background-color: var(--gray);
   border-radius: 4px;
