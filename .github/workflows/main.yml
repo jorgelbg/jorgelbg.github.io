@@ -3,32 +3,35 @@ name: github pages
 on:
   push:
     branches:
-    - hugo
+      - hugo
 
 jobs:
   build-deploy:
     runs-on: ubuntu-18.04
     steps:
-    - uses: actions/checkout@master
-      with:
-        fetch-depth: 100
-    - name: Fetch tags
-      run: git fetch --depth=100 origin +refs/tags/*:refs/tags/*
-      # with:
-      #   submodules: true
+      - uses: actions/checkout@master
+        with:
+          fetch-depth: 100
+      - name: Fetch tags
+        run: git fetch --depth=100 origin +refs/tags/*:refs/tags/*
 
-    - name: Setup Hugo
-      uses: peaceiris/actions-hugo@v2.2.2
-      with:
-        hugo-version: '0.60.1'
-        # extended: true
+        # with:
+        #   submodules: true
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2.2.2
+        with:
+          hugo-version: "0.60.1"
+          # extended: true
 
-    - name: Build
-      run: hugo --minify
+      - name: Install webp
+        run: apt install webp
 
-    - name: Deploy
-      uses: peaceiris/actions-gh-pages@v2.5.0
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
-        PUBLISH_BRANCH: master
-        PUBLISH_DIR: ./public
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v2.5.0
+        env:
+          ACTIONS_DEPLOY_KEY: ${{ secrets.ACTIONS_DEPLOY_KEY }}
+          PUBLISH_BRANCH: master
+          PUBLISH_DIR: ./public
