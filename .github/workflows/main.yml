@@ -24,7 +24,7 @@ jobs:
           # extended: true
 
       - name: Install webp
-        run: apt install webp
+        run: sudo apt install webp
 
       - name: Build
         run: hugo --minify
