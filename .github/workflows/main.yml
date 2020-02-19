@@ -26,6 +26,9 @@ jobs:
       - name: Install webp
         run: sudo apt install webp
 
+      - name: Convert PNG into WebP
+        run: find ./static -name "*.png" -exec sh -c 'cwebp "$1" -o "${1%.png}.webp"' sh {} \;
+
       - name: Build
         run: hugo --minify
 
