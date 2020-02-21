@@ -1,6 +1,8 @@
 <picture>
-  <source type="image/png" srcset="{{ .Get 0 }}.png" />
+  {{ if not .Site.IsServer }}
   <source type="image/webp" srcset="{{ .Get 0 }}.webp" />
+  {{ end }}
+  <source type="image/png" srcset="{{ .Get 0 }}.png" />
   <img
     src="{{ .Get 0 }}.png"
     class="align-center"
