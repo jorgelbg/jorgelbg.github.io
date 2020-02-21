@@ -130,6 +130,7 @@ q:after {
 
 a {
   text-decoration: none;
+  color: var(--main-color);
 }
 
 *,
@@ -680,7 +681,6 @@ code {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
     monospace;
   font-size: 14px;
-  padding: 4px;
   font-weight: 400;
 }
 
@@ -691,6 +691,7 @@ code {
 p > code {
   background-color: var(--gray);
   border-radius: 4px;
+  padding: 4px;
 }
 
 body {
