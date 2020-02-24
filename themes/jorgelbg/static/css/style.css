@@ -90,7 +90,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #2e2e2e;
+    --background-color: #1a202c;
     --text-color: #cbd5e0;
     --light-gray: #4a5568;
     --button-background: none;
