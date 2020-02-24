@@ -8,6 +8,8 @@ description: >
 tags: ["filebeat", "dissect", "test", "ui"]
 ---
 
+{{< picture "log-patterns" "log patterns image" >}}
+
 If you have been using [Filebeat](https://www.elastic.co/beats/filebeat) to ship your logs around
 (usually to [Elasticsearch](https://www.elastic.co/elasticsearch)) you know that Filebeat
 doesn't support Grok patterns (like
