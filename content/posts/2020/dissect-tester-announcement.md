@@ -73,7 +73,7 @@ That's why I built a small Web UI like [Grok Debugger](https://grokdebug.herokua
 [🚀 here](https://dissect-tester.jorgelbg.me) where you only need to put your pattern, a few samples
 (one per line) and see the output on the result area. That's it!
 
-{{< picture "/images/dissect-tester-announcement/screenshot" "screenshot of the UI" >}}
+{{< picture "screenshot" "screenshot of the UI" >}}
 
 ## Final thoughts
 
