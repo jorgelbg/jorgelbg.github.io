@@ -615,7 +615,7 @@ h1.archive,
   }
 
   #wrapper {
-    padding: 20px;
+    padding: 15px !important;
   }
 
   .post {
@@ -932,12 +932,6 @@ nav.main-nav {
 #post-list a.title,
 svg.background {
   width: 100%;
-}
-
-@media only screen and (max-width: 600px) {
-  #wrapper {
-    padding: 0 0 10px;
-  }
 }
 
 @media screen and (min-width: 1400px) {
