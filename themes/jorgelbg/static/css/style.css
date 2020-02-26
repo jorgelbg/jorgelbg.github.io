@@ -90,7 +90,7 @@ body {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-color: #2e2e2e;
+    --background-color: #1a202c;
     --text-color: #cbd5e0;
     --light-gray: #4a5568;
     --button-background: none;
@@ -130,6 +130,7 @@ q:after {
 
 a {
   text-decoration: none;
+  color: var(--main-color);
 }
 
 *,
@@ -606,6 +607,7 @@ h1.archive,
 @media screen and (max-width: 540px) {
   body {
     flex-direction: column;
+    padding: 0;
   }
 
   aside {
@@ -680,7 +682,6 @@ code {
   font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
     monospace;
   font-size: 14px;
-  padding: 4px;
   font-weight: 400;
 }
 
@@ -691,6 +692,7 @@ code {
 p > code {
   background-color: var(--gray);
   border-radius: 4px;
+  padding: 4px;
 }
 
 body {
@@ -934,7 +936,7 @@ svg.background {
 
 @media only screen and (max-width: 600px) {
   #wrapper {
-    padding: 0 20px 10px;
+    padding: 0 0 10px;
   }
 }
 

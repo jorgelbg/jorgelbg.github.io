@@ -1,5 +1,18 @@
 <picture>
-  <source type="image/webp" srcset="{{ .Get 0 }}.webp" />
-  <source type="image/png" srcset="{{ .Get 0 }}.png" />
-  <img src="{{ .Get 0 }}.png" class="align-center" loading="lazy" alt="{{ .Get 1 }}" />
+  {{ if not .Site.IsServer }}
+  <source
+    type="image/webp"
+    srcset="/images/{{ .Page.File.ContentBaseName }}/{{ .Get 0 }}.webp"
+  />
+  {{ end }}
+  <source
+    type="image/png"
+    srcset="/images/{{ .Page.File.ContentBaseName }}/{{ .Get 0 }}.png"
+  />
+  <img
+    src="/images/{{ .Page.File.ContentBaseName }}/{{ .Get 0 }}.png"
+    class="align-center"
+    alt="{{ .Get 1 }}"
+    loading="lazy"
+  />
 </picture>
