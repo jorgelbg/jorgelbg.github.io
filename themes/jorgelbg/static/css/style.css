@@ -264,11 +264,6 @@ li {
   list-style-position: inside;
 }
 
-#post-body,
-p {
-  line-height: 1.7;
-}
-
 b {
   font-weight: 500;
   color: var(--text-color);
@@ -761,8 +756,8 @@ h1 {
   font-weight: 400;
   font-style: normal;
   font-size: 1.22rem;
-  line-height: 1.58;
-  letter-spacing: -0.003em;
+  line-height: 1.65;
+  letter-spacing: 0.025em;
 }
 
 .post h1 {
@@ -978,4 +973,10 @@ header .last-edited {
   font-size: 10pt;
   text-transform: uppercase;
   margin-bottom: 30px;
+}
+
+picture {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
 }
