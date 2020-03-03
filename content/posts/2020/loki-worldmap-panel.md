@@ -3,8 +3,8 @@ title: "Displaying geohash information from Loki in the Worldmap Panel plugin"
 date: 2020-03-02T21:49:10+01:00
 draft: true
 description: >
-  Web UI tool for testing tokenizer strings for the dissect processor against a few
-  logline samples.
+  How to use Loki and the Worldmap panel plugin to show some geo data (geohashes or latitude and
+  longitude pairs) in a map.
 tags: ["grafana", "loki", "worldmap", "geohash"]
 ---
 
