@@ -64,6 +64,7 @@ aside {
   --button-background: linear-gradient(178deg, #fff, #fff, #fff, #ddd);
   --green: #38b2ac;
   --gray: #eaedee;
+  --github: #22292f;
 }
 
 html {
@@ -96,6 +97,7 @@ body {
     --button-background: none;
     --main-color: #a3bffa;
     --gray: #1e3458;
+    --github: white;
   }
 
   body {
@@ -811,7 +813,7 @@ h1 {
 }
 
 .symbol.github:hover path {
-  fill: #22292f;
+  fill: var(--github);
 }
 
 .symbol.rss:hover path {
