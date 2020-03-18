@@ -1,6 +1,6 @@
 ---
 title: "Displaying geohash tags from Loki in a Grafana Worldmap Panel map"
-date: 2020-03-02T21:49:10+01:00
+date: 2020-03-18T00:00:00+01:00
 draft: true
 description: >
   How to use Loki and the Worldmap panel plugin to show geohashes or latitude/longitude pairs in a map.
@@ -12,28 +12,27 @@ the same company behind the popular open-source observability platform. Loki its
 horizontally-scalable, highly-available, multi-tenant log aggregation system inspired by Prometheus.
 
 On fewer words, Loki is like Prometheus but for your logs. This means that although it doesn't
-provide all the full-text search capabilities of Elasticsearch it allows filtering by a set of
+provide all the full-text search capabilities of Elasticsearch, it allows filtering by a set of
 labels for each log stream. This translates into a more cost-effective solution.
 
 Even though Loki was announced on [KubeCon
 18'](https://kccna18.sched.com/event/GrXC/on-the-oss-path-to-full-observability-with-grafana-david-kaltschmidt-grafana-labs).
 It is still under active development. As expected the team is building in parallel the internal Loki
-components: ingestion, storage, and query layer and the Grafana support as a visualization UI on top
-of Loki. It was not until recently that I've started to play with Loki. My main experience is about
+components: ingestion, storage, and query layer and the visualization UI (Grafana). It was not until recently that I've started to play with Loki. My main experience is about
 running large [Solr](https://lucene.apache.org/solr/) and/or
 [Elasticsearch](https://www.elastic.co/de/elasticsearch) clusters, but I was looking for something
 a bit easier and cheaper to host by myself. After all, I was not interested in all
 the features from the ELK stack.
 
 At the moment my data consist of a few labels and no actual logline, which is ok. I'm
-mostly more interested only in the labels. Some of those labels (in my case) contained the latitude (`lat`),
+more interested only in the labels. Some of those labels (in my case) contained the latitude (`lat`),
 longitude (`long`) and geohash (`geohash`) of a given location. I also included some descriptive
 information like `place` and `country`.
 
 I wanted to plot this into a map using the [Worldmap
 Panel](https://grafana.com/grafana/plugins/grafana-worldmap-panel/installation). Yet, it was a bit
-tricky. I had previously run a container with the latest version of Grafana since I was using
-already the Explore UI from Grafana with the Loki datasource to check the incoming data. I ran the
+tricky. I had already run a container with the latest version of Grafana since I was using
+the Explore UI from Grafana with the Loki datasource to check the incoming data. I ran the
 following command to add the world map panel:
 
 ```bash
@@ -48,9 +47,13 @@ ended up looking like:
 sum(count_over_time({geohash=~".+"}[1h])) by (geohash,lat,long,country,place)
 ```
 
+My initial thought was to point the Worldmap Panel to the Loki datasource and run one of the
+[LogQL](https://github.com/grafana/loki/blob/master/docs/logql.md) queries against it. The query
+ended up looking like:
+
 This didn't work. Using the query inspector from Grafana I noticed that the response payload
-from Loki was almost identical to the output of a Prometheus query. My next step was
-to try and replicate the setup as shown in [this
+from Loki was almost identical to the output of a Prometheus query. The next step was
+to try and replicate the setup shown in [this
 post](https://www.robustperception.io/using-geohashes-with-the-worldmap-panel-and-prometheus).
 
 Trying to show the data setting the Location Data as a geohash yielded this error:
@@ -60,7 +63,7 @@ Error: Missing geohash value
 Which made a bit of sense, since we need to set the `{{ geohash }}` as the legend of our query. This
 makes the `geohash` label (when using a Prometheus datasource) available to the Worldmap panel. Since
 the legend input is missing from the Loki datasource it is not possible to do set it up this way.
-Since I already have the `lat` and `long` available directly from the query, I also tried to use the
+Since I already have the `lat` and `long` available from the query, I also tried to use the
 Location Data as a table, the setup ended up looking like:
 
 {{< picture "loki-table-fail" "Setup of the Loki datasource as a table" "50%" >}}
@@ -74,22 +77,23 @@ endpoint:
 
 {{< picture "loki-and-prometheus-datasources" "Both datasources configured in the Grafana instance" >}}
 
-As you can see we use the same URL, but we need to manually add the `/loki` path to the Prometheus datasource.
+As you can see we use the same URL, but we need to add the `/loki` path to the Prometheus datasource.
 
 Using Loki as a Prometheus datasources allows us to use the same query as before, but have
 access to the configuration options only available for a Prometheus datasource. We can now follow the
-instructions [previously mentioned
+instructions in the [mentioned
 post](https://www.robustperception.io/using-geohashes-with-the-worldmap-panel-and-prometheus) to
 visualize the labels stored in a Loki datasource in the Worldmap panel.
 
 ## Summary
 
-The TL;DR of this post is that you can configure a Loki datasource as a Prometheus datasource
-in Grafana which will provide the same whistles and bells of a normal Prometheus server, except that
+TL;DR you can configure a Loki datasource as a Prometheus datasource
+in Grafana, which will provide the same bells and whistles of a normal Prometheus server. Keep in mind that
 LogQL, the query language implemented by Loki, is a subset of PromQL, which means that not all
 functions, aggregations or operators will be available.
 
-This step of configuring Loki as a Prometheus datasource is mandatory (so far) to get the Worldmap
-Panel plugin playing nicely with your Loki datasource. I imagine that in the no so far future Grafana
-will do some of these settings automatically depending on how you want to use the data, which will
-make things (like using a 3rd party plugin) easier with Loki.
+This step of configuring Loki as a Prometheus datasource is mandatory (until the publishing date of
+this post) to get the Worldmap Panel plugin playing nicely with your Loki datasource. I imagine that
+in the no so far future Grafana's Loki support will be easier to use and it will change its behavior
+depending on how you want to use the data, which will make things (like using a 3rd party plugin)
+easier.
