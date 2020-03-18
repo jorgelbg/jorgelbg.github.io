@@ -1,7 +1,7 @@
 ---
 title: "Displaying geohash tags from a Loki datasource in a Grafana Worldmap Panel"
 date: 2020-03-18T00:00:00+01:00
-draft: true
+draft: false
 description: >
   How to use Loki and the Worldmap panel plugin to show geohashes or latitude/longitude pairs in a map.
 tags: ["grafana", "loki", "worldmap", "geohash"]
