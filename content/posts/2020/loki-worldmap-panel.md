@@ -1,5 +1,5 @@
 ---
-title: "Displaying geohash tags from Loki in a Grafana Worldmap Panel map"
+title: "Displaying geohash tags from a Loki datasource in a Grafana Worldmap Panel"
 date: 2020-03-18T00:00:00+01:00
 draft: true
 description: >
