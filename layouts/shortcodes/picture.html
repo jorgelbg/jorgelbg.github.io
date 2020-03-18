@@ -1,3 +1,5 @@
+{{ $width := default "100%" (.Get 2) }}
+
 <picture>
   {{ if not .Site.IsServer }}
   <source
@@ -14,5 +16,6 @@
     class="align-center"
     alt="{{ .Get 1 }}"
     loading="lazy"
+    style="max-width:{{ $width }};"
   />
 </picture>
