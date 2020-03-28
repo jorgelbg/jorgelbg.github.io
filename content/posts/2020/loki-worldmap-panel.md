@@ -87,6 +87,10 @@ instructions in the [mentioned
 post](https://www.robustperception.io/using-geohashes-with-the-worldmap-panel-and-prometheus) to
 visualize the labels stored in a Loki datasource in the Worldmap panel.
 
+The end result looks like:
+
+{{< picture "loki-end-result" "A Worldmap panel visualzing geohash data from a Loki datasource">}}
+
 ## Summary
 
 TL;DR you can configure a Loki datasource as a Prometheus datasource in Grafana, this will give us
