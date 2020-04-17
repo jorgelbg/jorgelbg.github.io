@@ -13,7 +13,7 @@ jobs:
         with:
           fetch-depth: 100
       - name: Fetch tags
-        run: git fetch --depth=100 origin +refs/tags/*:refs/tags/*
+        run: git fetch --depth=50 origin +refs/tags/*:refs/tags/*
 
         # with:
         #   submodules: true
