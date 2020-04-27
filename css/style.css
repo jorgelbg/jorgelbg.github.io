@@ -207,6 +207,10 @@ body.nf {
   position: relative;
 }
 
+.profile #header a::before {
+  background: none;
+}
+
 .profile #avatar {
   display: inline-block;
   width: 80px;
