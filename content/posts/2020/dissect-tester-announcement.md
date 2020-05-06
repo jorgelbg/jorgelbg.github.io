@@ -17,6 +17,19 @@ doesn't support Grok patterns (like
 Instead, Filebeat advocates the usage of the [dissect
 processor](https://www.elastic.co/guide/en/beats/filebeat/master/dissect.html).
 
+{{< announce >}}
+A small CLI tool for local pattern testing is also available now. Releases are available in the
+[Github Releases page](https://github.com/jorgelbg/dissect-tester/releases). After downloading and
+decompressing the `.tar.gz` file the CLI can be executed as:
+
+```sh
+$ dissect-tester/dissect-tester --pattern='%{key1} %{key2}'
+```
+
+Test cases are accepted through `stdin` and for each test case the result will be sent directly into
+`stdout`.
+{{</ announce >}}
+
 I like the dissect processor tokenization syntax. It is easy to understand and usually quite
 fast at processing. This blog post is not about the decision of not supporting Grok patterns in
 Filebeat.

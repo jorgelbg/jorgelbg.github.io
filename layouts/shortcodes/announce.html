@@ -1,6 +1,6 @@
 <!-- announcement -->
-<div class="info">
-    <svg width="80" viewBox="0 0 512 512"><circle cx="256" cy="475" r="27" fill="#f7911e"/><g fill="#d1d3d4"><path
+<div class="info announce">
+    <svg width="150" viewBox="0 0 512 512"><circle cx="256" cy="475" r="27" fill="#f7911e"/><g fill="#d1d3d4"><path
         d="M99 244v-34H67v41M413 244v-34h32v41z"/></g><g fill="#4aa7ed"><path d="M114 244h-3a101 101 0 000
         202h3V244zM398 244h3a101 101 0 010 202h-3V244z"/></g><path d="M456 210a200 200 0 00-400 0h64a136 136
         0 01272 0h64z" fill="#f9ae18"/><path d="M78 306c6 0 10-5 10-10v-1a10 10 0 00-20 0v1c0 5 5 10 10
@@ -12,7 +12,6 @@
         0 0054-208zM256 458a17 17 0 110 34 17 17 0 010-34zm-152-22a91 91 0 010-182v182zM89 236l-12
         3v-19h12v16zM256 64c-77 0-140 60-146 136H66a190 190 0 01380 0h-44c-6-76-69-136-146-136zm167
         156h12v19l-12-3v-16zm-15 216V254a91 91 0 010 182z"/></svg>
-
-    <p>{{ .Inner | markdownify }}</p>
+    <div>{{ .Inner | markdownify }}</div>
   </div>
   <!-- image -->
