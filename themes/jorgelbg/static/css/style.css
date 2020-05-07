@@ -329,9 +329,9 @@ i {
 
 .post h2 {
   margin-bottom: 40px;
-  font: 600 1.5rem/1.5 -apple-system-subheadline, sans-serif;
+  font: 700 1.5rem/1.5 "Open Sans", -apple-system-subheadline, sans-serif;
   color: var(--text-color);
-  letter-spacing: -0.5px;
+  letter-spacing: 0.5px;
 }
 
 .post h2.headline {
