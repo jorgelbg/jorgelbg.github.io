@@ -159,6 +159,10 @@ a:before {
   transition-timing-function: ease-out;
 }
 
+#post-list a:before {
+  content: none;
+}
+
 a:hover:before {
   right: 0;
 }
@@ -914,7 +918,7 @@ footer p.small {
 
 .post header h1 svg {
   display: none;
-  margin-left: -24px;
+  margin-left: -30.5px;
 }
 
 .post header h1 > a {
