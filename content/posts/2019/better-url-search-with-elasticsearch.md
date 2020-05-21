@@ -7,7 +7,7 @@ description: >
 tags: ["elasticsearch", "search", "url"]
 ---
 
-> 🚀 This article has been crossposted in the [trivago tech blog](https://tech.trivago.com/2020/02/11/better-url-search-with-elasticsearch/).
+> 🚀 This article was posted in the [trivago tech blog](https://tech.trivago.com/2020/02/11/better-url-search-with-elasticsearch/).
 
 At trivago, we generate a huge amount of logs and we have our [own custom setup for shipping
 logs](https://tech.trivago.com/2016/01/19/logstash_protobuf_codec/) using mostly [Protocol
