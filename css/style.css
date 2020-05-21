@@ -159,7 +159,8 @@ a:before {
   transition-timing-function: ease-out;
 }
 
-#post-list a:before {
+#post-list a:before,
+.post h1 a:before {
   content: none;
 }
 
