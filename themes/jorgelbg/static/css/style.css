@@ -65,6 +65,7 @@ aside {
   --green: #38b2ac;
   --gray: #eaedee;
   --github: #22292f;
+  --red: #e53e3e;
 }
 
 html {
@@ -98,6 +99,7 @@ body {
     --main-color: #a3bffa;
     --gray: #1e3458;
     --github: white;
+    --red: #fc8181;
   }
 
   body {
@@ -728,7 +730,7 @@ p > code {
   background-color: var(--gray);
   border-radius: 4px;
   padding: 5px;
-  color: #e53e3e;
+  color: var(--red);
 }
 
 body {
