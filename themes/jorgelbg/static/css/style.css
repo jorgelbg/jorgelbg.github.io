@@ -66,6 +66,8 @@ aside {
   --gray: #eaedee;
   --github: #22292f;
   --red: #e53e3e;
+  --post-width: 800px;
+  --code-font: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier;
 }
 
 html {
@@ -81,12 +83,12 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   display: flex;
-  max-width: 1100px;
+  /* max-width: 1100px; */
   margin: 0 auto;
   background-color: var(--background-color);
-  padding: 0 30px;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-    0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  /* padding: 0 30px; */
+  /* box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -2px rgba(0, 0, 0, 0.05); */
   min-height: 100vh;
 }
 
@@ -204,7 +206,7 @@ body.nf {
 
 .profile #wrapper {
   padding: 0 40px;
-  max-width: 800px;
+  max-width: var(--post-width);
   margin: 0 auto;
 }
 
@@ -263,9 +265,7 @@ nav.main-nav a {
 }
 
 #wrapper {
-  max-width: 800px;
   margin: 0 auto;
-  padding: 60px 40px 100px;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -390,7 +390,7 @@ h6 {
   margin-bottom: 6px;
 }
 
-p.small {
+.small {
   color: var(--light-text-color);
   font-size: 1rem;
   line-height: 1.5;
@@ -405,15 +405,13 @@ blockquote {
 }
 
 span.code {
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
-    monospace;
+  font-family: var(--code-font), monospace;
   background-color: var(--light-gray);
   font-size: 14px;
 }
 
 pre {
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
-    monospace;
+  font-family: var(--code-font), monospace;
   white-space: pre-wrap;
   padding: 20px;
   background-color: #2d3748;
@@ -501,7 +499,8 @@ img {
 }
 
 .post {
-  margin: 3rem 0 0;
+  margin: 3rem auto;
+  max-width: var(--post-width);
 }
 
 #post-meta {
@@ -514,6 +513,11 @@ img {
   margin-top: 40px;
   color: #444;
   border-bottom: 1px solid var(--light-gray);
+}
+
+.post-after {
+  width: var(--post-width);
+  margin: auto;
 }
 
 #post-meta div span {
@@ -716,8 +720,7 @@ a.symbol:hover {
 }
 
 code {
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
-    monospace;
+  font-family: var(--code-font), monospace;
   font-size: 14px;
   font-weight: 400;
 }
@@ -830,8 +833,7 @@ h1 {
 
 .graph text {
   /* transform: scale(1, -1); */
-  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier,
-    monospace;
+  font-family: var(--code-font), monospace;
   font-size: 8pt;
   font-weight: bold;
 }
@@ -936,10 +938,6 @@ footer p.small {
   top: 0.5rem;
 }
 
-#wrapper {
-  padding: 0 40px 10px;
-}
-
 #post-meta {
   font-family: -apple-system, BlinkMacSystemFont, segoe ui, Roboto, Oxygen,
     Ubuntu, Cantarell, open sans, helvetica neue, sans-serif;
@@ -1041,4 +1039,14 @@ picture {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
+}
+
+.hero-image {
+  /* border: 3px solid red; */
+  height: 400px;
+  width: 100%;
+  background-position: center top;
+  background-size: 100vw;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
 }

@@ -5,6 +5,9 @@ draft: false
 description: >
   How to use Loki and the Worldmap panel plugin to show geohashes or latitude/longitude pairs in a map.
 tags: ["grafana", "loki", "worldmap", "geohash"]
+hero:
+  image: "hero1.svg"
+  link: https://www.freepik.com/free-photos-vectors/business
 ---
 
 [Loki](https://grafana.com/oss/loki/) is a new~ish project from [Grafana](https://grafana.com), yes
