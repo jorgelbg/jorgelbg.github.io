@@ -1,2 +1,4 @@
 public
 docs
+yarn-error.log
+node_modules/*
