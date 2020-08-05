@@ -1,0 +1,11 @@
+{
+  "devDependencies": {
+    "postcss": "^7.0.26",
+    "postcss-cli": "^7.1.0",
+    "tailwindcss": "^1.6"
+  },
+  "scripts": {
+    "build:tailwind": "postcss ./base.css -o ./static/css/tailwind.css",
+    "watch": "watch \"npm run build:tailwind\" ./templates"
+  }
+}

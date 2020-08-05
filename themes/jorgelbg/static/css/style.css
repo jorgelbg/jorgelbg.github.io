@@ -1042,3 +1042,8 @@ picture {
   justify-content: center;
   margin-bottom: 20px;
 }
+
+iframe {
+  height: 100%;
+  border: none;
+}
