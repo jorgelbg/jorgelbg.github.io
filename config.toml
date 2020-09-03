@@ -15,6 +15,7 @@ pygmentsstyle = "fruity"
 pygmentscodefences = true
 pygmentsUseClasses = true
 enableGitInfo = true
+enableRobotsTXT = true
 
 [params]
 	name = "Jorge Luis Betancourt"
