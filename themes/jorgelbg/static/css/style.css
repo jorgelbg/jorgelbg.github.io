@@ -870,19 +870,19 @@ h1 {
 }
 
 .info.announce > div {
-  border-left: 6px solid var(--main-color);
-  padding-left: 10px;
-  margin-left: 10px;
+  border-left: 3px solid var(--main-color);
+  padding-left: 1rem;
+  margin: 0 0 0 1rem;
 }
 
 .info pre {
   margin-top: 20px;
 }
 
-.info p {
+/* .info p {
   width: 100%;
   margin: 0 0 0 1rem;
-}
+} */
 
 p.cc {
   color: #b8c2cc;
