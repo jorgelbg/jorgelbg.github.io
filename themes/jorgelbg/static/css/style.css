@@ -696,6 +696,10 @@ h1.archive,
   .post h2 {
     font-size: 20px;
   }
+
+  .info svg {
+    visibility: hidden;
+  }
 }
 
 #social {
@@ -994,6 +998,17 @@ svg.background {
 @media screen and (min-width: 1400px) {
   svg.background {
     max-height: 300px;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .info svg {
+    visibility: hidden;
+  }
+
+  .info.announce {
+    position: relative;
+    margin-left: -3rem;
   }
 }
 
