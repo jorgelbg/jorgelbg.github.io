@@ -696,6 +696,10 @@ h1.archive,
   .post h2 {
     font-size: 20px;
   }
+
+  .info svg {
+    visibility: hidden;
+  }
 }
 
 #social {
@@ -870,19 +874,19 @@ h1 {
 }
 
 .info.announce > div {
-  border-left: 6px solid var(--main-color);
-  padding-left: 10px;
-  margin-left: 10px;
+  border-left: 3px solid var(--main-color);
+  padding-left: 1rem;
+  margin: 0 0 0 1rem;
 }
 
 .info pre {
   margin-top: 20px;
 }
 
-.info p {
+/* .info p {
   width: 100%;
   margin: 0 0 0 1rem;
-}
+} */
 
 p.cc {
   color: #b8c2cc;
@@ -994,6 +998,17 @@ svg.background {
 @media screen and (min-width: 1400px) {
   svg.background {
     max-height: 300px;
+  }
+}
+
+@media screen and (max-width: 1020px) {
+  .info svg {
+    visibility: hidden;
+  }
+
+  .info.announce {
+    position: relative;
+    margin-left: -3rem;
   }
 }
 
