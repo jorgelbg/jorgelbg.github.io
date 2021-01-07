@@ -7,6 +7,36 @@ description: >
 tags: ["grafana", "loki", "worldmap", "geohash"]
 ---
 
+> ### 🚧 Loki v2.x
+>
+> Loki v2.0 included a new set of features to the query language that allows extraction of labels at
+> query time, unlocking new possibilities. This means that previously we would need to have the
+> `geohash` information as a label (which is not a great idea). Loki works best when you have a small
+> set of labels (with no high cardinality). A `geohash` field is a very bad candidate for a label 🙃,
+> in our defense before Loki v2.0 this was the only way of using the `geohash` in the worldmap
+> plugin.
+>
+> With the new [Parser expressions](https://grafana.com/docs/loki/latest/logql/#parser-expression) we
+> can extract labels (at query time) and used them as normal labels in our queries. For instance,
+> instead of using the old:
+>
+> ```js
+> sum(count_over_time({geohash=~".+"}[1h])) by (geohash)
+> ```
+>
+> which uses the the `geohash` labels, we can instead of the `| logfmt` parser expression to extract
+> the `geohash` label/tag from the logline at query time.
+>
+> ```js
+> sum(count_over_time({domain=~"jorgelbg.me"} | logfmt [5m])) by (geohash)
+> ```
+>
+> This has the advantage of not polluting our set of identifiable labels and helping to keep Loki
+> queries as fast as possible.
+>
+> Note: Beside the `| logfmt` parser it is also possible to use the `| json` one if the payload sent
+> to Loki is in the JSON format.
+
 [Loki](https://grafana.com/oss/loki/) is a new~ish project from [Grafana](https://grafana.com), yes
 the same company behind the popular open-source observability platform. Loki itself is a
 horizontally-scalable, highly-available, multi-tenant log aggregation system inspired by Prometheus.
