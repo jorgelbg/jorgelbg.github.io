@@ -12,9 +12,10 @@ tags: ["grafana", "loki", "worldmap", "geohash"]
 > Loki v2.0 included a new set of features to the query language that allows extraction of labels at
 > query time, unlocking new possibilities. This means that previously we would need to have the
 > `geohash` information as a label (which is not a great idea). Loki works best when you have a small
-> set of labels (with no high cardinality). A `geohash` field is a very bad candidate for a label 🙃,
-> in our defense before Loki v2.0 this was the only way of using the `geohash` in the worldmap
-> plugin.
+> set of labels (with [no high
+> cardinality](https://grafana.com/blog/2020/04/21/how-labels-in-loki-can-make-log-queries-faster-and-easier/)).
+> A `geohash` field is a very bad candidate for a label 🙃, in our defense before Loki v2.0 this was
+> the only way of using the `geohash` in the worldmap plugin.
 >
 > With the new [Parser expressions](https://grafana.com/docs/loki/latest/logql/#parser-expression) we
 > can extract labels (at query time) and used them as normal labels in our queries. For instance,
@@ -24,8 +25,8 @@ tags: ["grafana", "loki", "worldmap", "geohash"]
 > sum(count_over_time({geohash=~".+"}[1h])) by (geohash)
 > ```
 >
-> which uses the the `geohash` labels, we can instead of the `| logfmt` parser expression to extract
-> the `geohash` label/tag from the logline at query time.
+> which expects the geo information in a `geohash` label. We can instead use the `| logfmt` parser
+> expression to extract the `geohash` information from the payload into a label at query time.
 >
 > ```js
 > sum(count_over_time({domain=~"jorgelbg.me"} | logfmt [5m])) by (geohash)
