@@ -6,6 +6,8 @@ description: >
   the Touch ID sensor in supported devices.
 tags: ["pinentry", "touchid", "gpg", "mac"]
 draft: false
+images:
+  - images/pinentry-touchid/login.png
 ---
 
 {{< picture "login" "secure login image" "100%">}}
