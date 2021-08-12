@@ -1,5 +1,5 @@
 # Site settings
-baseurl = "//jorgelbg.me"
+baseurl = "https://jorgelbg.me"
 themesDir = "themes/"
 languageCode = "en-us"
 title = "Jorge Luis Betancourt"
