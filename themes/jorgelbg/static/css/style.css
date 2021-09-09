@@ -808,11 +808,11 @@ h1 {
 }
 
 .post h1 {
-  font-family: -apple-system-body, Georgia;
+  font-family: "Open Sans", -apple-system-subheadline, sans-serif;
   font-size: 2.3rem;
   line-height: 1.5;
-  font-weight: 300;
-  letter-spacing: 1.6px;
+  font-weight: 700;
+  letter-spacing: 1px;
   text-align: left;
 }
 
@@ -931,6 +931,15 @@ footer p.small {
 
 .post header h1 > a {
   color: var(--text-color);
+  background-image: linear-gradient(
+    90deg,
+    rgb(204, 0, 88),
+    rgb(78, 16, 166),
+    rgb(0, 65, 169)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .post header h1:hover svg {
