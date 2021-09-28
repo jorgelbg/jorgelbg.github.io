@@ -108,7 +108,7 @@ that allowed me to have an initial prototype in a couple of hours (including res
 ## Acknowledgments
 
 Finally, I would like to say thank you to the authors and contributors of [go-assuan][go-assuan],
-[go-keychain][go-keychain], [gopass](github.com/gopasspw/pinentry) and [go-touchid][go-touchid].
+[go-keychain][go-keychain], [gopass](https://github.com/gopasspw/pinentry) and [go-touchid][go-touchid].
 
 _Touch ID icon made by [Freepik](https://www.freepik.com) from [Flaticon](https://www.flaticon.com/)._
 
