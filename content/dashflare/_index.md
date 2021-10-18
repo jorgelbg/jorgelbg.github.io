@@ -5,6 +5,4 @@ hidden = true
 type = "page"
 +++
 
-something something
-
 {{<signup>}}
