@@ -8,9 +8,10 @@
 		</a>
 	{{ end }}
 
-	{{ range .Site.Menus.main }}
+	<!-- renders main menu pages -->
+	<!-- {{ range .Site.Menus.main }}
  		<a href='{{ .URL }}'>{{ .Name }}</a>
-  	{{ end }}
+  	{{ end }} -->
 
 	<!-- {{ if .Site.Params.enableRSS }}
 		<a class="cta" href="{{ .Site.RSSLink }}">{{ .Site.Params.subscribe | default "Subscribe" }}</a>
