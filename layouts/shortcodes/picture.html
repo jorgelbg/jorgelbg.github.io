@@ -1,5 +1,6 @@
 {{ $width := default "100%" (.Get 2) }}
 
+<a href="/images/{{ .Page.File.ContentBaseName }}/{{ .Get 0 }}.png">
 <picture>
   {{ if not .Site.IsServer }}
   <source
@@ -19,3 +20,4 @@
     style="max-width:{{ $width }};"
   />
 </picture>
+</a>
