@@ -3,7 +3,7 @@ title: Time based SLO for Kafka data pipelines
 date: 2022-01-17T18:05:48+01:00
 draft: true
 description: >
-  Using a time based approach to define SLOs for Kafka based data pipelines.
+  Using a time based threshold to define SLOs for Kafka based data pipelines.
 ---
 
 {{< picture "hero" "Data processing illustration" >}}
@@ -38,16 +38,16 @@ varies widely between applications. -->
 
 This could be interpreted as priority of the data, using the right amount of resources (CPU, memory,
 network tiers) for those pipelines that have higher priority. Your SLO should reflect this priority
-and events with higher priority should have a tighter SLO. This should also ensure that all the
+and pipelines with higher priority should have a tighter SLO. This should also ensure that all
 running data pipelines do not interfere with each other.
 
 ## End-to-end measurement
 
-If you have a data pipeline that has multiple stages it may be useful to not only measure the SLOs of
-the individual components but also pay close attention to an end-to-end SLO.
+If you have a data pipeline that has multiple stages it may be useful to not only measure individual
+components but also pay close attention to an end-to-end SLO.
 
 These are key properties to take into account when creating an SLO for a data pipeline but not very
-well suited for our particular case: we deal with logging/monitoring data (or events).
+well suited for our particular case: we deal with logging/monitoring data.
 
 When creating an SLO (or any alert, really) we need to make sure that it is **actionable**. An alert
 due an SLO violation where you cannot do anything is not helpful at all.
@@ -55,7 +55,7 @@ due an SLO violation where you cannot do anything is not helpful at all.
 In our case we are only responsible for one of the _pipelines_ that consume the data. Events are
 produced by our applications (maintained by multiple teams) and are written into our central Kafka
 cluster(s). From there, multiple consumers use the data. Our particular case is ingesting the events
-into a few Elasticsearch clusters that are used for debugging and for visualizing/querying the data.
+into a few Elasticsearch clusters that are used for debugging and visualizing/querying the data.
 
 > How can we best define an SLO specific for our case?
 
@@ -65,7 +65,7 @@ case, our SLO will cover failure modes that are not within the scope of our team
 form of _The pipeline job has completed successfully within Y [seconds, days, minutes]_ doesn't work
 either because our pipelines/processors are always running.
 
-Since we don't control the data flowing through the pipeline, defining a SLO around _data
+Since we don't control the data flowing through the pipeline, defining an SLO around _data
 correctness_ is out of our scope. The producers are the ones that know which data is included in the
 events.
 
@@ -90,18 +90,20 @@ an external user. This works great as a measurement of the general reliability o
 means that any component involved in the request flow from the user that is down should affect the
 SLO. -->
 
+## Our previous approach
+
 Previously we were creating threshold alerts over the _consumer lag_ of our pipelines. If the amount
-of events in the queue that hadn't been consumed yet passed a given value an alert would be
+of events in the queue, that hadn't been consumed yet, passed a given value an alert would be
 triggered.
 
-We define the _lag_ of a kafka consumer group as the difference between the offset of the the last
-message written into the topic and the offset of the last consumed message. We track this value under
-a metric called `kafka_consumergroup_lag`.
-
-{{< mark "lag-query" >}}
-```promql
-sum(kafka_consumergroup_lag) by (topic, consumergroup)
-```
+> We define the _lag_ of a kafka consumer group as the difference between the offset of the the last
+> message written into the topic and the offset of the last consumed message. We track this value under
+> a metric called `kafka_consumergroup_lag`.
+>
+> {{< mark "lag-query" >}}
+> ```promql
+> sum(kafka_consumergroup_lag) by (topic, consumergroup)
+> ```
 
 Over this metric we set up a max threshold (let's say 250k) and we triggered an alert if the result
 of the query went above that value.
@@ -120,14 +122,14 @@ then?
 If instead of thinking about the _number of events to process_ we start to think about how long it
 will take to _process the existing lag_ then it is easier to reason about the alerting conditions.
 
-We do not have to think anymore about how many events are in the queue, or how fast the lag is being
-processed. If we set an SLO over this metric is easier to understand **and communicate** to other
-teams: _this pipeline may have a delay of up to Y [seconds, minutes, hours]_.
+We do not have to think anymore about how many events are in the queue, or how many messages/s are
+written into the topic, or how fast the lag is being processed. An SLO over this metric is easier to
+understand **and communicate** to other teams: _this pipeline may have a delay of up to Y [seconds,
+minutes, hours]_.
 
-This should also help us to fight alert fatigue, we do not need to continuously tweak the threshold
-for each topic (which depending on volume of events). Because we are focusing on _how fast_ the
-processor(s) will consume the existing lag, our alerting is independent of the amount of data written
-to the topic and also resilient to temporary slowdowns that don't make us miss our target.
+Because we are focusing on _how fast_ the processor(s) will consume the existing lag, our alerting is
+independent of the amount of data written to the topic and it is more resilient to temporary
+slowdowns that don't make us miss our target.
 
 In practice this allows to use the _speed_ of the processor as a control variable for the amount of
 lag in the topic, while still focusing in a single numeric dimension.
@@ -158,14 +160,14 @@ topic.
 
 {{< info >}}
 
-If your processor exposes any internal metric that exposes maximum throughput (events/second, for
-example) you should use that metric as part of the SLO calculation. In this post we will focus
-on metrics purely collected from Kafka. The upside is that these metrics are independent from which
-processors/consumers are used but they may be a bit less precise.
+If your processor exposes a __maximum throughput__ metric (events/second, for example) you should use
+that metric as part of the SLO calculation. In this post we will focus on metrics purely collected
+from Kafka. The upside is that these metrics are independent from which processors/consumers are used
+in your pipeline, but they may be a bit less precise.
 
 {{</ info >}}
 
-Putting these two queries together as we mentioned before we get:
+Putting these two queries together:
 
 ```promql
 kafka_consumergroup_lag
@@ -175,8 +177,8 @@ rate(kafka_consumergroup_current_offset_sum[1h])
 
 This query still has one issue, it uses the current "speed of the processor" for calculating how long
 it will take to process the current consumer lag. Unless your processor is running at full throughput
-**all the time** this will lead to longer estimated times for processing the lag. What we *really*
-need is the maximum throughput of the processor:
+**all the time** this will lead to longer estimated times for processing the lag. What we _need_ is
+the maximum throughput of the processor in a given period of time.
 
 ```ruby
 current_lag / max(processor_speed)
@@ -198,12 +200,12 @@ support][subquery] added to Prometheus since version 2.7.
 > rule][recording-rule] for pre-calculating the max throughput of your pipelines.
 
 Keep in mind that this query will only return the max throughput **already seen** (in the requested
-interval). It is also possible that your processor can consume data faster than the values seen in
-the given interval. It is also possible that the speed of your processor changes depending on which
-host is running. The good news is that as soon as the processor shows that is able to process data
-faster the estimated time for consuming the lag will be updated automatically.
+interval). It is possible that your processor can consume data faster than the values seen in the
+given interval. It is also possible that the speed of your processor changes depending on which host
+is running. The good news is that as soon as the processor shows that is able to process data faster
+the estimated time for consuming the lag will be updated automatically.
 
-Combining these two parts into a single query:
+Combining these two expressions into a single query:
 
 ```promql
 kafka_consumergroup_lag
@@ -215,9 +217,9 @@ Graphing these values in Grafana (and setting the Y axis to seconds) we get some
 
 {{< picture "consume-time-graph" "Plot of the time to consume the lag at maximum throughput" >}}
 
-Another benefit of this approach is that just by eyeballing the graph we can answer the question of
-how long is going to take to process certain lag. This was a common question that we ask ourselves
-when we are recovering from an incident, and we try to include in our incident updates.
+> Another benefit of this approach is that just by eyeballing the graph we can answer the question of
+> how long is going to take to process certain lag. This was a common question that we ask ourselves
+> when we are recovering from an incident, and we try to include in our incident updates.
 
 <!-- This new query makes it easier to create an actionable alert that is more resilient to sudden
 temporary bursts or slowdowns of the processor. At the same time, this alert works better than a
@@ -226,8 +228,8 @@ needed to process the lag will increase and it will trigger, even if the number 
 not that high. -->
 
 There is one additional condition that we can add _just_ for our alert. If we get a burst of new data
-but we can see that the lag is going down it is possible that don't want to be alerted at all. We can
-_encode_ this requirement as: _if the lag is increasing_ by adding the following to our query:
+but we can see that the lag is going down it is possible that we don't want to be alerted at all. We
+add the following to our query:
 
 ```promql
 and deriv(
@@ -239,33 +241,33 @@ If the lag is increasing **and** is going to take longer than our defined thresh
 trigger a notification.
 
 > Of course, this type of additional constraints to the alert will depend on your specific
-> environment and how the data is used after it leaves the pipeline.
+> environment and needs.
 
 More complex situations regarding triggering or not a notification (especially if it involves waking
 up teammates) can be encoded in other components like [Alertmanager][alertmanager]. If we are in the
 middle of the day and people are actively using the data then it is more likely that you want to know
-that the data is going to be a bit delayed, and maybe inform the teams that use/own the data. But if
-this happens in the middle of the night and the data is going to be available before people wake up
-in the morning, _maybe_ this is not urgent enough to get on-call engineers out of their bed.
+there is some delay, and potentially inform the teams that use the data. But if this happens in the
+middle of the night and the data is going to be available before people wake up in the morning,
+_maybe_ this is not urgent enough to get on-call engineers out of their bed.
 
 ## Results
 
 We applied this approach to a few of our pipelines, and in a recent incident we noticed the
 difference. For this topic in question we previously had an alert that would trigger if the lag went
 above a fixed threshold of **200k** events. 200k represents roughly 2 times the peak value observed
-for this topic during normal days. This seems like a good value to start with (see panel 1 of the
+for this topic during normal days. This seems like a good value to start with (see panel **1** of the
 [screenshot](#screenshot)).
 
 We had one Grafana panel with the old threshold alert and right next the one that estimates the time
 that is going to take to consume the lag. During the incident, the lag was increasing for this
 particular topic until it reached values above 500k. This triggered our old alerting and we got a
 Slack notification. Taking a look at the new panel that contained the time based estimation (see
-panel 2 of the [screenshot](#screenshot)). Our new query was estimating that the lag _would_ be
-processed in less than 2 minutes.
+panel **2** of the [screenshot](#screenshot)). Our new query was estimating that the lag was going to
+be processed in less than 2 minutes.
 
 {{< mark "screenshot" >}}
-Our new alert would not have fired for this incident, checking the lag a couple of minutes later ...
-it was effectively gone.
+Our new alert did not fire for this incident, checking the lag a couple of minutes later ... it was
+effectively gone.
 
 {{< picture "incident" "Old threshold-based alert next to our new time based" >}}
 
@@ -288,10 +290,10 @@ groups:
     - record: pipeline_throughput
       expr: max_over_time(rate(kafka_consumergroup_current_offset_sum[5m])[2d:5m])
 ```
-
+<!--
 Keep in mind that we are keeping all the labels from the original
 `kafka_consumergroup_current_offset_sum` because the evaluation time for this group is usually quite
-fast.
+fast. -->
 
 <!-- _People vector created by [pch.vector - www.freepik.com](https://www.freepik.com/vectors/people)_ -->
 
