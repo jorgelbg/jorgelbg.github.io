@@ -65,6 +65,7 @@ aside {
   --green: #38b2ac;
   --gray: #eaedee;
   --github: #22292f;
+  --mastodon: #2888cd;
   --red: #e53e3e;
 }
 
@@ -857,6 +858,10 @@ h1 {
   fill: var(--github);
 }
 
+.symbol.mastodon:hover path {
+  fill: var(--mastodon);
+}
+
 .symbol.rss:hover path {
   fill: #ed8936;
 }
@@ -1071,4 +1076,8 @@ picture {
 iframe {
   height: 100%;
   border: none;
+}
+
+a.symbol:hover:before {
+  content: none;
 }
