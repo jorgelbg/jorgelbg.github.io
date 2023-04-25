@@ -1,6 +1,6 @@
 {
   "devDependencies": {
-    "cssnano": "^5.1.13",
+    "cssnano": "^6.0.0",
     "postcss": "^8.2.13",
     "postcss-cli": "^7.1.0",
     "tailwindcss": "^1.6"
