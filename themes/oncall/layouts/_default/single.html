@@ -1,0 +1,38 @@
+{{ define "main" }}
+<article class="post-wrap">
+    <a class="backlink" href="{{ "posts" | absURL }}"><span aria-hidden="true">&larr;</span> all writing</a>
+
+    <header class="post-header">
+        <div class="post-kicker">
+            {{ with .Params.tags }}
+                {{ range . }}
+                    <a class="tag" href="{{ printf "tags/%s" (. | urlize) | absURL }}">{{ . }}</a>
+                {{ end }}
+            {{ end }}
+            <span>{{ .ReadingTime }} min read</span>
+        </div>
+
+        <h1 class="post-title">{{ .Title }}</h1>
+
+        <div class="post-meta">
+            <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2, 2006" }}</time>
+            {{ if and (ne .GitInfo nil) .Site.Params.social.github }}
+                <span class="dot-sep">&middot;</span>
+                <a href="{{ .Site.Params.social.github }}/jorgelbg.github.io/commit/{{ .GitInfo.Hash }}"
+                   title="{{ .GitInfo.Subject }}">last modified {{ .Lastmod.Format "Jan 2, 2006" }} &middot; {{ .GitInfo.AbbreviatedHash }}</a>
+            {{ end }}
+        </div>
+    </header>
+
+    <section id="post-body">
+        {{ .Content }}
+    </section>
+
+    <footer class="post-foot">
+        <span class="post-foot-note">Thanks for reading &mdash; say hi if this helped.</span>
+        {{ partial "share.html" . }}
+    </footer>
+</article>
+
+{{ partial "latest-posts.html" . }}
+{{ end }}

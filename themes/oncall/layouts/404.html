@@ -1,0 +1,24 @@
+{{ define "main" }}
+<section class="error-page">
+    <span class="error-badge"><span class="dot"></span>SEV1 &middot; HTTP 404</span>
+
+    <h1 class="error-code">4<span class="ghost">04</span></h1>
+
+    <h2 class="error-title">This route isn&rsquo;t in the index.</h2>
+
+    <p class="error-desc">
+        The page you&rsquo;re looking for was moved, deleted, or never deployed.
+        The graph is flat, but everything else is fine.
+    </p>
+
+    <svg class="flatline" viewBox="0 0 600 72" preserveAspectRatio="none" aria-hidden="true">
+        <path pathLength="1" d="M0 40 H180 l8 -1 l8 3 l10 -26 l10 44 l10 -20 l8 0 H572"/>
+        <circle class="dot-end" cx="572" cy="40" r="4"/>
+    </svg>
+
+    <div class="error-actions">
+        <a class="btn btn-primary" href="{{ .Site.BaseURL }}"><span aria-hidden="true">&larr;</span> back home</a>
+        <a class="btn btn-ghost" href="{{ "posts" | absURL }}">read the blog</a>
+    </div>
+</section>
+{{ end }}

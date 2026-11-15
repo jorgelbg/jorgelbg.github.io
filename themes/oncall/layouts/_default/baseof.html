@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang | default "en" }}">
+<head>
+{{ partial "head.html" . }}
+</head>
+<body class="{{ if eq .Kind "404" }}kind-404{{ else if .IsHome }}kind-home{{ else if eq .Kind "section" }}kind-list{{ else }}kind-page{{ end }}">
+    <a class="skip-link" href="#main">Skip to content</a>
+    {{ partial "nav.html" . }}
+
+    {{ block "hero" . }}{{ end }}
+
+    <main class="site-main" id="main">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    {{ partial "footer.html" . }}
+    {{ partial "js.html" . }}
+</body>
+</html>

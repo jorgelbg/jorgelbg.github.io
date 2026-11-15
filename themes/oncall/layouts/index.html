@@ -1,0 +1,19 @@
+{{ define "hero" }}{{ partial "hero.html" . }}{{ end }}
+
+{{ define "main" }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+<section class="section">
+    <div class="section-head">
+        <h2 class="section-title">Writing <span class="count">{{ len $posts }}</span></h2>
+        {{ if .Site.Params.enableRSS }}
+            {{ with .OutputFormats.Get "rss" }}
+                <a class="section-link" href="{{ .Permalink }}">rss feed &nearr;</a>
+            {{ end }}
+        {{ end }}
+    </div>
+    <p class="section-sub">Field notes on observability, search, and running things in production.</p>
+
+    {{ partial "cards.html" . }}
+    {{ partial "pagination.html" . }}
+</section>
+{{ end }}

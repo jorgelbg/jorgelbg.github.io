@@ -1,0 +1,17 @@
+{{ define "main" }}
+<section class="section">
+    <div class="section-head">
+        <h1 class="section-title">{{ if eq .Section "posts" }}Writing{{ else }}{{ .Title }}{{ end }} <span class="count">{{ .Paginator.TotalNumberOfElements }}</span></h1>
+        {{ if .Site.Params.enableRSS }}
+            {{ with .OutputFormats.Get "rss" }}
+                <a class="section-link" href="{{ .Permalink }}">rss feed &nearr;</a>
+            {{ end }}
+        {{ end }}
+    </div>
+
+    {{ with .Content }}<div class="section-sub">{{ . }}</div>{{ end }}
+
+    {{ partial "cards.html" . }}
+    {{ partial "pagination.html" . }}
+</section>
+{{ end }}

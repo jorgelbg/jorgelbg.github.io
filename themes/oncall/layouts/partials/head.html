@@ -1,0 +1,71 @@
+<meta charset="utf-8">
+<script>
+(function () {
+  try {
+    var saved = localStorage.getItem('oncall-theme');
+    var theme = (saved === 'dark' || saved === 'light')
+      ? saved
+      : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    document.documentElement.dataset.theme = theme;
+  } catch (e) {}
+})();
+</script>
+<link rel="stylesheet" href="{{ "css/style.css" | absURL }}">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+{{ with .Site.Params.name }}<meta name="author" content="{{ . }}">{{ end }}
+
+{{ $description := .Description | default .Site.Params.description }}
+{{ with $description }}<meta name="description" content="{{ . }}">{{ end }}
+
+{{ hugo.Generator }}
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ with .Site.Params.description }} &mdash; {{ . }}{{ end }}{{ else }}{{ .Title }} &mdash; {{ .Site.Title }}{{ end }}</title>
+
+<link rel="shortcut icon" href="{{ "favicon.ico" | absURL }}">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ "apple-touch-icon.png" | absURL }}">
+<link rel="icon" type="image/png" sizes="32x32" href="{{ "favicon-32x32.png" | absURL }}">
+<link rel="icon" type="image/png" sizes="16x16" href="{{ "favicon-16x16.png" | absURL }}">
+<link rel="manifest" href="{{ "site.webmanifest" | absURL }}">
+<link rel="mask-icon" href="{{ "safari-pinned-tab.svg" | absURL }}" color="#0f9d8d">
+<meta name="msapplication-TileColor" content="#12243f">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf7f1">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0b1524">
+
+{{ range .Site.Params.customCSS }}
+<link rel="stylesheet" href="{{ . | absURL }}">
+{{ end }}
+
+{{ if .Site.Params.enableRSS }}
+{{ with .OutputFormats.Get "rss" }}
+<link href="{{ .Permalink }}" rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}">
+{{ end }}
+{{ end }}
+
+{{ template "_internal/opengraph.html" . }}
+{{ template "_internal/schema.html" . }}
+
+{{- with .Params.images -}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ index . 0 | absURL }}">
+{{- else -}}
+{{- $images := .Resources.ByType "image" -}}
+{{- $featured := $images.GetMatch "*feature*" -}}
+{{- if not $featured }}{{ $featured = $images.GetMatch "{*cover*,*thumbnail*}" }}{{ end -}}
+{{- with $featured -}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ $featured.Permalink }}">
+{{- else -}}
+{{- with .Site.Params.images -}}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="{{ index . 0 | absURL }}">
+{{- else -}}
+<meta name="twitter:card" content="summary">
+{{- end -}}
+{{- end -}}
+{{- end }}
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ with .Description }}{{ . }}{{ else }}{{ if .IsPage }}{{ .Summary | plainify | truncate 160 }}{{ else }}{{ .Site.Params.description }}{{ end }}{{ end }}">
+{{ with .Site.Params.social.twitter -}}
+{{- $username := replace . "https://twitter.com/" "" -}}
+<meta name="twitter:site" content="@{{ $username }}">
+{{- end }}

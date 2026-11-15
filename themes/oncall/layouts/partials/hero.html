@@ -1,0 +1,44 @@
+<section class="hero">
+    <div class="hero-inner">
+        <div class="hero-copy">
+            <p class="kicker"><span class="dot"></span>Site reliability &middot; observability</p>
+
+            <h1 class="hero-title">Keeping search and observability systems <span class="mark">calm</span>, fast, and boring.</h1>
+
+            <p class="hero-lede">
+                I&rsquo;m Jorge &mdash; a Site Reliability Engineer at trivago and part of the
+                Observability squad. I design and operate logging, metrics and tracing
+                pipelines that move terabytes a day, so that humans can sleep.
+            </p>
+
+            <div class="hero-actions">
+                <a class="btn btn-primary" href="{{ "about" | absURL }}">More about me <span class="arrow">&rarr;</span></a>
+                {{ with .Site.Params.social.github }}
+                    <a class="btn btn-ghost" href="{{ . }}" rel="me">GitHub</a>
+                {{ end }}
+                {{ with .Site.Params.social.twitter }}
+                    <a class="btn btn-ghost" href="{{ . }}" rel="me">Twitter</a>
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="hero-figure">
+            <div class="portrait">
+                <a href="{{ "about" | absURL }}" aria-label="About {{ .Site.Params.name }}">
+                    <img src="{{ "images/avatar.png" | absURL }}" alt="Portrait of {{ .Site.Params.name }}">
+                </a>
+            </div>
+
+            <div class="mini-panel" aria-hidden="true">
+                <div class="mini-panel-head"><span>requests / 5m</span><span class="live">live</span></div>
+                <svg viewBox="0 0 200 34" preserveAspectRatio="none">
+                    <path d="M0 26 C 14 24, 20 18, 32 19 C 44 20, 50 26, 62 24 C 74 22, 80 12, 92 14 C 104 16, 110 24, 122 22 C 134 20, 140 9, 152 12 C 164 15, 170 22, 182 19 C 190 17, 195 15, 200 16 L 200 34 L 0 34 Z"
+                          fill="currentColor" opacity="0.12"/>
+                    <path d="M0 26 C 14 24, 20 18, 32 19 C 44 20, 50 26, 62 24 C 74 22, 80 12, 92 14 C 104 16, 110 24, 122 22 C 134 20, 140 9, 152 12 C 164 15, 170 22, 182 19 C 190 17, 195 15, 200 16"
+                          fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+                <div class="mini-panel-foot"><span>p99 42ms</span><span>0 errors</span></div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,40 @@
+<header class="site-header">
+    <div class="header-inner">
+        <a class="brand" href="{{ .Site.BaseURL }}">
+            <span class="brand-mark" aria-hidden="true"></span>jorgelbg
+        </a>
+
+        <nav class="nav-links" aria-label="Main">
+            <a class="nav-link" href="{{ "posts" | absURL }}"
+               {{ if eq .Section "posts" }}aria-current="page"{{ end }}>writing</a>
+            <a class="nav-link" href="{{ "about" | absURL }}"
+               {{ if eq .Section "about" }}aria-current="page"{{ end }}>about</a>
+            {{ with .Site.Params.social.github }}
+                <a class="nav-link nav-hide-sm" href="{{ . }}" rel="me">github</a>
+            {{ end }}
+            {{ if .Site.Params.enableRSS }}
+                {{ with .OutputFormats.Get "rss" }}
+                    <a class="nav-link" href="{{ .Permalink }}">rss</a>
+                {{ end }}
+            {{ end }}
+        </nav>
+
+        <div class="header-right">
+            {{ if eq .Kind "404" }}
+                <span class="chip crit" role="status"><span class="dot"></span>404 &middot; degraded</span>
+            {{ else }}
+                <span class="chip" role="status"><span class="dot"></span>all systems nominal</span>
+            {{ end }}
+
+            <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle dark / light mode">
+                <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <circle cx="12" cy="12" r="4.2"/>
+                    <path d="M12 2.5v2.2M12 19.3v2.2M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2.5 12h2.2M19.3 12h2.2M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/>
+                </svg>
+                <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11Z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>

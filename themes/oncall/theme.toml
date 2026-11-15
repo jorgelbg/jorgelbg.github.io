@@ -1,0 +1,11 @@
+name = "oncall"
+license = "MIT"
+licenselink = ""
+description = "A calm, editorial personal-site theme for an SRE's notebook: warm paper, deep ink, one confident teal, mono details and subtle observability cues. Loosely inspired by the bold, playful design of jackmcdade.com."
+homepage = "https://jorgelbg.me"
+tags = ["blog", "personal", "dark mode", "minimal", "editorial", "observability"]
+min_version = "0.112.0"
+
+[author]
+  name = "Jorge Luis Betancourt"
+  homepage = "https://jorgelbg.me"

@@ -1,0 +1,23 @@
+<ul class="post-list">
+    {{ range where .Paginator.Pages "Section" "ne" "" }}
+        {{ $desc := .Description }}
+        {{ if not $desc }}
+            {{ $desc = .Summary | plainify | truncate 170 }}
+        {{ end }}
+        <li class="post-row">
+            <a href="{{ .Permalink }}">
+                <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006 &middot; Jan 2" | safeHTML }}</time>
+                <div>
+                    <h2>{{ .LinkTitle }}</h2>
+                    {{ with $desc }}<p class="post-desc">{{ . }}</p>{{ end }}
+                    {{ with .Params.tags }}
+                        <div class="post-tags">
+                            {{ range . }}<span class="tag">{{ . }}</span>{{ end }}
+                        </div>
+                    {{ end }}
+                </div>
+                <span class="post-arrow" aria-hidden="true">&rarr;</span>
+            </a>
+        </li>
+    {{ end }}
+</ul>

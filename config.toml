@@ -3,7 +3,7 @@ baseurl = "https://jorgelbg.me"
 themesDir = "themes/"
 languageCode = "en-us"
 title = "Jorge Luis Betancourt"
-theme = "jorgelbg"
+theme = "oncall"
 # Enter your tracking code to enable Google Analytics
 googleAnalytics = "UA-115201846-1"
 # Disable comments by leaving disqusShortname empty
@@ -14,6 +14,12 @@ pygmentsstyle = "fruity"
 # Enable "```" for code blocks
 pygmentscodefences = true
 pygmentsUseClasses = true
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      # posts embed raw HTML (iframes, etc.) — render it like Hugo used to
+      unsafe = true
 enableGitInfo = true
 enableRobotsTXT = true
 
@@ -49,7 +55,13 @@ enableRobotsTXT = true
   title404 = ""
   subtitle404 = ""
 
-# Add additional social link entries underneath
+# Signal uses params.social (supported by current Hugo releases).
+[params.social]
+    twitter  = "https://twitter.com/jorgelbg"
+    github   = "https://github.com/jorgelbg"
+    mastodon = "https://mastodon.social/@jorgelbg"
+
+# Legacy social settings retained for the existing themes.
 [social]
     twitter  = "https://twitter.com/jorgelbg"
     github   = "https://github.com/jorgelbg"

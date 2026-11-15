@@ -130,7 +130,7 @@ We often hear how good Docker is for replicating your local environment in
 production. Or how it can revolutionize your CI/CD pipeline. We also heard about
 the new version of "it works on my machine" 😂
 
-{{< tweet 917564505416073216 >}}
+{{< x user="turnoff_us" id="917564505416073216" >}}
 
 And of course, it's true, but sometimes we forget that it also works the other
 way around. Docker allows developers to apply already proven solutions to

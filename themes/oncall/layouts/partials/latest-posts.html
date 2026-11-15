@@ -1,0 +1,19 @@
+{{ $section := .Site.GetPage "section" "posts" }}
+<section class="more-posts">
+    <div class="section-head">
+        <h2 class="section-title">More writing</h2>
+        {{ with $section }}<a class="section-link" href="{{ .Permalink }}">all posts &rarr;</a>{{ end }}
+    </div>
+    <ul class="more-list">
+        {{ $others := where .Site.RegularPages "Section" "posts" }}
+        {{ $others = where $others "Permalink" "!=" .Permalink }}
+        {{ range first 3 $others }}
+            <li>
+                <a href="{{ .Permalink }}">
+                    <span>{{ .LinkTitle }}</span>
+                    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 2, 2006" }}</time>
+                </a>
+            </li>
+        {{ end }}
+    </ul>
+</section>

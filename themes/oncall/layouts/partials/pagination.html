@@ -1,0 +1,14 @@
+{{ if or (.Paginator.HasPrev) (.Paginator.HasNext) }}
+<nav class="pager" aria-label="Pagination">
+    {{ if .Paginator.HasPrev }}
+        <a class="btn" href="{{ .Paginator.Prev.URL }}"><span class="arrow">&larr;</span> {{ .Site.Params.newerPosts | default "newer posts" }}</a>
+    {{ else }}
+        <span class="spacer"></span>
+    {{ end }}
+    {{ if .Paginator.HasNext }}
+        <a class="btn" href="{{ .Paginator.Next.URL }}">{{ .Site.Params.olderPosts | default "older posts" }} <span class="arrow">&rarr;</span></a>
+    {{ else }}
+        <span class="spacer"></span>
+    {{ end }}
+</nav>
+{{ end }}

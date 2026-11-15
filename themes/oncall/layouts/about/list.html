@@ -1,0 +1,154 @@
+{{ define "main" }}
+<section class="page-head">
+    <p class="kicker"><span class="dot"></span>About</p>
+    <h1 class="page-title">Hi, I&rsquo;m <span class="mark">Jorge</span>.</h1>
+    <p class="page-lede">
+        Software engineer based in D&uuml;sseldorf. I&rsquo;m a Site Reliability Engineer
+        at trivago, working on observability at scale.
+    </p>
+</section>
+
+<div class="about-grid">
+    <div class="about-prose">
+        <p>
+            I&rsquo;m part of the <strong>Observability squad</strong> at trivago, responsible for
+            designing and operating a logging, metrics and tracing pipeline that moves multiple
+            terabytes of data every day. My job is to make that machinery boring: predictable,
+            well-instrumented, and quiet at 3am.
+        </p>
+        <p>
+            Before observability I spent a lot of time with search &mdash; relevance, query
+            pipelines, and the strange places where data and ranking meet. That curiosity about
+            getting the right answer out of messy data never really left.
+        </p>
+        <p>
+            Off the clock I build small tools that scratch my own itches: a Touch&nbsp;ID
+            pinentry for GPG, a playground for Filebeat dissect patterns, and a privacy-first
+            analytics platform that runs at the edge.
+        </p>
+        <p>
+            The best way to reach me is on
+            {{ with .Site.Params.social.twitter }}<a href="{{ . }}" rel="me">Twitter</a>{{ end }}
+            {{ if and .Site.Params.social.twitter .Site.Params.social.github }}or{{ end }}
+            {{ with .Site.Params.social.github }}<a href="{{ . }}" rel="me">GitHub</a>{{ end }}.
+        </p>
+    </div>
+
+    <aside class="now-card">
+        <h2>Currently</h2>
+        <ul class="now-list">
+            <li><span class="label">role</span><span>SRE &middot; Observability @ trivago</span></li>
+            <li><span class="label">based in</span><span>D&uuml;sseldorf, Germany</span></li>
+            <li><span class="label">working on</span><span>Logs, metrics &amp; tracing at scale</span></li>
+            <li><span class="label">status</span><span>all systems nominal</span></li>
+        </ul>
+    </aside>
+</div>
+
+<section class="projects">
+    <div class="section-head">
+        <h2 class="section-title">Projects <span class="count">4</span></h2>
+        {{ with .Site.Params.social.github }}
+            <a class="section-link" href="{{ . }}">github &nearr;</a>
+        {{ end }}
+    </div>
+    <p class="section-sub">Small tools I&rsquo;ve built and still maintain.</p>
+
+    <div class="project-grid">
+        <article class="project-card">
+            <div class="project-head">
+                <span class="project-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7.5" cy="15.5" r="4.5"/><path d="m21 3-9.6 9.6"/><path d="m15.5 8.5 3 3L22 8l-3-3"/></svg>
+                </span>
+                <h3 class="project-name">
+                    <a href="https://github.com/jorgelbg/pinentry-touchid">pinentry-touchid</a>
+                </h3>
+            </div>
+            <p class="project-desc">
+                Custom GPG pinentry program for macOS that allows using Touch&nbsp;ID for fetching
+                the password from the macOS keychain.
+            </p>
+            <div class="card-tags"><span class="tag">gpg</span><span class="tag">macos</span></div>
+        </article>
+
+        <article class="project-card">
+            <div class="project-head">
+                <span class="project-icon" aria-hidden="true">
+                    <svg viewBox="0 0 967 936">
+                        <g fill="none" fill-rule="evenodd">
+                            <g fill-rule="nonzero">
+                                <path fill="currentColor" d="M77.922 805.578h405.203v-28.45H77.922c-25.82 0-46.754-19.103-46.754-42.666V108.687c0-23.57 20.934-42.666 46.754-42.666h685.726c25.832 0 46.754 19.096 46.754 42.666v327.107h31.176V108.687c-.05-39.254-34.91-71.063-77.93-71.109H77.922C34.914 37.624.055 69.433 0 108.688v625.774c.055 39.255 34.914 71.063 77.922 71.116Z"/>
+                                <path fill="currentColor" opacity=".45" d="M110 187.875h621v31H110z"/>
+                                <path fill="#f4ab45" d="M279.059 250.391h109.089v31H279.059z"/>
+                                <path fill="#00bfb3" d="M419.059 250.391h218.179v31H419.059z"/>
+                                <path fill="currentColor" opacity=".45" d="M113.059 374.391h264.933v31H113.059z"/>
+                                <path fill="#00bfb3" d="M113.059 436.734h109.089v31H113.059z"/>
+                                <path fill="#f4ab45" d="M253.32 436.734h124.672v31H253.32z"/>
+                                <path fill="#bf69a6" d="M409.164 374.391H471.5v31h-62.336zm-296.105-124h135v31h-135z"/>
+                                <path fill="currentColor" opacity=".45" d="M113.059 561.41h345v31h-345z"/>
+                                <path fill="#00bfb3" d="M113.059 623.75h109.089v31H113.059z"/>
+                                <path fill="#bf69a6" d="M253.059 623.391h62.336v31h-62.336z"/>
+                                <path fill="#7f9cf5" d="M346.059 623.391h112v31h-112zM409 437.875h112v31H409z"/>
+                                <path fill="#68d391" d="M732.484 899.086c129.114 0 233.766-104.672 233.766-233.774 0-129.113-104.652-233.773-233.766-233.773-129.113 0-233.773 104.66-233.773 233.774.152 129.042 104.723 233.617 233.773 233.773Zm0-436.375c111.887 0 202.602 90.707 202.602 202.601 0 111.895-90.715 202.598-202.602 202.598-111.898 0-202.609-90.703-202.609-202.597.133-111.84 90.762-202.477 202.61-202.602Z"/>
+                                <path fill="#68d391" d="m637.418 673.926-27.898 13.93 31.171 62.34a15.574 15.574 0 0 0 11.45 8.421c.804.125 1.609.192 2.418.203 4.129 0 8.093-1.644 11.023-4.566L852.59 567.238 830.559 545.2 658.824 716.926l-21.406-43Z"/>
+                            </g>
+                            <ellipse cx="127" cy="121.375" fill="currentColor" rx="17" ry="17.5"/>
+                            <ellipse cx="182" cy="121.375" fill="currentColor" rx="17" ry="17.5"/>
+                            <ellipse cx="237" cy="121.375" fill="currentColor" rx="17" ry="17.5"/>
+                        </g>
+                    </svg>
+                </span>
+                <h3 class="project-name">
+                    <a href="https://github.com/jorgelbg/dissect-tester">dissect-tester</a>
+                </h3>
+            </div>
+            <p class="project-desc">
+                Simple API/UI for testing
+                <a href="https://www.elastic.co/guide/en/beats/filebeat/master/dissect.html">Filebeat</a>
+                dissect patterns against sample log lines.
+            </p>
+            <div class="card-tags"><span class="tag">logs</span><span class="tag">parsers</span></div>
+        </article>
+
+        <article class="project-card">
+            <div class="project-head">
+                <span class="project-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5s-3.5-4-4-6.5c-.5 2.5-2 4.9-4 6.5C6 11.1 5 13 5 15a7 7 0 0 0 7 7z"/><path d="M12 22a3 3 0 0 0 3-3c0-1.5-.8-2.6-1.5-3.5S12 13.5 12 12c-.6 1.5-1.2 2.6-2 3.5-.6.9-1 2-1 3.5a3 3 0 0 0 3 3z"/></svg>
+                </span>
+                <h3 class="project-name">
+                    <a href="https://github.com/jorgelbg/cloudflare-access-grafana">cloudflare-access-grafana</a>
+                </h3>
+            </div>
+            <p class="project-desc">
+                Transparent HTTP proxy that runs behind Cloudflare Access and automatically
+                signs users into Grafana.
+            </p>
+            <div class="card-tags"><span class="tag">proxy</span><span class="tag">grafana</span></div>
+        </article>
+
+        <article class="project-card">
+            <div class="project-head">
+                <span class="project-icon" aria-hidden="true">
+                    <svg viewBox="0 0 1273 1375">
+                        <rect width="337" height="783" y="592" fill="#fbbf24" rx="43"/>
+                        <rect width="337" height="429" x="478" y="946" fill="#ea580c" rx="43"/>
+                        <rect width="337" height="1041" x="936" y="334" fill="#60a5fa" rx="43"/>
+                        <path stroke="currentColor" stroke-width="20" d="m165.341 324.575 474 168M1101.68 97.442l-459 412" opacity=".4"/>
+                        <circle cx="162" cy="334" r="90" fill="#fbbf24"/>
+                        <circle cx="636" cy="502" r="90" fill="#ea580c"/>
+                        <circle cx="1095" cy="90" r="90" fill="#60a5fa"/>
+                    </svg>
+                </span>
+                <h3 class="project-name">
+                    <a href="https://github.com/jorgelbg/dashflare">dashflare</a>
+                </h3>
+            </div>
+            <p class="project-desc">
+                Privacy-first analytics for website monitoring. Data collection happens at the
+                edge in a Cloudflare worker, and it&rsquo;s easy to self-host.
+            </p>
+            <div class="card-tags"><span class="tag">analytics</span><span class="tag">edge</span></div>
+        </article>
+    </div>
+</section>
+{{ end }}
