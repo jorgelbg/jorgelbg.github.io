@@ -410,12 +410,23 @@ p { margin: 0 0 1em; }
   text-wrap: balance;
 }
 
-.hero-title .mark {
-  background: linear-gradient(transparent 60%, var(--marker) 60%, var(--marker) 94%, transparent 94%);
+.hero-title .mark,
+.page-title .mark {
+  background-image: linear-gradient(var(--marker), var(--marker));
+  background-repeat: no-repeat;
+  background-position: 0 88%;
+  background-size: 0% 36%;
   padding: 0 0.06em;
+  border-radius: 3px;
   color: inherit;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
+  animation: marker-sweep 0.85s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
+}
+
+@keyframes marker-sweep {
+  from { background-size: 0% 36%; }
+  to   { background-size: 100% 36%; }
 }
 
 .hero-lede {
@@ -999,13 +1010,6 @@ a.tag:hover {
   line-height: 1.02;
   letter-spacing: -0.05em;
   margin: 18px 0 0;
-}
-
-.page-title .mark {
-  background: linear-gradient(transparent 60%, var(--marker) 60%, var(--marker) 94%, transparent 94%);
-  padding: 0 0.06em;
-  -webkit-box-decoration-break: clone;
-  box-decoration-break: clone;
 }
 
 .page-lede {
