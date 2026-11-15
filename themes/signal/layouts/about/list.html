@@ -1,0 +1,13 @@
+{{ define "main" }}
+<section class="about-page">
+  <header class="page-heading"><p class="eyebrow">BEHIND THE KEYBOARD</p><h1>Hi, I’m {{ index (split (.Site.Params.name | default .Site.Title) " ") 0 }}<span class="accent">.</span></h1><p>{{ .Site.Params.bio }}</p></header>
+  <div class="about-intro"><img src="{{ "images/avatar@2x.png" | relURL }}" width="120" height="120" alt="{{ .Site.Params.name | default .Site.Title }}"><div class="prose"><p>{{ .Site.Params.aboutAuthor | default .Site.Params.description }}.</p><p>This is my engineering notebook: practical experiments with logs, metrics, and the systems behind them. I write about making software easier to understand, debug, and operate.</p>{{ if not (in .RawContent "Completely rendered from the theme") }}{{ .Content }}{{ end }}</div></div>
+  <div class="section-heading"><div><p class="eyebrow">BUILDING IN THE OPEN</p><h2>Selected projects</h2></div></div>
+  <div class="project-grid">
+    <a class="project-card" href="https://github.com/jorgelbg/pinentry-touchid"><span class="eyebrow">SECURITY / DEVELOPER TOOLS ↗</span><h3>pinentry-touchid</h3><p>Use Touch ID to retrieve GPG passwords from the macOS Keychain.</p></a>
+    <a class="project-card" href="https://github.com/jorgelbg/dissect-tester"><span class="eyebrow">LOGS / DEVELOPER TOOLS ↗</span><h3>dissect-tester</h3><p>A simple UI for testing Filebeat dissect patterns against sample log lines.</p></a>
+    <a class="project-card" href="https://github.com/jorgelbg/cloudflare-access-grafana"><span class="eyebrow">OBSERVABILITY / AUTHENTICATION ↗</span><h3>cloudflare-access-grafana</h3><p>Connect Cloudflare Access authentication to your Grafana instance.</p></a>
+    <a class="project-card" href="https://github.com/jorgelbg/dashflare"><span class="eyebrow">ANALYTICS / EDGE ↗</span><h3>dashflare</h3><p>Privacy-first, self-hosted website analytics with data collection at the edge.</p></a>
+  </div>
+</section>
+{{ end }}

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+<head>
+  {{ partial "signal/head.html" . }}
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  {{ partial "signal/header.html" . }}
+  <main id="main" class="shell" tabindex="-1">{{ block "main" . }}{{ end }}</main>
+  {{ partial "signal/footer.html" . }}
+</body>
+</html>

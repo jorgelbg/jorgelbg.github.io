@@ -1,0 +1,6 @@
+<article class="post-card">
+  <div class="post-meta"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02, 2006" }}</time><span aria-hidden="true">/</span><span>{{ .ReadingTime }} min read</span></div>
+  <h3><a href="{{ .RelPermalink }}">{{ .Title }} <span class="article-arrow" aria-hidden="true">↗</span></a></h3>
+  <p>{{ .Description | default (.Summary | plainify | truncate 180) | markdownify }}</p>
+  {{ with .GetTerms "tags" }}<ul class="tags" aria-label="Topics">{{ range first 3 . }}<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}</ul>{{ end }}
+</article>

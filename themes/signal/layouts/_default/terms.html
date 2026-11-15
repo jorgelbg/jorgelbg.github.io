@@ -1,0 +1,4 @@
+{{ define "main" }}
+<header class="page-heading"><p class="eyebrow">EXPLORE BY LABEL</p><h1>Follow a signal<span class="count">{{ len .Data.Terms }}</span></h1><p>Pick a topic. Follow the thread. Find something useful.</p></header>
+<div class="terms-grid">{{ range .Data.Terms.ByCount }}<a class="term-card" href="{{ .Page.RelPermalink }}"><span class="hash" aria-hidden="true">#</span><h2>{{ .Page.Title }}</h2><span>{{ .Count }} {{ if eq .Count 1 }}article{{ else }}articles{{ end }} <span aria-hidden="true">↗</span></span></a>{{ end }}</div>
+{{ end }}

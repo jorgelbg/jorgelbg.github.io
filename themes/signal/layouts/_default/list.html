@@ -1,0 +1,9 @@
+{{ define "main" }}
+<header class="page-heading"><p class="eyebrow">{{ if eq .Section "tags" }}FILTERED TRANSMISSIONS{{ else }}THE ENGINEERING JOURNAL{{ end }}</p><h1>{{ if eq .Section "posts" }}All writing{{ else }}{{ .Title }}{{ end }}<span class="count">{{ len .RegularPagesRecursive }}</span></h1>{{ with .Content }}<div class="prose">{{ . }}</div>{{ end }}<p>Notes, experiments, and lessons from building and operating software.</p></header>
+<section class="archive" aria-label="Articles">
+{{ $pages := .RegularPagesRecursive.ByDate.Reverse }}
+{{ $paginator := .Paginate $pages }}
+{{ range $paginator.Pages }}{{ partial "signal/post-card.html" . }}{{ else }}<p>No articles in this collection yet.</p>{{ end }}
+{{ partial "signal/pagination.html" . }}
+</section>
+{{ end }}

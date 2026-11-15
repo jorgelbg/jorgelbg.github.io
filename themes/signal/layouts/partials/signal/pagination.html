@@ -1,0 +1,2 @@
+{{ $paginator := .Paginator }}
+{{ if gt $paginator.TotalPages 1 }}<nav class="pagination" aria-label="Pagination"><div>{{ if $paginator.HasPrev }}<a class="text-link" href="{{ $paginator.Prev.URL }}">← Newer articles</a>{{ end }}</div><span>{{ $paginator.PageNumber }} / {{ $paginator.TotalPages }}</span><div>{{ if $paginator.HasNext }}<a class="text-link" href="{{ $paginator.Next.URL }}">Older articles →</a>{{ end }}</div></nav>{{ end }}

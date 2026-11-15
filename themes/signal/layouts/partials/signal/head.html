@@ -1,0 +1,19 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+{{ $description := .Description | default .Site.Params.bio | default .Site.Params.description | plainify }}
+<title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ .Site.Title }}</title>
+<meta name="description" content="{{ $description }}">
+<link rel="canonical" href="{{ .Permalink }}">
+<meta property="og:title" content="{{ .Title | default .Site.Title }}">
+<meta property="og:description" content="{{ $description }}">
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta name="twitter:card" content="summary">
+<link rel="icon" type="image/svg+xml" href="{{ "signal/favicon.svg" | relURL }}">
+<link rel="stylesheet" href="{{ "signal/style.css" | relURL }}">
+{{ if .Site.Params.enableRSS }}{{ with .Site.Home.OutputFormats.Get "RSS" }}
+<link rel="alternate" type="application/rss+xml" title="{{ $.Site.Title }}" href="{{ .Permalink }}">
+{{ end }}{{ end }}
+{{ range .Site.Params.customCSS }}<link rel="stylesheet" href="{{ . | relURL }}">{{ end }}
+{{ range .Site.Params.customJS }}<script defer src="{{ . | relURL }}"></script>{{ end }}

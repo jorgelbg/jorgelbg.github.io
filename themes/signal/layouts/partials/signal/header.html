@@ -1,0 +1,12 @@
+<header class="site-header shell">
+  <a class="identity" href="{{ .Site.Home.RelPermalink }}" aria-label="{{ .Site.Title }} — home">
+    <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M3 17h6l4-10 6 19 4-13 3 4h3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+    <span>{{ .Site.Params.name | default .Site.Title }}<small>ENGINEERING NOTES</small></span>
+  </a>
+  <nav class="main-nav" aria-label="Main navigation">
+    <a {{ if or .IsHome (eq .Section "posts") }}aria-current="page"{{ end }} href="{{ "posts/" | relURL }}">Writing</a>
+    <a {{ if eq .Section "tags" }}aria-current="page"{{ end }} href="{{ "tags/" | relURL }}">Topics</a>
+    <a {{ if eq .Section "about" }}aria-current="page"{{ end }} href="{{ "about/" | relURL }}">About</a>
+    {{ if .Site.Params.enableRSS }}{{ with .Site.Home.OutputFormats.Get "RSS" }}<a class="rss-link" href="{{ .RelPermalink }}">RSS <span aria-hidden="true">↗</span></a>{{ end }}{{ end }}
+  </nav>
+</header>

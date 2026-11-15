@@ -1,0 +1,14 @@
+<div class="telemetry" role="img" aria-label="Illustrative telemetry dashboard showing metrics, logs, and a distributed trace. Not live monitoring data.">
+  <div class="panel-title"><span><span class="status-dot" aria-hidden="true"></span> system.overview</span><span class="demo-label">ILLUSTRATIVE</span></div>
+  <div class="telemetry-metrics"><div><small>REQUEST RATE</small><strong>2.4k <em>req/s</em></strong><span>↗ steady throughput</span></div><div><small>P99 LATENCY</small><strong>42 <em>ms</em></strong><span>within budget</span></div></div>
+  <div class="chart-label"><span>request_duration_seconds</span><span>last 30 minutes</span></div>
+  <svg class="metric-chart" viewBox="0 0 440 115" fill="none" aria-hidden="true">
+    <defs><linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#50ddb1" stop-opacity=".22"/><stop offset="1" stop-color="#50ddb1" stop-opacity="0"/></linearGradient></defs>
+    <path d="M0 25H440M0 60H440M0 95H440M55 0V115M165 0V115M275 0V115M385 0V115" stroke="#223239" stroke-dasharray="3 5"/>
+    <path d="M0 82 12 78 24 83 36 67 48 73 60 62 72 69 84 57 96 65 108 60 120 70 132 55 144 62 156 50 168 59 180 47 192 55 204 45 216 55 228 40 240 48 252 34 264 44 276 35 288 42 300 25 312 37 324 29 336 40 348 27 360 33 372 21 384 30 396 25 408 34 420 23 440 28V115H0Z" fill="url(#chart-fill)"/>
+    <path d="m0 82 12-4 12 5 12-16 12 6 12-11 12 7 12-12 12 8 12-5 12 10 12-15 12 7 12-12 12 9 12-12 12 8 12-10 12 10 12-15 12 8 12-14 12 10 12-9 12 7 12-17 12 12 12-8 12 11 12-13 12 6 12-12 12 9 12-5 12 9 12-11 20 5" stroke="#50ddb1" stroke-width="2"/>
+  </svg>
+  <div class="chart-axis"><span>−30m</span><span>−15m</span><span>now</span></div>
+  <div class="trace"><div class="chart-label"><span>trace / request lifecycle</span><span>42ms</span></div><div class="trace-row"><span>gateway</span><i style="--start:0%;--length:94%"></i></div><div class="trace-row"><span>api.resolve</span><i style="--start:12%;--length:70%"></i></div><div class="trace-row"><span>db.query</span><i style="--start:28%;--length:39%"></i></div></div>
+  <div class="log-line"><span>INFO</span> request completed <b>status=200</b><span class="cursor" aria-hidden="true">▌</span></div>
+</div>

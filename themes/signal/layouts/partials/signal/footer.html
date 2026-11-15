@@ -1,0 +1,4 @@
+<footer class="site-footer shell">
+  <div><a class="footer-brand" href="{{ .Site.Home.RelPermalink }}"><span class="status-dot" aria-hidden="true"></span> Less noise. More signal.</a><p>© {{ now.Format "2006" }} {{ .Site.Params.name | default .Site.Title }}</p></div>
+  <nav aria-label="Social links">{{ range $name, $url := .Site.Params.social }}<a href="{{ $url }}" {{ if eq $name "mastodon" }}rel="me"{{ end }}>{{ $name | humanize }} <span aria-hidden="true">↗</span></a>{{ end }}<a href="https://gohugo.io/">Built with Hugo ↗</a></nav>
+</footer>

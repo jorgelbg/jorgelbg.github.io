@@ -1,0 +1,25 @@
+{{ define "main" }}
+{{ $posts := where .Site.RegularPages "Section" "posts" }}
+<section class="hero">
+  <div class="hero-copy">
+    <p class="eyebrow"><span class="status-dot" aria-hidden="true"></span> OBSERVABILITY / SITE RELIABILITY</p>
+    <h1>Making sense of<br>complex <span>systems.</span></h1>
+    <p class="hero-description">Field notes on observability, reliable infrastructure, and the tools that help us understand what’s happening in production.</p>
+    <div class="hero-actions"><a class="button" href="#writing">Explore the writing <span aria-hidden="true">↓</span></a><a class="text-link" href="{{ "about/" | relURL }}">Behind the keyboard <span aria-hidden="true">↗</span></a></div>
+    <p class="hero-byline">{{ .Site.Params.bio | default .Site.Params.description }}</p>
+  </div>
+  {{ partial "signal/telemetry.html" . }}
+</section>
+<div class="signal-strip" aria-label="Topics of this blog"><span><i class="status-dot" aria-hidden="true"></i> CONNECTING THE DOTS</span><span>01 <b>Logs</b></span><span>02 <b>Metrics</b></span><span>03 <b>Traces</b></span><span class="strip-end">From data to understanding <span aria-hidden="true">↗</span></span></div>
+<section id="writing" class="writing-section">
+  <div class="section-heading"><div><p class="eyebrow">THE ENGINEERING JOURNAL</p><h2>Latest transmissions<span class="count">{{ len $posts }}</span></h2></div><a class="text-link" href="{{ "posts/" | relURL }}">All articles <span aria-hidden="true">↗</span></a></div>
+  <div class="journal-grid">
+    <div>{{ range first 5 $posts.ByDate.Reverse }}{{ partial "signal/post-card.html" . }}{{ else }}<p>No articles yet. The next transmission is on its way.</p>{{ end }}</div>
+    <aside class="sidebar" aria-label="Explore this site">
+      <section class="side-panel"><p class="eyebrow">EXPLORE BY LABEL</p><h3>Follow a signal</h3><div class="topic-list">{{ range first 8 .Site.Taxonomies.tags.ByCount }}<a href="{{ .Page.RelPermalink }}"><span><span class="hash">#</span> {{ .Page.Title }}</span><span class="topic-count">{{ .Count }}</span></a>{{ end }}</div><a class="text-link" href="{{ "tags/" | relURL }}">All topics <span aria-hidden="true">→</span></a></section>
+      <section class="side-panel about-panel"><span class="terminal-prompt" aria-hidden="true">&gt;_</span><h3>Hi, I’m {{ index (split (.Site.Params.name | default .Site.Title) " ") 0 }}.</h3><p>{{ .Site.Params.aboutAuthor | default .Site.Params.bio }}.</p><a class="text-link" href="{{ "about/" | relURL }}">More about me <span aria-hidden="true">↗</span></a></section>
+      {{ if .Site.Params.enableRSS }}{{ with .Site.Home.OutputFormats.Get "RSS" }}<a class="feed-panel" href="{{ .RelPermalink }}"><span aria-hidden="true">◉</span><span>Subscribe to the signal<small>No algorithm. Just RSS.</small></span><span aria-hidden="true">↗</span></a>{{ end }}{{ end }}
+    </aside>
+  </div>
+</section>
+{{ end }}
