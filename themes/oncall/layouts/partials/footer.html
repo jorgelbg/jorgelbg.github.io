@@ -1,43 +1,16 @@
-<footer class="site-footer">
+<footer class="site-footer notebook-footer">
     <div class="footer-inner">
-        <div class="footer-top">
-            <div class="footer-brand">
-                <a class="brand" href="{{ .Site.BaseURL }}">
-                    <span class="brand-mark" aria-hidden="true"></span>jorgelbg
-                </a>
-                <p>{{ .Site.Params.bio }}</p>
-            </div>
-
-            <nav class="footer-links" aria-label="Elsewhere">
-                {{ range $key, $val := .Site.Params.social }}
-                    <a href="{{ $val }}" rel="me">{{ $key }}</a>
-                {{ end }}
-                {{ if .Site.Params.enableRSS }}
-                    {{ with .OutputFormats.Get "rss" }}
-                        <a href="{{ .Permalink }}">rss</a>
-                    {{ end }}
-                {{ end }}
+        <div class="notebook-footer-top">
+            <div><p class="notebook-footer-invitation">Thanks for stopping by<span class="notebook-period">.</span></p><p>A personal notebook, not a publishing schedule.</p></div>
+            <a class="notebook-signature" href="{{ "about" | relURL }}" aria-label="About Jorge">Jorge<span aria-hidden="true"> ↗</span></a>
+        </div>
+        <div class="notebook-footer-bottom">
+            <span>© {{ now.Format "2006" }} {{ .Site.Params.name }}</span>
+            <nav aria-label="Elsewhere">
+                {{ range $key, $val := .Site.Params.social }}<a href="{{ $val }}" rel="me">{{ $key }}</a>{{ end }}
+                {{ if .Site.Params.enableRSS }}{{ with .OutputFormats.Get "rss" }}<a href="{{ .RelPermalink }}">rss</a>{{ end }}{{ end }}
             </nav>
-        </div>
-
-        <div class="uptime">
-            <div class="uptime-bars" aria-label="90-day uptime history">
-                {{ range $i := seq 44 }}
-                    {{ $h := add 5 (mod (mul $i 7) 12) }}
-                    {{ $warn := eq (mod (mul $i 17) 47) 5 }}
-                    {{ if $warn }}
-                        <span style="height: {{ $h }}px" class="warn" tabindex="0" data-incident="Nov 14 · 11m degraded — it was DNS"></span>
-                    {{ else }}
-                        <span style="height: {{ $h }}px"></span>
-                    {{ end }}
-                {{ end }}
-            </div>
-            <span class="uptime-label">99.98% uptime &middot; no open incidents</span>
-        </div>
-
-        <div class="footer-bottom">
-            <span>&copy; {{ now.Format "2006" }} {{ .Site.Params.name }}</span>
-            <span>Built with Hugo &middot; no pager needed</span>
+            <span>Made with Hugo. Read at your own pace.</span>
         </div>
     </div>
 </footer>

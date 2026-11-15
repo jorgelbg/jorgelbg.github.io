@@ -4,6 +4,7 @@ description: "Use Docker, ELK stack, Prometheus and Grafana to solve common prob
 date: 2018-08-23T05:42:44+02:00
 tags: ["prometheus", "grafana", "elk"]
 draft: false
+marginNote: "An older note about a still-familiar problem: getting useful answers out of local logs."
 ---
 
 This post is a personal comment. I'm going to talk about how using some tools

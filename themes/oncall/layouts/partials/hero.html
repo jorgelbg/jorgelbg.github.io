@@ -1,75 +1,16 @@
-<section class="hero">
-    <div class="hero-inner">
-        <div class="hero-copy">
-            <p class="kicker"><span class="dot"></span>Site reliability &middot; observability</p>
-
-            <h1 class="hero-title">Keeping search and <span class="mark">observability</span> systems calm, fast, and boring.</h1>
-
-            <p class="hero-lede">
-                I&rsquo;m Jorge &mdash; a Site Reliability Engineer at trivago and part of the
-                Observability squad. I design and operate logging, metrics and tracing
-                pipelines that move terabytes a day, so that humans can sleep.
-            </p>
-
-            <div class="hero-actions">
-                <a class="btn btn-primary" href="{{ "about" | absURL }}">More about me <span class="arrow">&rarr;</span></a>
-                {{ with .Site.Params.social.github }}
-                    <a class="btn btn-ghost" href="{{ . }}" rel="me">GitHub</a>
-                {{ end }}
-                {{ with .Site.Params.social.twitter }}
-                    <a class="btn btn-ghost" href="{{ . }}" rel="me">Twitter</a>
-                {{ end }}
-            </div>
-        </div>
-
-        <div class="hero-figure">
-            <div class="hero-note" aria-hidden="true">
-                <svg viewBox="0 0 56 38" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M52 8 C 30 4, 14 14, 10 32"/>
-                    <path d="M4 25 L 10 33 L 18 27"/>
-                </svg>
-                <span>quiet pagers,<br>happy humans</span>
-            </div>
-
-            <div class="portrait">
-                <a href="{{ "about" | absURL }}" aria-label="About {{ .Site.Params.name }}">
-                    <img src="{{ "images/avatar.png" | absURL }}" alt="Portrait of {{ .Site.Params.name }}">
-                </a>
-            </div>
-
-            <div class="mini-panel" aria-hidden="true">
-                <div class="mini-panel-head">
-                    <span>requests / 5m</span>
-                    <span class="mini-status">
-                        <span class="state-ok">live</span>
-                        <span class="state-spike">spike</span>
-                    </span>
-                </div>
-                <div class="mini-panel-chart">
-                    <svg class="spark-track" viewBox="0 0 600 38" preserveAspectRatio="none">
-                        <g class="spark-calm">
-                            <path d="M0 26 C 18 26, 28 19, 46 20 C 64 21, 74 28, 94 25 C 114 22, 126 17, 146 20 C 166 23, 180 26, 200 26 C 220 26, 240 24, 258 25 C 268 25, 273 4, 282 4 C 291 4, 295 31, 303 29 C 310 27, 314 13, 322 13 C 330 13, 336 26, 352 25 C 370 24, 384 26, 400 26 C 418 26, 428 19, 446 20 C 464 21, 474 28, 494 25 C 514 22, 526 17, 546 20 C 566 23, 580 26, 600 26 L 600 38 L 0 38 Z"
-                                  fill="currentColor" opacity="0.13"/>
-                            <path d="M0 26 C 18 26, 28 19, 46 20 C 64 21, 74 28, 94 25 C 114 22, 126 17, 146 20 C 166 23, 180 26, 200 26 C 220 26, 240 24, 258 25 C 268 25, 273 4, 282 4 C 291 4, 295 31, 303 29 C 310 27, 314 13, 322 13 C 330 13, 336 26, 352 25 C 370 24, 384 26, 400 26 C 418 26, 428 19, 446 20 C 464 21, 474 28, 494 25 C 514 22, 526 17, 546 20 C 566 23, 580 26, 600 26"
-                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </g>
-                        <g class="spark-hot">
-                            <path d="M0 26 C 18 26, 28 19, 46 20 C 64 21, 74 28, 94 25 C 114 22, 126 17, 146 20 C 166 23, 180 26, 200 26 C 220 26, 240 24, 258 25 C 268 25, 273 4, 282 4 C 291 4, 295 31, 303 29 C 310 27, 314 13, 322 13 C 330 13, 336 26, 352 25 C 370 24, 384 26, 400 26 C 418 26, 428 19, 446 20 C 464 21, 474 28, 494 25 C 514 22, 526 17, 546 20 C 566 23, 580 26, 600 26 L 600 38 L 0 38 Z"
-                                  fill="currentColor" opacity="0.16"/>
-                            <path d="M0 26 C 18 26, 28 19, 46 20 C 64 21, 74 28, 94 25 C 114 22, 126 17, 146 20 C 166 23, 180 26, 200 26 C 220 26, 240 24, 258 25 C 268 25, 273 4, 282 4 C 291 4, 295 31, 303 29 C 310 27, 314 13, 322 13 C 330 13, 336 26, 352 25 C 370 24, 384 26, 400 26 C 418 26, 428 19, 446 20 C 464 21, 474 28, 494 25 C 514 22, 526 17, 546 20 C 566 23, 580 26, 600 26"
-                                  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle cx="282" cy="4" r="2.8" fill="currentColor"/>
-                        </g>
-                    </svg>
-                </div>
-                <div class="mini-panel-foot">
-                    <span class="mini-latency">
-                        <span class="state-ok">p99 42ms</span>
-                        <span class="state-spike">p99 312ms</span>
-                    </span>
-                    <span>0 errors</span>
-                </div>
-            </div>
+<section class="notebook-intro" aria-labelledby="notebook-title">
+    <div class="notebook-intro-copy">
+        <p class="notebook-eyebrow">Jorge’s corner of the internet</p>
+        <h1 id="notebook-title">Working things out.<br><em>Writing them down.</em></h1>
+        <p class="notebook-hello">Hi, I’m <a href="{{ "about" | relURL }}">Jorge</a> — a software engineer in Düsseldorf.</p>
+        <p class="notebook-deck">I work on search and observability at trivago. This is where I write about the things I learn along the way: systems, small tools, and the occasional rabbit hole.</p>
+        <div class="notebook-intro-links">
+            <a href="{{ "about" | relURL }}">A little more about me <span aria-hidden="true">↗</span></a>
+            {{ with .Site.Params.social.github }}<a href="{{ . }}" rel="me">Things I’ve made <span aria-hidden="true">↗</span></a>{{ end }}
         </div>
     </div>
+    <figure class="notebook-portrait">
+        <a href="{{ "about" | relURL }}" aria-label="More about Jorge"><img src="{{ "images/avatar.png" | relURL }}" alt="Jorge outdoors, wearing sunglasses" width="256" height="256" fetchpriority="high"></a>
+        <figcaption><svg viewBox="0 0 70 42" fill="none" aria-hidden="true"><path d="M65 34C30 37 15 24 11 6M4 13L11 5L19 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>The person<br>behind the posts.</figcaption>
+    </figure>
 </section>

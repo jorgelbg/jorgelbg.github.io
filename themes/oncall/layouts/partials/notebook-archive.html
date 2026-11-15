@@ -1,0 +1,10 @@
+{{ range .pages.GroupByDate "2006" }}
+<div class="notebook-year">
+    {{ if eq $.level 2 }}<h2>{{ .Key }}</h2>{{ else }}<h3>{{ .Key }}</h3>{{ end }}
+    <ul>
+        {{ range .Pages }}
+        <li><a href="{{ .RelPermalink }}"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "Jan 02" }}</time><span>{{ .LinkTitle }}</span><span class="notebook-archive-arrow" aria-hidden="true">↗</span></a></li>
+        {{ end }}
+    </ul>
+</div>
+{{ end }}

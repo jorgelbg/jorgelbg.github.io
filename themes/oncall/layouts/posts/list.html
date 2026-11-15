@@ -1,0 +1,8 @@
+{{ define "main" }}
+<section class="notebook-archive-page" aria-labelledby="archive-title">
+    <a class="backlink" href="{{ "/" | relURL }}"><span aria-hidden="true">←</span> Back home</a>
+    <p class="notebook-eyebrow">The notebook</p>
+    <header class="notebook-section-head"><h1 id="archive-title">All the writing<span class="notebook-period">.</span></h1><p>A chronological collection of things learned, built, and figured out.</p></header>
+    {{ partial "notebook-archive.html" (dict "pages" .RegularPages.ByDate.Reverse "level" 2) }}
+</section>
+{{ end }}

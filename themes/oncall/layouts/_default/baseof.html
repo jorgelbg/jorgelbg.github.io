@@ -3,13 +3,13 @@
 <head>
 {{ partial "head.html" . }}
 </head>
-<body class="{{ if eq .Kind "404" }}kind-404{{ else if .IsHome }}kind-home{{ else if eq .Kind "section" }}kind-list{{ else }}kind-page{{ end }}">
+<body class="field-notes {{ if eq .Kind "404" }}kind-404{{ else if .IsHome }}kind-home{{ else if eq .Kind "section" }}kind-list{{ else }}kind-page{{ end }}">
     <a class="skip-link" href="#main">Skip to content</a>
     {{ partial "nav.html" . }}
 
     {{ block "hero" . }}{{ end }}
 
-    <main class="site-main" id="main">
+    <main class="site-main" id="main" tabindex="-1">
         {{ block "main" . }}{{ end }}
     </main>
 

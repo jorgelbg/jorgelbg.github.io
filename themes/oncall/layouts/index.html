@@ -1,19 +1,37 @@
 {{ define "hero" }}{{ partial "hero.html" . }}{{ end }}
 
 {{ define "main" }}
-{{ $posts := where .Site.RegularPages "Section" "posts" }}
-<section class="section">
-    <div class="section-head">
-        <h2 class="section-title">Writing <span class="count">{{ len $posts }}</span></h2>
-        {{ if .Site.Params.enableRSS }}
-            {{ with .OutputFormats.Get "rss" }}
-                <a class="section-link" href="{{ .Permalink }}">rss feed &nearr;</a>
+{{ $posts := (where .Site.RegularPages "Section" "posts").ByDate.Reverse }}
+<section class="notebook-section notebook-selections" aria-labelledby="selections-title">
+    <div class="notebook-section-label"><span aria-hidden="true">01</span><p>A few starting points</p></div>
+    <div class="notebook-section-content">
+        <header class="notebook-section-head"><h2 id="selections-title">If you’re new here<span class="notebook-period">.</span></h2><p>No particular order. Just a couple of ways in.</p></header>
+        <div class="notebook-selected-list">
+            {{ with .Site.GetPage "/posts/logs-metrics-for-small-data" }}
+            <article class="notebook-selected">
+                <p class="notebook-category">On making sense of things</p>
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }} <span aria-hidden="true">↗</span></a></h3>
+                <p>Big tools, small problems. What happens when the observability stack comes home to a laptop?</p>
+                <span class="notebook-reading-time">{{ .ReadingTime }} minute read · {{ .Date.Format "2006" }}</span>
+            </article>
             {{ end }}
-        {{ end }}
+            {{ with .Site.GetPage "/posts/2021/pinentry-touchid" }}
+            <article class="notebook-selected">
+                <p class="notebook-category">On scratching your own itch</p>
+                <h3><a href="{{ .RelPermalink }}">{{ .Title }} <span aria-hidden="true">↗</span></a></h3>
+                <p>A small tool born of a familiar annoyance: typing the same password, over and over.</p>
+                <span class="notebook-reading-time">{{ .ReadingTime }} minute read · {{ .Date.Format "2006" }}</span>
+            </article>
+            {{ end }}
+        </div>
     </div>
-    <p class="section-sub">Field notes on observability, search, and running things in production.</p>
+</section>
 
-    {{ partial "cards.html" . }}
-    {{ partial "pagination.html" . }}
+<section class="notebook-section notebook-writing" aria-labelledby="writing-title">
+    <div class="notebook-section-label"><span aria-hidden="true">02</span><p>The notebook</p></div>
+    <div class="notebook-section-content">
+        <header class="notebook-section-head notebook-writing-head"><div><h2 id="writing-title">All the writing<span class="notebook-period">.</span></h2><p>Things learned, built, and figured out along the way.</p></div>{{ if .Site.Params.enableRSS }}{{ with .OutputFormats.Get "rss" }}<a class="notebook-rss" href="{{ .RelPermalink }}">Follow via RSS <span aria-hidden="true">↗</span></a>{{ end }}{{ end }}</header>
+        {{ partial "notebook-archive.html" (dict "pages" $posts "level" 3) }}
+    </div>
 </section>
 {{ end }}

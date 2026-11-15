@@ -1,51 +1,21 @@
 {{ define "main" }}
-<article class="post-wrap">
-    <a class="backlink" href="{{ "posts" | absURL }}"><span aria-hidden="true">&larr;</span> all writing</a>
-
+<article class="post-wrap notebook-post">
+    <a class="backlink" href="{{ "posts" | relURL }}"><span aria-hidden="true">←</span> Back to the notebook</a>
     <header class="post-header">
-        <div class="post-kicker">
-            {{ with .Params.tags }}
-                {{ range . }}
-                    <a class="tag" href="{{ printf "tags/%s" (. | urlize) | absURL }}">{{ . }}</a>
-                {{ end }}
-            {{ end }}
-        </div>
-
+        <p class="notebook-eyebrow">{{ .Date.Format "January 2, 2006" }} <span aria-hidden="true">·</span> {{ .ReadingTime }} minute read</p>
         <h1 class="post-title">{{ .Title }}</h1>
-
-        <div class="trace-bar">
-            <div class="trace-kv">
-                <span class="k">ts</span>
-                <time class="v" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2006-01-02" }}</time>
-            </div>
-            <div class="trace-kv">
-                <span class="k">span</span>
-                <span class="v">{{ .ReadingTime }}m read</span>
-            </div>
-            {{ if and (ne .GitInfo nil) .Site.Params.social.github }}
-            <div class="trace-kv">
-                <span class="k">rev</span>
-                <a class="v" href="{{ .Site.Params.social.github }}/jorgelbg.github.io/commit/{{ .GitInfo.Hash }}"
-                   title="Last modified {{ .Lastmod.Format "Jan 2, 2006" }}: {{ .GitInfo.Subject }}">{{ .GitInfo.AbbreviatedHash }}</a>
-            </div>
-            {{ end }}
-            <div class="trace-waterfall" aria-hidden="true">
-                <span class="wf-1"></span>
-                <span class="wf-2"></span>
-                <span class="wf-3"></span>
-            </div>
-        </div>
+        {{ with .GetTerms "tags" }}<ul class="notebook-post-topics" aria-label="Topics">{{ range . }}<li><a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a></li>{{ end }}</ul>{{ end }}
     </header>
-
-    <section id="post-body">
-        {{ .Content }}
-    </section>
-
-    <footer class="post-foot">
-        <span class="post-foot-note">Thanks for reading &mdash; say hi if this helped.</span>
-        {{ partial "share.html" . }}
+    <div class="notebook-reading-layout">
+        {{ with .Params.marginNote }}<aside class="notebook-margin-note" aria-label="In the margin"><span aria-hidden="true">↳</span><p>{{ . }}</p></aside>{{ end }}
+        <section id="post-body" aria-label="Article">{{ .Content }}</section>
+    </div>
+    <footer class="notebook-post-signoff">
+        <span class="notebook-endmark" aria-hidden="true">✳</span>
+        <p>Thanks for reading.<br>I’m Jorge. I write about software and the things I learn building it.</p>
+        <a href="{{ "about" | relURL }}">More about me <span aria-hidden="true">↗</span></a>
+        {{ if .Site.Params.enableRSS }}{{ with .Site.Home.OutputFormats.Get "rss" }}<span aria-hidden="true"> / </span><a href="{{ .RelPermalink }}">Keep in touch via RSS <span aria-hidden="true">↗</span></a>{{ end }}{{ end }}
     </footer>
 </article>
-
 {{ partial "latest-posts.html" . }}
 {{ end }}

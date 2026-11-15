@@ -20,19 +20,6 @@
         </nav>
 
         <div class="header-right">
-            {{ if eq .Kind "404" }}
-                <span class="chip crit" role="status"><span class="dot"></span>404 &middot; degraded</span>
-            {{ else }}
-                <input type="checkbox" id="chaos-toggle" class="chaos-input" aria-label="Simulate incident (Chaos Monkey)">
-                <label class="chip chaos-chip" for="chaos-toggle" title="Click to toggle Chaos Monkey">
-                    <span class="dot"></span>
-                    <span class="chip-text">
-                        <span class="chip-nominal">all systems nominal</span>
-                        <span class="chip-chaos">sev-2 &middot; chaos active</span>
-                    </span>
-                </label>
-            {{ end }}
-
             <button class="theme-toggle" type="button" aria-label="Toggle color theme" title="Toggle dark / light mode">
                 <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                     <circle cx="12" cy="12" r="4.2"/>
@@ -44,7 +31,4 @@
             </button>
         </div>
     </div>
-    {{ if and .IsPage (eq .Section "posts") }}
-        <div class="scroll-trace" aria-hidden="true"></div>
-    {{ end }}
 </header>
