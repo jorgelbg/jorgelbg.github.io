@@ -1,14 +1,67 @@
-<div class="telemetry" role="img" aria-label="Illustrative telemetry dashboard showing metrics, logs, and a distributed trace. Not live monitoring data.">
-  <div class="panel-title"><span><span class="status-dot" aria-hidden="true"></span> system.overview</span><span class="demo-label">ILLUSTRATIVE</span></div>
-  <div class="telemetry-metrics"><div><small>REQUEST RATE</small><strong>2.4k <em>req/s</em></strong><span>↗ steady throughput</span></div><div><small>P99 LATENCY</small><strong>42 <em>ms</em></strong><span>within budget</span></div></div>
-  <div class="chart-label"><span>request_duration_seconds</span><span>last 30 minutes</span></div>
-  <svg class="metric-chart" viewBox="0 0 440 115" fill="none" aria-hidden="true">
-    <defs><linearGradient id="chart-fill" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#50ddb1" stop-opacity=".22"/><stop offset="1" stop-color="#50ddb1" stop-opacity="0"/></linearGradient></defs>
-    <path d="M0 25H440M0 60H440M0 95H440M55 0V115M165 0V115M275 0V115M385 0V115" stroke="#223239" stroke-dasharray="3 5"/>
-    <path d="M0 82 12 78 24 83 36 67 48 73 60 62 72 69 84 57 96 65 108 60 120 70 132 55 144 62 156 50 168 59 180 47 192 55 204 45 216 55 228 40 240 48 252 34 264 44 276 35 288 42 300 25 312 37 324 29 336 40 348 27 360 33 372 21 384 30 396 25 408 34 420 23 440 28V115H0Z" fill="url(#chart-fill)"/>
-    <path d="m0 82 12-4 12 5 12-16 12 6 12-11 12 7 12-12 12 8 12-5 12 10 12-15 12 7 12-12 12 9 12-12 12 8 12-10 12 10 12-15 12 8 12-14 12 10 12-9 12 7 12-17 12 12 12-8 12 11 12-13 12 6 12-12 12 9 12-5 12 9 12-11 20 5" stroke="#50ddb1" stroke-width="2"/>
+<div class="telemetry" role="img" tabindex="0" aria-label="Abstract observability illustration: metric waves and distributed trace paths connect a constellation of services. Decorative, not live data. Hover or focus to pause the animation.">
+  <svg class="signal-constellation" viewBox="0 0 520 460" fill="none" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="signal-aura"><stop stop-color="#69e0b5" stop-opacity=".1"/><stop offset="1" stop-color="#69e0b5" stop-opacity="0"/></radialGradient>
+      <linearGradient id="signal-wave" x1="40" y1="0" x2="480" y2="0" gradientUnits="userSpaceOnUse"><stop stop-color="#69e0b5" stop-opacity="0"/><stop offset=".25" stop-color="#69e0b5"/><stop offset=".75" stop-color="#8ebeff"/><stop offset="1" stop-color="#8ebeff" stop-opacity="0"/></linearGradient>
+      <pattern id="signal-dots" width="24" height="24" patternUnits="userSpaceOnUse"><circle cx="12" cy="12" r=".8" fill="#53736c" fill-opacity=".28"/></pattern>
+    </defs>
+
+    <circle cx="264" cy="218" r="218" fill="url(#signal-aura)"/>
+    <circle cx="264" cy="218" r="195" fill="url(#signal-dots)"/>
+    <g class="signal-orbits">
+      <circle cx="264" cy="218" r="76"/>
+      <circle cx="264" cy="218" r="136"/>
+      <circle cx="264" cy="218" r="194" stroke-dasharray="2 10"/>
+      <path d="M264 15v20m0 366v20M61 218h20m366 0h20"/>
+    </g>
+    <g class="signal-ripples">
+      <circle class="signal-ripple" cx="264" cy="218" r="58"/>
+      <circle class="signal-ripple signal-ripple-late" cx="264" cy="218" r="58"/>
+    </g>
+
+    <!-- Shared geometry keeps the moving trace fragments on their service paths. -->
+    <g class="signal-paths">
+      <path id="signal-route-a" d="M95 158h65q18 0 30 18l26 28q12 14 29 14h19"/>
+      <path id="signal-route-b" d="M187 72v47q0 17 17 28l41 29q19 12 19 42"/>
+      <path id="signal-route-c" d="M264 218h56q18 0 29-19l44-76"/>
+      <path id="signal-route-d" d="M264 218h47q18 0 31 16l42 48q12 15 33 15h24"/>
+      <path id="signal-route-e" d="M264 218v52q0 18-17 30l-48 32q-16 11-16 31"/>
+      <path id="signal-route-f" d="M264 218h-35q-16 0-28 15l-29 36q-12 15-30 15h-38"/>
+    </g>
+    <g class="signal-flow">
+      <use href="#signal-route-a" class="flow-a"/>
+      <use href="#signal-route-b" class="flow-b"/>
+      <use href="#signal-route-c" class="flow-c"/>
+      <use href="#signal-route-d" class="flow-d"/>
+      <use href="#signal-route-e" class="flow-e"/>
+      <use href="#signal-route-f" class="flow-f"/>
+    </g>
+
+    <g class="signal-nodes">
+      <g transform="translate(95 158)"><circle r="15"/><circle class="node-core" r="4"/></g>
+      <g transform="translate(187 72)"><circle r="12"/><circle class="node-core" r="3"/></g>
+      <g transform="translate(393 123)"><circle r="18"/><circle class="node-core" r="5"/></g>
+      <g transform="translate(441 297)"><circle r="13"/><circle class="node-core" r="3"/></g>
+      <g transform="translate(183 363)"><circle r="16"/><circle class="node-core" r="4"/></g>
+      <g transform="translate(104 284)"><circle r="10"/><circle class="node-core" r="3"/></g>
+    </g>
+    <g class="signal-hub">
+      <circle cx="264" cy="218" r="31"/>
+      <path d="m246 219 9-1 5-12 8 24 6-14h8"/>
+    </g>
+
+    <g class="signal-log-points">
+      <circle cx="121" cy="110" r="2"/><circle cx="134" cy="110" r="2"/><circle cx="147" cy="110" r="2"/>
+      <circle cx="364" cy="334" r="2"/><circle cx="377" cy="334" r="2"/><circle cx="390" cy="334" r="2"/>
+    </g>
+    <g class="signal-waves">
+      <path class="signal-wave-echo" d="M32 343c45 0 48-37 84-37s37 64 74 64 40-76 78-76 39 61 76 61 41-29 72-29 42 17 72 17"/>
+      <path class="signal-wave-main" pathLength="1000" d="M32 343c45 0 48-25 84-25s37 42 74 42 40-53 78-53 39 40 76 40 41-18 72-18 42 14 72 14"/>
+      <path class="signal-wave-pulse" pathLength="1000" d="M32 343c45 0 48-25 84-25s37 42 74 42 40-53 78-53 39 40 76 40 41-18 72-18 42 14 72 14"/>
+    </g>
+    <g class="signal-labels">
+      <text x="55" y="89">LOGS</text><text x="365" y="80">TRACES</text><text x="350" y="393">METRICS</text>
+      <text class="signal-caption" x="264" y="444" text-anchor="middle">MANY SIGNALS. ONE CONNECTED SYSTEM.</text>
+    </g>
   </svg>
-  <div class="chart-axis"><span>−30m</span><span>−15m</span><span>now</span></div>
-  <div class="trace"><div class="chart-label"><span>trace / request lifecycle</span><span>42ms</span></div><div class="trace-row"><span>gateway</span><i style="--start:0%;--length:94%"></i></div><div class="trace-row"><span>api.resolve</span><i style="--start:12%;--length:70%"></i></div><div class="trace-row"><span>db.query</span><i style="--start:28%;--length:39%"></i></div></div>
-  <div class="log-line"><span>INFO</span> request completed <b>status=200</b><span class="cursor" aria-hidden="true">▌</span></div>
 </div>

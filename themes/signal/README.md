@@ -1,6 +1,6 @@
 # Signal
 
-A standalone Hugo theme for an observability and Site Reliability Engineering journal. Dark graphite surfaces, mint accents, monospace metadata, and a small illustrative telemetry dashboard. No remote fonts, JavaScript dependencies, analytics, or CSS build step.
+A standalone Hugo theme for an observability and Site Reliability Engineering journal. Dark graphite surfaces, mint accents, monospace metadata, and an abstract observability constellation. No remote fonts, JavaScript dependencies, analytics, or CSS build step.
 
 ## Preview
 
@@ -32,7 +32,7 @@ hugo --minify
 - Responsive layouts, keyboard focus indicators, skip link, reduced-motion support.
 - A privacy-friendly `x` shortcode that links to a referenced social post instead of loading a third-party widget. This also supports content using that shortcode on older Hugo versions.
 
-The telemetry panel is decorative sample data, explicitly labeled **ILLUSTRATIVE**. It does not report real availability, latency, or traffic.
+The hero illustration is an abstract constellation of service nodes, trace paths, log events, and metric waves—not a product dashboard or live monitoring data. CSS-only animations send trace fragments between nodes, ripple outward from the hub, and sweep along the metric wave. Hover or keyboard-focus the illustration to pause it. `prefers-reduced-motion` disables all animation while preserving the static composition.
 
 ## Configuration
 
