@@ -1,0 +1,8 @@
+{{ $lang := .Type | default "text" }}
+<div class="code-frame">
+    <div class="code-bar" aria-hidden="true">
+        <span class="code-dots"><i></i><i></i><i></i></span>
+        <span class="code-lang">{{ $lang }}</span>
+    </div>
+    {{ transform.Highlight .Inner $lang .Options }}
+</div>

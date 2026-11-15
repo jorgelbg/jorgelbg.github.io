@@ -23,6 +23,14 @@
         </div>
 
         <div class="hero-figure">
+            <div class="hero-note" aria-hidden="true">
+                <svg viewBox="0 0 56 38" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M52 8 C 30 4, 14 14, 10 32"/>
+                    <path d="M4 25 L 10 33 L 18 27"/>
+                </svg>
+                <span>quiet pagers,<br>happy humans</span>
+            </div>
+
             <div class="portrait">
                 <a href="{{ "about" | absURL }}" aria-label="About {{ .Site.Params.name }}">
                     <img src="{{ "images/avatar.png" | absURL }}" alt="Portrait of {{ .Site.Params.name }}">

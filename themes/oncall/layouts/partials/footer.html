@@ -21,11 +21,15 @@
         </div>
 
         <div class="uptime">
-            <div class="uptime-bars" aria-hidden="true">
+            <div class="uptime-bars" aria-label="90-day uptime history">
                 {{ range $i := seq 44 }}
                     {{ $h := add 5 (mod (mul $i 7) 12) }}
                     {{ $warn := eq (mod (mul $i 17) 47) 5 }}
-                    <span style="height: {{ $h }}px" class="{{ if $warn }}warn{{ end }}"></span>
+                    {{ if $warn }}
+                        <span style="height: {{ $h }}px" class="warn" tabindex="0" data-incident="Nov 14 · 11m degraded — it was DNS"></span>
+                    {{ else }}
+                        <span style="height: {{ $h }}px"></span>
+                    {{ end }}
                 {{ end }}
             </div>
             <span class="uptime-label">99.98% uptime &middot; no open incidents</span>
