@@ -541,17 +541,96 @@ p { margin: 0 0 1em; }
   color: var(--ink-3);
 }
 
-.mini-panel-head .live { color: var(--ok); }
+.mini-status,
+.mini-latency {
+  display: inline-grid;
+}
 
-.mini-panel svg {
-  display: block;
+.mini-status { text-align: right; }
+
+.mini-status > span,
+.mini-latency > span {
+  grid-area: 1 / 1;
+  will-change: opacity;
+}
+
+.mini-status .state-ok {
+  color: var(--ok);
+  animation: spark-calm-state 9s linear infinite;
+}
+
+.mini-status .state-spike {
+  color: var(--danger);
+  font-weight: 700;
+  opacity: 0;
+  animation: spark-hot-fade 9s linear infinite;
+}
+
+.mini-latency .state-ok {
+  color: var(--ink-2);
+  animation: spark-calm-state 9s linear infinite;
+}
+
+.mini-latency .state-spike {
+  color: var(--danger);
+  font-weight: 600;
+  opacity: 0;
+  animation: spark-hot-fade 9s linear infinite;
+}
+
+.mini-panel-chart {
+  overflow: hidden;
   width: 100%;
-  height: 34px;
+  height: 36px;
   margin: 6px 0;
+}
+
+.mini-panel .spark-track {
+  display: block;
+  width: 300%;
+  max-width: none;
+  height: 100%;
+  will-change: transform;
+  animation: spark-scroll 9s linear infinite;
+}
+
+.mini-panel .spark-calm {
   color: var(--accent);
+  will-change: opacity;
+  animation: spark-calm-fade 9s linear infinite;
+}
+
+.mini-panel .spark-hot {
+  color: var(--danger);
+  opacity: 0;
+  will-change: opacity;
+  animation: spark-hot-fade 9s linear infinite;
 }
 
 .mini-panel-foot { color: var(--ink-2); }
+
+@keyframes spark-scroll {
+  from { transform: translate3d(0, 0, 0); }
+  to   { transform: translate3d(-66.6667%, 0, 0); }
+}
+
+@keyframes spark-calm-fade {
+  0%, 17%   { opacity: 1; }
+  23%, 64%  { opacity: 0.08; }
+  72%, 100% { opacity: 1; }
+}
+
+@keyframes spark-calm-state {
+  0%, 17%   { opacity: 1; }
+  23%, 64%  { opacity: 0; }
+  72%, 100% { opacity: 1; }
+}
+
+@keyframes spark-hot-fade {
+  0%, 17%   { opacity: 0; }
+  23%, 64%  { opacity: 1; }
+  72%, 100% { opacity: 0; }
+}
 
 /* ---------- section headers ---------- */
 .section-head {

@@ -8,4 +8,4 @@ This is the source of my personal blog [jorgelbg.me](https://jorgelbg.me). It is
 It runs on Github Pages behind Cloudflare. In the unlikely event that you want to fix something or
 see a problem feel free to open a PR/issue or send me tweet.
 
-![Screenshot of my blog](./screenshot.png)
+![Oncall theme homepage with an author portrait and engineering posts on observability and site reliability](./screenshot.png)
