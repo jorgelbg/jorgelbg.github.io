@@ -10,7 +10,14 @@
         </div>
     </div>
     <figure class="notebook-portrait">
-        <a href="{{ "about" | relURL }}" aria-label="More about Jorge"><img src="{{ "images/avatar.png" | relURL }}" alt="Jorge outdoors, wearing sunglasses" width="256" height="256" fetchpriority="high"></a>
+        <a href="{{ "about" | relURL }}" aria-label="More about Jorge">
+            <img src="{{ "images/avatar.png" | relURL }}" alt="Jorge outdoors, wearing sunglasses" width="256" height="256" fetchpriority="high">
+            <svg class="portrait-orbits" viewBox="0 0 280 280" fill="none" aria-hidden="true" focusable="false">
+                <path class="portrait-orbit" pathLength="100" d="M29 70C70 4 194 7 244 83C294 159 242 252 158 266C78 280 9 222 13 145C16 93 52 50 106 34"/>
+                <path class="portrait-orbit" pathLength="100" d="M251 53C294 110 263 212 187 249C121 281 27 245 15 176C2 106 72 36 156 23C228 12 278 70 259 133"/>
+                <path class="portrait-orbit" pathLength="100" d="M51 238C9 192 36 95 101 49C165 4 247 35 267 105C284 167 221 238 145 247C84 255 39 223 27 190"/>
+            </svg>
+        </a>
         <figcaption><svg viewBox="0 0 70 42" fill="none" aria-hidden="true"><path d="M65 34C30 37 15 24 11 6M4 13L11 5L19 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>The person<br>behind the posts.</figcaption>
     </figure>
 </section>

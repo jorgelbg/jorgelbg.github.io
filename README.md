@@ -9,3 +9,5 @@ It runs on Github Pages behind Cloudflare. In the unlikely event that you want t
 see a problem feel free to open a PR/issue or send me tweet.
 
 ![Oncall theme homepage with an author portrait and engineering posts on observability and site reliability](./screenshot.png)
+
+[Explore the Oncall color proposals and light/dark previews](./docs/color-proposals/README.md).

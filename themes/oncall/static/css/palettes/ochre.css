@@ -1,0 +1,27 @@
+/* Ochre: ivory stock, dark umber, and golden-brown ink. Load after style.css. */
+:root {
+  --paper:#f8f5e9; --paper-2:#eee8d7; --card:#fffcf2;
+  --ink:#352e23; --ink-2:#655b49; --ink-3:#6b604c;
+  --line:#e1d8c0; --line-strong:#c8b996; --border-ink:#352e23;
+  --accent:#9a701d; --accent-ink:#79520f; --accent-soft:#efe0b9;
+  --marker:#e8d294; --danger:#a43832; --warn:#805617; --ok:#4d613d;
+  --shadow-soft:0 1px 2px #352e230f,0 8px 24px -12px #352e232e;
+}
+:root[data-theme="dark"] {
+  --paper:#1d1b16; --paper-2:#27241c; --card:#302b20;
+  --ink:#f1ead7; --ink-2:#c9bfa5; --ink-3:#b8ad91;
+  --line:#453d2c; --line-strong:#675b3f; --border-ink:#a0916d;
+  --accent:#cfb169; --accent-ink:#e0c584; --accent-soft:#44371b;
+  --marker:#cfb1693d; --danger:#e5a099; --warn:#dec17f; --ok:#b0bf91;
+  --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --paper:#1d1b16; --paper-2:#27241c; --card:#302b20;
+    --ink:#f1ead7; --ink-2:#c9bfa5; --ink-3:#b8ad91;
+    --line:#453d2c; --line-strong:#675b3f; --border-ink:#a0916d;
+    --accent:#cfb169; --accent-ink:#e0c584; --accent-soft:#44371b;
+    --marker:#cfb1693d; --danger:#e5a099; --warn:#dec17f; --ok:#b0bf91;
+    --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+  }
+}

@@ -31,10 +31,35 @@
 .notebook-intro-links a span { color: var(--accent-ink); padding-left: 5px; }
 .notebook-intro-links a:hover { color: var(--accent-ink); border-color: var(--accent); }
 .notebook-portrait { margin: 28px 0 0; transform: rotate(3deg); }
-.notebook-portrait > a { display: block; padding: 7px; border: 1px solid var(--line-strong); border-radius: 49% 51% 48% 52%; }
+.notebook-portrait > a { position: relative; display: block; padding: 7px; border: 1px solid var(--line-strong); border-radius: 49% 51% 48% 52%; }
 .notebook-portrait img { display: block; width: 100%; height: auto; border-radius: 50%; filter: saturate(.72); }
+/* Draw loose ink orbits on hover/focus. The overlay never intercepts the link. */
+.notebook-portrait .portrait-orbits {
+  position: absolute;
+  inset: -15%;
+  width: 130%;
+  height: 130%;
+  max-width: none;
+  pointer-events: none;
+  overflow: visible;
+}
+.portrait-orbit {
+  stroke: var(--accent);
+  stroke-width: 2.4;
+  stroke-linecap: round;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  opacity: 0;
+  transition: stroke-dashoffset .85s cubic-bezier(.22, 1, .36, 1), opacity .2s ease;
+}
+.portrait-orbit:nth-child(2) { stroke: var(--ink-2); stroke-width: 1.2; }
+.portrait-orbit:nth-child(3) { stroke: var(--accent-ink); stroke-width: 1.8; }
+.notebook-portrait > a:is(:hover, :focus-visible) .portrait-orbit { stroke-dashoffset: 0; opacity: 1; }
+.notebook-portrait > a:is(:hover, :focus-visible) .portrait-orbit:nth-child(2) { transition-delay: .1s; }
+.notebook-portrait > a:is(:hover, :focus-visible) .portrait-orbit:nth-child(3) { transition-delay: .2s; }
 .notebook-portrait figcaption { margin-top: 20px; margin-left: 32px; display: flex; align-items: flex-start; font: 19px/1.1 var(--hand); color: var(--accent-ink); transform: rotate(-6deg); }
-.notebook-portrait svg { width: 65px; height: 42px; margin: -4px 8px 0 -12px; flex-shrink: 0; }
+.notebook-portrait figcaption svg { width: 65px; height: 42px; margin: -4px 8px 0 -12px; flex-shrink: 0; }
 @media (min-width: 801px) {
   .notebook-portrait figcaption {
     margin-left: 50%;
@@ -45,7 +70,7 @@
 }
 @media (min-width: 801px) and (max-width: 1190px) {
   .notebook-portrait figcaption { width: 110px; flex-direction: column; }
-  .notebook-portrait svg { margin-bottom: 8px; }
+  .notebook-portrait figcaption svg { margin-bottom: 8px; }
 }
 .notebook-section { max-width: var(--wrap); margin: auto; padding: 42px 32px 50px; display: grid; grid-template-columns: 134px minmax(0, 1fr); gap: 32px; border-top: 1px solid var(--line-strong); }
 .notebook-section-label { padding-top: 8px; color: var(--ink-2); font: 14px/1.7 var(--mono); }
@@ -132,7 +157,7 @@
   .notebook-intro { grid-template-columns: minmax(0, 1fr) 150px; gap: 30px; padding-top: 58px; padding-bottom: 60px; }
   .notebook-intro h1 { font-size: 44px; }
   .notebook-portrait figcaption { font-size: 17px; margin-left: 10px; }
-  .notebook-portrait svg { width: 38px; }
+  .notebook-portrait figcaption svg { width: 38px; }
   .notebook-section { grid-template-columns: 1fr; gap: 18px; }
   .notebook-section-label { display: flex; gap: 10px; padding: 0; }
   .notebook-section-label p { max-width: none; margin: 0; }
@@ -148,7 +173,7 @@
   .notebook-portrait { display: flex; align-items: center; gap: 24px; margin: 0; transform: none; }
   .notebook-portrait > a { width: 86px; flex-shrink: 0; padding: 4px; }
   .notebook-portrait figcaption { margin: 0; font-size: 18px; }
-  .notebook-portrait svg { width: 45px; transform: rotate(-55deg); }
+  .notebook-portrait figcaption svg { width: 45px; transform: rotate(-55deg); }
   .notebook-intro .notebook-eyebrow { margin-bottom: 20px; font-size: 14px; letter-spacing: .04em; }
   .notebook-intro h1 { font-size: clamp(34px, 8.5vw, 46px); margin-bottom: 24px; }
   .notebook-hello { font-size: 16px; }

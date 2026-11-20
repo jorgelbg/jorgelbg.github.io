@@ -1,0 +1,27 @@
+/* Espresso: parchment, coffee ink, and a nearly monochrome accent. Load after style.css. */
+:root {
+  --paper:#f3eee6; --paper-2:#e8dfd3; --card:#fcf8f1;
+  --ink:#352d27; --ink-2:#63574d; --ink-3:#6b5c50;
+  --line:#dcd0c1; --line-strong:#c0ab95; --border-ink:#352d27;
+  --accent:#7d5e43; --accent-ink:#65472f; --accent-soft:#e9d8c6;
+  --marker:#dcc3a6; --danger:#9c3732; --warn:#78531b; --ok:#485b3b;
+  --shadow-soft:0 1px 2px #352d270f,0 8px 24px -12px #352d272e;
+}
+:root[data-theme="dark"] {
+  --paper:#201b18; --paper-2:#29231e; --card:#322a24;
+  --ink:#efe6d9; --ink-2:#c9b9a6; --ink-3:#b8a58d;
+  --line:#46382c; --line-strong:#68523d; --border-ink:#9e8266;
+  --accent:#c5a27e; --accent-ink:#dbbb96; --accent-soft:#443323;
+  --marker:#c5a27e3d; --danger:#e2a095; --warn:#d5b67e; --ok:#afbf99;
+  --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --paper:#201b18; --paper-2:#29231e; --card:#322a24;
+    --ink:#efe6d9; --ink-2:#c9b9a6; --ink-3:#b8a58d;
+    --line:#46382c; --line-strong:#68523d; --border-ink:#9e8266;
+    --accent:#c5a27e; --accent-ink:#dbbb96; --accent-soft:#443323;
+    --marker:#c5a27e3d; --danger:#e2a095; --warn:#d5b67e; --ok:#afbf99;
+    --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+  }
+}

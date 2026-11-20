@@ -1,0 +1,27 @@
+/* Aubergine: pearl paper and muted plum, without neon purple. Load after style.css. */
+:root {
+  --paper:#f5f2f4; --paper-2:#eae3e8; --card:#fcf9fc;
+  --ink:#332c38; --ink-2:#625668; --ink-3:#6b5d70;
+  --line:#dfd5e0; --line-strong:#c1b0c6; --border-ink:#332c38;
+  --accent:#7b567e; --accent-ink:#654169; --accent-soft:#e9dcec;
+  --marker:#d9c2de; --danger:#a3363d; --warn:#805b20; --ok:#48603f;
+  --shadow-soft:0 1px 2px #332c380f,0 8px 24px -12px #332c382e;
+}
+:root[data-theme="dark"] {
+  --paper:#1d1920; --paper-2:#27212c; --card:#302736;
+  --ink:#eee7f1; --ink-2:#c6b7cd; --ink-3:#b5a2bd;
+  --line:#44354b; --line-strong:#66516f; --border-ink:#9a83a4;
+  --accent:#bb9bc7; --accent-ink:#d0b4dc; --accent-soft:#402e4a;
+  --marker:#bb9bc73d; --danger:#e6a3ac; --warn:#d2b88b; --ok:#acc39e;
+  --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --paper:#1d1920; --paper-2:#27212c; --card:#302736;
+    --ink:#eee7f1; --ink-2:#c6b7cd; --ink-3:#b5a2bd;
+    --line:#44354b; --line-strong:#66516f; --border-ink:#9a83a4;
+    --accent:#bb9bc7; --accent-ink:#d0b4dc; --accent-soft:#402e4a;
+    --marker:#bb9bc73d; --danger:#e6a3ac; --warn:#d2b88b; --ok:#acc39e;
+    --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+  }
+}

@@ -1,0 +1,27 @@
+/* Oxblood: book cloth, warm paper, and burgundy ink. Load after style.css. */
+:root {
+  --paper:#f8f4ed; --paper-2:#eee7db; --card:#fffaf4;
+  --ink:#32292b; --ink-2:#66595d; --ink-3:#6b5e63;
+  --line:#e0d7cc; --line-strong:#c9b9b5; --border-ink:#32292b;
+  --accent:#944352; --accent-ink:#833646; --accent-soft:#eddae0;
+  --marker:#e8c7c8; --danger:#ab3434; --warn:#895f1a; --ok:#526748;
+  --shadow-soft:0 1px 2px #32292b0f,0 8px 24px -12px #32292b2e;
+}
+:root[data-theme="dark"] {
+  --paper:#1b1719; --paper-2:#251f22; --card:#2d2529;
+  --ink:#eee7e7; --ink-2:#c3b5ba; --ink-3:#b0a0a7;
+  --line:#403239; --line-strong:#64505a; --border-ink:#95818a;
+  --accent:#c78d98; --accent-ink:#dbaab3; --accent-soft:#402b33;
+  --marker:#c78d983d; --danger:#e4a29d; --warn:#c9ab72; --ok:#a5b18d;
+  --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --paper:#1b1719; --paper-2:#251f22; --card:#2d2529;
+    --ink:#eee7e7; --ink-2:#c3b5ba; --ink-3:#b0a0a7;
+    --line:#403239; --line-strong:#64505a; --border-ink:#95818a;
+    --accent:#c78d98; --accent-ink:#dbaab3; --accent-soft:#402b33;
+    --marker:#c78d983d; --danger:#e4a29d; --warn:#c9ab72; --ok:#a5b18d;
+    --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+  }
+}

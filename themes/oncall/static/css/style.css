@@ -1,32 +1,32 @@
 /* ==========================================================================
    oncall — a calm, editorial theme for an SRE's notebook
-   Warm paper, deep ink, one confident teal, mono for the machinery.
+   Chalk, charcoal, and oxide ink; muted olive for operational status.
    ========================================================================== */
 
 /* ---------- design tokens ---------- */
 :root {
   color-scheme: light;
 
-  --paper:        #faf7f1;
-  --paper-2:      #f3eee4;
-  --card:         #fffdf9;
+  --paper:        #f5f4f0;
+  --paper-2:      #eceae4;
+  --card:         #fdfcf9;
 
-  --ink:          #12243f;
-  --ink-2:        #4d5c73;
-  --ink-3:        #6e7b8f;
+  --ink:          #292724;
+  --ink-2:        #605b55;
+  --ink-3:        #6b655e;
 
-  --line:         #e6dfd0;
-  --line-strong:  #d3c9b4;
-  --border-ink:   #12243f;
+  --line:         #dedbd3;
+  --line-strong:  #c6c0b5;
+  --border-ink:   #292724;
 
-  --accent:       #0f9d8d;
-  --accent-ink:   #0a6f65;
-  --accent-soft:  #dcf2ee;
+  --accent:       #b54c2c;
+  --accent-ink:   #983d22;
+  --accent-soft:  #f0dfd4;
 
-  --marker:       #ffd166;
-  --danger:       #dc4a3d;
-  --warn:         #e8a33d;
-  --ok:           #17a34a;
+  --marker:       #e6c6aa;
+  --danger:       #ab3434;
+  --warn:         #895f1a;
+  --ok:           #526748;
 
   --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
           "Helvetica Neue", Arial, sans-serif;
@@ -38,33 +38,33 @@
 
   --radius: 14px;
   --shadow-off: 4px 4px 0 var(--ink);
-  --shadow-soft: 0 1px 2px rgba(18, 36, 63, 0.06),
-                 0 8px 24px -12px rgba(18, 36, 63, 0.18);
+  --shadow-soft: 0 1px 2px rgba(41, 39, 36, 0.06),
+                 0 8px 24px -12px rgba(41, 39, 36, 0.18);
 }
 
 :root[data-theme="dark"] {
   color-scheme: dark;
 
-  --paper:        #0b1524;
-  --paper-2:      #0e1c30;
-  --card:         #111f35;
+  --paper:        #171716;
+  --paper-2:      #20201e;
+  --card:         #262623;
 
-  --ink:          #e9eff8;
-  --ink-2:        #a7b6cb;
-  --ink-3:        #7c8da6;
+  --ink:          #eeece5;
+  --ink-2:        #bdb8ae;
+  --ink-3:        #a9a59d;
 
-  --line:         #22314a;
-  --line-strong:  #2e405e;
-  --border-ink:   #3b5278;
+  --line:         #373731;
+  --line-strong:  #535047;
+  --border-ink:   #8a8378;
 
-  --accent:       #3bdbc4;
-  --accent-ink:   #62e7d4;
-  --accent-soft:  #103936;
+  --accent:       #cf8b65;
+  --accent-ink:   #dfa17d;
+  --accent-soft:  #372920;
 
-  --marker:       rgba(242, 193, 78, 0.34);
-  --danger:       #ff6f61;
-  --warn:         #f0b45a;
-  --ok:           #4ade80;
+  --marker:       rgba(207, 139, 101, 0.24);
+  --danger:       #df9490;
+  --warn:         #c9ab72;
+  --ok:           #9cab87;
 
   --shadow-off: 4px 4px 0 #000;
   --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4),
@@ -75,26 +75,26 @@
   :root:not([data-theme="light"]) {
     color-scheme: dark;
 
-    --paper:        #0b1524;
-    --paper-2:      #0e1c30;
-    --card:         #111f35;
+    --paper:        #171716;
+    --paper-2:      #20201e;
+    --card:         #262623;
 
-    --ink:          #e9eff8;
-    --ink-2:        #a7b6cb;
-    --ink-3:        #7c8da6;
+    --ink:          #eeece5;
+    --ink-2:        #bdb8ae;
+    --ink-3:        #a9a59d;
 
-    --line:         #22314a;
-    --line-strong:  #2e405e;
-    --border-ink:   #3b5278;
+    --line:         #373731;
+    --line-strong:  #535047;
+    --border-ink:   #8a8378;
 
-    --accent:       #3bdbc4;
-    --accent-ink:   #62e7d4;
-    --accent-soft:  #103936;
+    --accent:       #cf8b65;
+    --accent-ink:   #dfa17d;
+    --accent-soft:  #372920;
 
-    --marker:       rgba(242, 193, 78, 0.34);
-    --danger:       #ff6f61;
-    --warn:         #f0b45a;
-    --ok:           #4ade80;
+    --marker:       rgba(207, 139, 101, 0.24);
+    --danger:       #df9490;
+    --warn:         #c9ab72;
+    --ok:           #9cab87;
 
     --shadow-off: 4px 4px 0 #000;
     --shadow-soft: 0 1px 2px rgba(0, 0, 0, 0.4),
@@ -476,9 +476,7 @@ p { margin: 0 0 1em; }
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--line);
-  background:
-    radial-gradient(120% 90% at 88% 10%, var(--accent-soft) 0%, transparent 55%),
-    var(--paper);
+  background: var(--paper);
 }
 
 .hero::after {
@@ -1139,7 +1137,7 @@ a.tag:hover {
   margin: 1.8em 0;
   border-radius: 12px;
   border: 1px solid var(--line-strong);
-  background: #081120;
+  background: #1b1c19;
   overflow: hidden;
 }
 
@@ -1149,12 +1147,12 @@ a.tag:hover {
   justify-content: space-between;
   padding: 9px 14px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: #0c182c;
+  background: #252620;
   font-family: var(--mono);
   font-size: 10px;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: #7c8da6;
+  color: #a5a497;
 }
 
 .code-dots {
@@ -1169,12 +1167,12 @@ a.tag:hover {
   background: rgba(255, 255, 255, 0.16);
 }
 
-.code-dots i:nth-child(1) { background: rgba(255, 111, 97, 0.65); }
-.code-dots i:nth-child(2) { background: rgba(240, 180, 90, 0.65); }
-.code-dots i:nth-child(3) { background: rgba(74, 222, 128, 0.65); }
+.code-dots i:nth-child(1) { background: #c58b7f; }
+.code-dots i:nth-child(2) { background: #c2ad7b; }
+.code-dots i:nth-child(3) { background: #a3b28b; }
 
 .code-lang {
-  color: #9db4d3;
+  color: #c8c4b5;
   font-weight: 600;
 }
 
@@ -1184,8 +1182,8 @@ a.tag:hover {
   padding: 18px 22px;
   border-radius: 12px;
   border: 1px solid var(--line);
-  background: #081120;
-  color: #e8eef8;
+  background: #1b1c19;
+  color: #e5e3d9;
   font-family: var(--mono);
   font-size: 13.5px;
   line-height: 1.7;
@@ -1213,21 +1211,21 @@ a.tag:hover {
 .highlight { position: relative; }
 
 /* chroma (pygments) — dark panel in both color schemes */
-.chroma { color: #e8eef8; background: #081120; }
+.chroma { color: #e5e3d9; background: #1b1c19; }
 .chroma .hl {
   display: block;
   width: 100%;
-  background: rgba(242, 193, 78, 0.18);
+  background: rgba(207, 139, 101, 0.14);
 }
-.chroma .c, .chroma .c1, .chroma .cm { color: #6d86a8; font-style: italic; }
-.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn { color: #ff8fc7; }
-.chroma .o, .chroma .p { color: #9db4d3; }
-.chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .se { color: #f4e08a; }
-.chroma .m, .chroma .mi, .chroma .mf { color: #c3a6ff; }
-.chroma .n, .chroma .nf, .chroma .nx { color: #8fd7ff; }
-.chroma .nt { color: #7fe0c8; }
-.chroma .na { color: #ffb86b; }
-.chroma .err { color: #ff7a6e; }
+.chroma .c, .chroma .c1, .chroma .cm { color: #a5a497; font-style: italic; }
+.chroma .k, .chroma .kc, .chroma .kd, .chroma .kn { color: #d6a184; }
+.chroma .o, .chroma .p { color: #c8c4b5; }
+.chroma .s, .chroma .s1, .chroma .s2, .chroma .sb, .chroma .se { color: #b5c19c; }
+.chroma .m, .chroma .mi, .chroma .mf { color: #d1bc91; }
+.chroma .n, .chroma .nf, .chroma .nx { color: #b6c6cd; }
+.chroma .nt { color: #b5c19c; }
+.chroma .na { color: #d6a184; }
+.chroma .err { color: #df9490; }
 
 /* ---------- post footer ---------- */
 .post-foot {

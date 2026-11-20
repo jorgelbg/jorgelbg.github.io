@@ -1,0 +1,27 @@
+/* Olive: field journal, limestone, and moss ink. Load after style.css. */
+:root {
+  --paper:#f4f3eb; --paper-2:#e7e6da; --card:#fcfbf5;
+  --ink:#303328; --ink-2:#5b6050; --ink-3:#626754;
+  --line:#d9dccb; --line-strong:#bbc0a7; --border-ink:#303328;
+  --accent:#5b653b; --accent-ink:#46522c; --accent-soft:#e4e8d3;
+  --marker:#d1d7af; --danger:#9f3931; --warn:#805a1b; --ok:#465b37;
+  --shadow-soft:0 1px 2px #3033280f,0 8px 24px -12px #3033282e;
+}
+:root[data-theme="dark"] {
+  --paper:#191c16; --paper-2:#22271d; --card:#2a3023;
+  --ink:#e8ecdf; --ink-2:#bdc4ae; --ink-3:#abb59b;
+  --line:#3b4430; --line-strong:#596448; --border-ink:#8e9a7d;
+  --accent:#b6bf8d; --accent-ink:#c2cca0; --accent-soft:#343d26;
+  --marker:#b6bf8d3d; --danger:#e2a497; --warn:#cfb782; --ok:#b6c89d;
+  --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --paper:#191c16; --paper-2:#22271d; --card:#2a3023;
+    --ink:#e8ecdf; --ink-2:#bdc4ae; --ink-3:#abb59b;
+    --line:#3b4430; --line-strong:#596448; --border-ink:#8e9a7d;
+    --accent:#b6bf8d; --accent-ink:#c2cca0; --accent-soft:#343d26;
+    --marker:#b6bf8d3d; --danger:#e2a497; --warn:#cfb782; --ok:#b6c89d;
+    --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+  }
+}

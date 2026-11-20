@@ -1,0 +1,27 @@
+/* Oxide: chalk, charcoal, and red pencil. Load after style.css. */
+:root {
+  --paper:#f5f4f0; --paper-2:#eceae4; --card:#fdfcf9;
+  --ink:#292724; --ink-2:#605b55; --ink-3:#6b655e;
+  --line:#dedbd3; --line-strong:#c6c0b5; --border-ink:#292724;
+  --accent:#b54c2c; --accent-ink:#983d22; --accent-soft:#f0dfd4;
+  --marker:#e6c6aa; --danger:#ab3434; --warn:#895f1a; --ok:#526748;
+  --shadow-soft:0 1px 2px #2927240f,0 8px 24px -12px #2927242e;
+}
+:root[data-theme="dark"] {
+  --paper:#171716; --paper-2:#20201e; --card:#262623;
+  --ink:#eeece5; --ink-2:#bdb8ae; --ink-3:#a9a59d;
+  --line:#373731; --line-strong:#535047; --border-ink:#8a8378;
+  --accent:#cf8b65; --accent-ink:#dfa17d; --accent-soft:#372920;
+  --marker:#cf8b653d; --danger:#df9490; --warn:#c9ab72; --ok:#9cab87;
+  --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --paper:#171716; --paper-2:#20201e; --card:#262623;
+    --ink:#eeece5; --ink-2:#bdb8ae; --ink-3:#a9a59d;
+    --line:#373731; --line-strong:#535047; --border-ink:#8a8378;
+    --accent:#cf8b65; --accent-ink:#dfa17d; --accent-soft:#372920;
+    --marker:#cf8b653d; --danger:#df9490; --warn:#c9ab72; --ok:#9cab87;
+    --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+  }
+}

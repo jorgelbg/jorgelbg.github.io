@@ -1,0 +1,27 @@
+/* Slate blue: cool paper and faded fountain-pen ink. Load after style.css. */
+:root {
+  --paper:#f3f4f3; --paper-2:#e6e9e7; --card:#fcfdfc;
+  --ink:#2b3136; --ink-2:#555f66; --ink-3:#5d666d;
+  --line:#d6dddf; --line-strong:#b7c1c8; --border-ink:#2b3136;
+  --accent:#48627b; --accent-ink:#3d526b; --accent-soft:#e0e6ed;
+  --marker:#c9d6e0; --danger:#a13737; --warn:#805f25; --ok:#4a624d;
+  --shadow-soft:0 1px 2px #2b31360f,0 8px 24px -12px #2b31362e;
+}
+:root[data-theme="dark"] {
+  --paper:#181d21; --paper-2:#20272c; --card:#262e34;
+  --ink:#e6ecf0; --ink-2:#bac6ce; --ink-3:#a1b0ba;
+  --line:#39454e; --line-strong:#52616c; --border-ink:#8899a6;
+  --accent:#96abc0; --accent-ink:#b0c2d4; --accent-soft:#2d3b49;
+  --marker:#96abc03d; --danger:#e2a19b; --warn:#d1b582; --ok:#a7bba1;
+  --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+}
+@media (prefers-color-scheme:dark) {
+  :root:not([data-theme="light"]) {
+    --paper:#181d21; --paper-2:#20272c; --card:#262e34;
+    --ink:#e6ecf0; --ink-2:#bac6ce; --ink-3:#a1b0ba;
+    --line:#39454e; --line-strong:#52616c; --border-ink:#8899a6;
+    --accent:#96abc0; --accent-ink:#b0c2d4; --accent-soft:#2d3b49;
+    --marker:#96abc03d; --danger:#e2a19b; --warn:#d1b582; --ok:#a7bba1;
+    --shadow-soft:0 1px 2px #0006,0 12px 32px -16px #000c;
+  }
+}

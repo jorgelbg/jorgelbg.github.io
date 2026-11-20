@@ -1,4 +1,6 @@
 public
-docs
+# Ignore generated docs output, but keep the color proposal gallery.
+/docs/*
+!/docs/color-proposals/
 yarn-error.log
 node_modules/*
